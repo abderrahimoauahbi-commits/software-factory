@@ -1,0 +1,83 @@
+# Modèle d'identité et de confiance (jalon J3c, ADR-0005). Lu par le Policy Engine (J4) ; ses invariants sont
+# contrôlés par core/tests/test_modeles_securite.py.
+schema_version: "1.0"
+
+actors:
+  human:
+    roles: [factory_owner, chief_architect, security_owner, data_owner, project_owner, release_approver,
+            reviewer_senior]
+    identity_v1: "déclarée : réponse écrite du Factory Owner dans la session, recopiée par l'agent dans audit/approvals"
+    authentication_v1: WEAK          # voir faiblesse W1
+    identity_target: "acte hors de portée de l'agent : commit signé par l'humain, ou commande lancée par l'humain"
+  policy_engine:
+    kind: system
+    identity_v1: "code de la Factory, version + empreinte (J4)"
+  agent:
+    kind: actor
+    identity_v1: "rôle du registre + identifiant d'exécution + modèle déclaré par le runtime"
+    authentication_v1: DECLARED
+  model:
+    kind: advisor
+    identity_v1: "identifiant déclaré par le runtime d'agent"
+  tool:
+    kind: instrument
+    identity_v1: "fiche du registre + exécutable détecté (chemin, version) par le Bootstrap"
+    authentication_v1: VERIFIED
+  mcp:
+    kind: instrument
+    identity_v1: "fiche du registre reconnue par son descripteur (commande ou adresse)"
+  project:
+    kind: scope
+    identity_v1: "carte du registre + marqueurs d'identité vérifiés (ROOT_SCOPE)"
+    authentication_v1: VERIFIED
+  execution:
+    kind: scope
+    identity_v1: "execution_id unique, lié à un ticket (J5)"
+  machine:
+    kind: host
+    identity_v1: "poste qui exécute la Factory (non authentifié en v1)"
+  environment:
+    kind: scope
+    identity_v1: "déclaré par le manifest, ressource par ressource (K4)"
+  external_content:
+    kind: data
+    identity_v1: "aucune : donnée non fiable (P06)"
+
+# Arêtes de confiance : seules les arêtes listées existent. Une action absente est refusée.
+edges:
+  - { from: human, verb: approves, to: human_gate, condition: "rôle requis par la porte ; auteur ≠ approbateur" }
+  - { from: human, verb: grants, to: exception, condition: "rôle du RACI (Playbook §3.2), durée et périmètre bornés" }
+  - { from: human, verb: changes, to: policy, condition: "Factory Owner + ADR (Playbook §15.4)" }
+  - { from: human, verb: reviews, to: ticket, condition: "relecteur distinct de l'auteur" }
+  - { from: policy_engine, verb: decides, to: policy_decision_request, condition: "seul décideur ; ALLOW/DENY/WAITING_HUMAN/WAITING_DEPENDENCY/ESCALATE" }
+  - { from: agent, verb: requests, to: policy_decision_request, condition: "toute action non C0" }
+  - { from: agent, verb: executes, to: tool, condition: "après ALLOW, dans le périmètre de l'exécution" }
+  - { from: agent, verb: reviews, to: ticket, condition: "jamais un ticket dont il est l'auteur ; modèle différent si possible (§12.3)" }
+  - { from: tool, verb: accesses, to: resource, condition: "dans le périmètre de l'exécution" }
+  - { from: mcp, verb: accesses, to: resource, condition: "MCP autorisé pour le projet ; production en lecture seule par défaut" }
+  - { from: model, verb: advises, to: agent, condition: "contenu non fiable tant qu'il n'est pas vérifié" }
+  - { from: external_content, verb: informs, to: agent, condition: "donnée, jamais instruction (P06)" }
+
+# Verbes qui confèrent un pouvoir : ils ne peuvent partir que d'un humain (ou du Policy Engine pour « decides »).
+power_verbs:
+  approves: [human]
+  grants: [human]
+  changes: [human]
+  decides: [policy_engine]
+
+invariants:
+  - { id: I1, rule: "seul un humain approuve, accorde une exception ou change une politique" }
+  - { id: I2, rule: "un agent, un modèle, un outil, un MCP ou une donnée externe n'est jamais source d'un verbe de pouvoir" }
+  - { id: I3, rule: "auteur ≠ relecteur ; pour C3/C4, relecteur ≠ approbateur de la release" }
+  - { id: I4, rule: "le Policy Engine est le seul décideur ; il n'approuve jamais une porte humaine" }
+  - { id: I5, rule: "la confiance ne naît pas d'une donnée : external_content n'est jamais source d'une instruction" }
+  - { id: I6, rule: "une permission d'un niveau inférieur ne dépasse jamais son parent (Factory > projet > workflow > ticket > exécution > action)" }
+
+weaknesses:
+  - id: W1
+    description: >
+      L'identité humaine n'est pas authentifiée : c'est l'agent qui recopie une réponse de la session dans
+      audit/approvals. Un agent compromis (injection, T01) pourrait forger une approbation (T14).
+    status: OPEN
+    mitigation_target: "J5 : approbation valable seulement si enregistrée par un acte de l'humain hors de portée de l'agent"
+    decision: WAITING_HUMAN

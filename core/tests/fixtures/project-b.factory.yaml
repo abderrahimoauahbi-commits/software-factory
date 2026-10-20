@@ -1,0 +1,51 @@
+# Manifest de TEST, fictif : deuxième pile (TypeScript / Node) pour prouver que le cœur est générique (J10).
+schema_version: "1.0"
+project:
+  id: project-b
+  name: Project B (test, autre pile)
+  description: Service web fictif
+  factory: { version: "3.2", minimum_version: "3.2" }
+  lifecycle: { state: REGISTERED, criticality_default: C2 }
+  stack:
+    languages: [typescript]
+    frameworks: []
+    databases: []
+    frontend: []
+    backend: []
+    mobile: []
+    infrastructure: []
+    build_systems: [npm]
+    test_systems: [node-test]
+  capabilities:
+    required: [SOURCE_CONTROL, LANGUAGE_TOOLCHAIN, PACKAGE_MANAGEMENT, BUILD, TEST, TYPECHECK]
+    optional: []
+  repositories:
+    - { id: main, type: git, path: ".", remote: null, branch: main }
+  paths:
+    read: [app/, test/, package.json]
+    write: [app/, test/]
+    forbidden: [.env, dist/, secrets/]
+  environments:
+    - { id: local, type: LOCAL, allowed: true, write_allowed: true, data_classification: INTERNAL }
+    - { id: prod, type: PRODUCTION, allowed: false, write_allowed: false, data_classification: RESTRICTED }
+  agents: { required: [frontend, qa], allowed: [] }
+  tools: { required: [git, node, npm, typescript], allowed: [] }
+  skills: { required: [], allowed: [] }
+  models: { allowed: [], preferred: null, fallback: null }
+  mcp: { allowed: [], production_write: false, production_delete: false }
+  security:
+    production_write: false
+    production_delete: false
+    secrets_allowed: false
+    outbound_network_default: false
+    sensitive_data_to_ai: false
+  data: { classification: INTERNAL, owners: [data-owner-b], retention_policy: null }
+  compliance: { frameworks: [] }
+  quality:
+    required: [unit_tests, build]
+    optional: []
+    gates:
+      unit_tests: { command: "npm test" }
+      build: { command: "npm run build" }
+  budgets: { token_limit: null, cost_limit: null, time_limit_minutes: null, max_attempts: 3 }
+  governance: { project_owner: owner-b, release_approver: null, security_owner: null, data_owner: data-owner-b, architect: null }

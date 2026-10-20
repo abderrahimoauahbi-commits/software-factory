@@ -1,0 +1,43 @@
+schema_version: '1.0'
+id: light-change
+name: LIGHT_CHANGE
+version: 0.1.0
+project_id: factory-catalog
+type: LIGHT_CHANGE
+criticality: C1
+phases:
+- phase_id: TICKET_PREPARATION
+  type: PHASE
+  required: true
+  order: 1
+- phase_id: AGENT_ASSIGNMENT
+  type: PHASE
+  required: true
+  order: 2
+- phase_id: EXECUTION
+  type: PHASE
+  required: true
+  order: 3
+- phase_id: QUALITY
+  type: PHASE
+  required: true
+  order: 4
+- phase_id: REVIEW
+  type: PHASE
+  required: true
+  order: 5
+- phase_id: MERGE
+  type: PHASE
+  required: true
+  order: 6
+entry_conditions: []
+exit_conditions: []
+human_gates: []
+policies:
+- security-defaults
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+status: DRAFT
+notes: 'Brouillon v0.1 : à relire avant activation.'

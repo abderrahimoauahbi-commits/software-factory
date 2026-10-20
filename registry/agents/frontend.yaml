@@ -1,0 +1,55 @@
+schema_version: '1.0'
+id: frontend
+name: frontend
+version: 0.2.0                  # ADR-0022 D3 : domaines, types de tickets, relecteur, profil de prompt
+role: Implémente l'interface selon le ticket
+lifecycle: DISCOVERED
+model:
+  primary: selected_by_policy
+  fallback: selected_by_policy
+capabilities:
+- SOURCE_WRITE
+- BUILD
+- TEST
+- BROWSER_TEST
+skills: []
+tools: []
+mcp: []
+domains: {}                     # {projet: [domaines]} : fixés à la validation de la correspondance des tickets du projet
+workflows: [feature, bug-fix, light-change]   # types de tickets autorisés (registry/workflows)
+prompt: registry/prompts/roles/frontend.md   # consigne du rôle, partie B du prompt effectif ; ne donne aucun droit
+suspension: habilitation suspendue par la Factory à toute violation de périmètre ou de sécurité constatée, ou à trois échecs consécutifs (Playbook § 8.6)
+revocation: par le Factory Owner, ou à l'expiration de l'habilitation ; réévaluation exigée (Playbook § 12.6)
+permissions:
+  max_criticality: C2
+  read: []
+  write: []
+  execute: []
+  network: []
+  database: []
+  environments: []
+security:
+  secret_access: false
+  production_access: false
+  destructive_access: false
+review:
+  required: true
+  preferred_reviewer: qa     # relecteur distinct de l'auteur (ADR-0022 D3, Playbook P02)
+evaluation:
+  last_evaluation: null
+  score: null
+  status: NOT_EVALUATED
+  next_review: '2027-01-15'
+governance:
+  owner: Factory Owner
+  approved_by: null
+notes: 'Rôle défini, non habilité : aucun agent n''est actif sans évaluation réussie (Playbook §12.6). Criticité
+  maximale plafonnée à C2 en phase 1 (Playbook §17). Définition détaillée : étape 4.'
+provisional_habilitation:          # pour la campagne d'évaluation G4 (suite EVAL-frontend-gestionfil), même cadre que qa
+  max_criticality: C2
+  projects:
+  - gestionfil
+  requested_at: '2026-10-17'
+  expires_at: '2026-11-16'
+  decision: G4 du 17/10/2026 (ADR-0010, ADR-0015) — demandée pour évaluer l'agent ; valable seulement après approbation humaine
+  status: REQUESTED — valable seulement après approbation par la commande humaine

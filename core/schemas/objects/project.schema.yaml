@@ -1,0 +1,84 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Clés « references », « mandatory », « limits », « version_fields » : extensions ADR-0004.
+schema_version: '1.0'
+object: project
+required:
+- id
+- name
+- factory
+- lifecycle
+- stack
+- capabilities
+- repositories
+- environments
+- security
+- data
+- quality
+- governance
+enums:
+  lifecycle.state: lifecycle:project
+  lifecycle.criticality_default: CRITICALITY
+  environments[].type: ENVIRONMENT
+  environments[].data_classification: DATA_CLASSIFICATION
+  data.classification: DATA_CLASSIFICATION
+fields:
+  security.production_write:
+    default: false
+  security.production_delete:
+    default: false
+  security.secrets_allowed:
+    default: false
+  security.outbound_network_default:
+    default: false
+  security.sensitive_data_to_ai:
+    default: false
+  mcp.production_write:
+    default: false
+  mcp.production_delete:
+    default: false
+  budgets.max_attempts:
+    default: 3
+  paths:
+    optional: true
+    shape:
+      read: liste de chemins relatifs à la racine du projet
+      write: idem
+      forbidden: idem
+    rule: forbidden est prioritaire sur read et write (Master §11.2) ; appliqué par le Policy Engine
+rules:
+- id unique
+- version de Factory compatible
+- criticité déclarée
+- production_write et production_delete à false par défaut
+- réseau sortant à false par défaut
+- aucun secret ni identifiant dans le manifest
+- ne peut affaiblir une politique obligatoire de la Factory
+- outil, agent ou MCP inconnu jamais actif automatiquement
+references:
+  capabilities.required[]: capabilities
+  capabilities.optional[]: capabilities
+  tools.required[]: tools
+  tools.allowed[]: tools
+  agents.required[]: agents
+  agents.allowed[]: agents
+  mcp.allowed[]: mcp
+  models.allowed[]: models
+mandatory:
+  security.production_write: false
+  security.production_delete: false
+  security.secrets_allowed: false
+  security.outbound_network_default: false
+  security.sensitive_data_to_ai: false
+  mcp.production_write: false
+  mcp.production_delete: false
+limits:
+  budgets.max_attempts:
+    max: 3   # NE1 (16/10/2026) : borne fixe à ratifier en v1.1 ; à lire dans la politique d'exécution (Playbook v3.3 proposé §8.6). Valeur v1.0 inchangée.
+version_fields:
+  factory.version: same_major
+  factory.minimum_version: not_above
+relative_paths:
+- paths.read[]
+- paths.write[]
+- paths.forbidden[]

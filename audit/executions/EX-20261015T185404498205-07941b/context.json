@@ -1,0 +1,105 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "T-GF-003",
+  "criticality": "C1",
+  "objective": "Dans versCsv (frontend/src/lib/export.ts), une valeur numérique non finie (NaN, ±Infinity) d'une colonne déclarée numérique donne une cellule vide au lieu des textes « NaN » / « Infinity » dans Excel",
+  "scope": {
+   "paths": [
+    "frontend/src/lib/export.ts",
+    "frontend/tests/export.test.ts"
+   ],
+   "included": [
+    "frontend/src/lib/export.ts",
+    "frontend/tests/export.test.ts"
+   ],
+   "excluded": [
+    "les autres fichiers de frontend/src/",
+    "backend/",
+    "db/",
+    "deploiement/"
+   ],
+   "roots": [
+    "PROJECT_ROOT"
+   ],
+   "files": [
+    "frontend/src/lib/export.ts",
+    "frontend/tests/export.test.ts"
+   ],
+   "modules": [],
+   "services": [],
+   "data": []
+  }
+ },
+ "execution": {
+  "id": "EX-20261015T185404498205-07941b",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-003-EX-20261015T185404498205-07941b",
+  "branch": "factory/T-GF-003/EX-20261015T185404498205-07941b",
+  "base": "8002c157af62ef1989ca2d16999be7d46c3efd6b",
+  "extraction_differences": {
+   "db/pg/socle/schema.sql": "0d3795fefbf1ce4fd9aebdf54a644e266b3eab702b6fb9fb662035e42efeffde"
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/export.ts",
+     "frontend/tests/export.test.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

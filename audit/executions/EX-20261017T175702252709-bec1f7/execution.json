@@ -1,0 +1,343 @@
+{
+ "execution_id": "EX-20261017T175702252709-bec1f7",
+ "id": "EX-20261017T175702252709-bec1f7",
+ "project_id": "gestionfil",
+ "ticket_id": "EVAL-qa-20261017T174658-QA-REF-3",
+ "state": "COMPLETED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "claude-sonnet-5-5",
+  "version": "claude-sonnet-5-5"
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-17T17:57:02+00:00",
+  "authorized": "2026-10-17T17:57:02+00:00",
+  "started": "2026-10-17T17:57:47+00:00",
+  "completed": "2026-10-17T18:01:23+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C1 dans le périmètre"
+  ],
+  "criticite_effective": "C1",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "fb4427c9344de3c4c06e06b19c6b33048e5531e23bde7c93f4b3f6c869cd5b9e",
+  "nature": null,
+  "explication": {
+   "regle": "R99",
+   "nom": "Permission dans le périmètre, ou refus par défaut d'une action connue",
+   "pourquoi": "une action connue est permise dans son périmètre ; sinon, aucune règle ne la permet (refus par défaut)",
+   "risque": "—",
+   "frontiere_humaine": null,
+   "exception": null
+  },
+  "exceptions": null
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000469"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000470"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000471"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000472"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000473"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000474"
+  },
+  {
+   "to": "TESTING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000475"
+  },
+  {
+   "to": "COMPLETED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000476"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\EVAL-qa-20261017T174658-QA-REF-3-EX-20261017T175702252709-bec1f7",
+  "branch": "factory/EVAL-qa-20261017T174658-QA-REF-3/EX-20261017T175702252709-bec1f7",
+  "base": "4f53f2a72ec027ab133b3db7f3c3feb2d7ae13ce",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 40.8
+   }
+  }
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "EVAL-qa-20261017T174658-QA-REF-3",
+   "criticality": "C1",
+   "objective": "Crée frontend/tests/fmt-texte.test.ts pour fmt.booleen et fmt.texte (frontend/src/lib/utils.ts), dans le style des tests existants. Couvre : 1 ou true → « Oui » ; 0 ou false → « Non » ; toute autre valeur (null, '1', 2) → « — » ; fmt.texte : null, undefined et '' → « — », mais 0 → « 0 ». Ne modifie aucun fichier source.",
+   "scope": {
+    "paths": [
+     "frontend/tests/"
+    ]
+   }
+  },
+  "execution": {
+   "id": "EX-20261017T175702252709-bec1f7",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\EVAL-qa-20261017T174658-QA-REF-3-EX-20261017T175702252709-bec1f7",
+   "branch": "factory/EVAL-qa-20261017T174658-QA-REF-3/EX-20261017T175702252709-bec1f7",
+   "base": "4f53f2a72ec027ab133b3db7f3c3feb2d7ae13ce",
+   "extraction_differences": {},
+   "copied_dependencies": {
+    "frontend/node_modules": {
+     "files": 21043,
+     "seconds": 40.8
+    }
+   },
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/tests/"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 1,
+   "max_attempts": 3
+  }
+ },
+ "changes": [
+  "frontend/tests/fmt-texte.test.ts"
+ ],
+ "extraction_unchanged": [],
+ "post_gates": {
+  "frontend/tests/fmt-texte.test.ts": "1c79971b64027c5bdebc3cc65dbd01429e67e657f8e125f3c255546166a37e96"
+ },
+ "gate_outputs": [],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "EVAL-qa-20261017T174658-QA-REF-3",
+  "execution": "EX-20261017T175702252709-bec1f7",
+  "agent": "qa",
+  "model": "claude-sonnet-5-5",
+  "model_version": "claude-sonnet-5-5",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/tests/"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/EVAL-qa-20261017T174658-QA-REF-3/EX-20261017T175702252709-bec1f7",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\EVAL-qa-20261017T174658-QA-REF-3-EX-20261017T175702252709-bec1f7",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261017T175702252709-bec1f7-diff",
+   "EX-20261017T175702252709-bec1f7-changes"
+  ],
+  "tests": [
+   "EX-20261017T175702252709-bec1f7-frontend_unit_tests",
+   "EX-20261017T175702252709-bec1f7-lint"
+  ],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261017T175702252709-bec1f7-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat 4f53f2a72ec027ab133b3db7f3c3feb2d7ae13ce",
+   "timestamp": "2026-10-17T17:58:48+00:00",
+   "command": "git diff --stat 4f53f2a72ec027ab133b3db7f3c3feb2d7ae13ce",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T175702252709-bec1f7-diff.log",
+   "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "generated_by": "plateforme:EX-20261017T175702252709-bec1f7",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T175702252709-bec1f7-changes",
+   "type": "ARTIFACT",
+   "source": "plateforme : changements de l'agent",
+   "timestamp": "2026-10-17T17:58:49+00:00",
+   "command": null,
+   "exit_code": null,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T175702252709-bec1f7-changes.txt",
+   "hash": "03264210ecdc773255441140e1d8ff34aebece95f80b0ece6131ad5d0dc54ae0",
+   "generated_by": "plateforme:EX-20261017T175702252709-bec1f7",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T175702252709-bec1f7-frontend_unit_tests",
+   "type": "TEST",
+   "source": "npm test",
+   "timestamp": "2026-10-17T17:58:53+00:00",
+   "command": "npm test",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T175702252709-bec1f7-frontend_unit_tests.log",
+   "hash": "2555f1ea5e344dab12726df4f8ea0c413ffe950c02420548729bafbe7a9bfa08",
+   "generated_by": "plateforme:EX-20261017T175702252709-bec1f7",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T175702252709-bec1f7-lint",
+   "type": "TEST",
+   "source": "npm run lint",
+   "timestamp": "2026-10-17T18:01:22+00:00",
+   "command": "npm run lint",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T175702252709-bec1f7-lint.log",
+   "hash": "0addb8a2232674ca464436cb9b7c7cf24eeac4cdb397c0858d4390f4a93bc063",
+   "generated_by": "plateforme:EX-20261017T175702252709-bec1f7",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

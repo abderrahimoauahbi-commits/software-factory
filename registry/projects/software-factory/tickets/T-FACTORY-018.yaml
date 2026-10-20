@@ -1,0 +1,105 @@
+schema_version: '1.0'
+id: T-FACTORY-018
+project_id: software-factory
+workflow_id: feature
+title: 'Revue de code humaine : la preuve REVIEW vient de la commande humaine (W1)'
+objective: Permettre à l'humain de relire un ticket par un acte que l'agent ne peut pas imiter, lié au diff exact
+requester: Factory Owner
+state: IMPLEMENTED
+criticality: C3
+criticality_justification: 'Portes humaines et preuves de revue : contrôle de sécurité du cycle (Playbook §9.1, §10.4).'
+scope:
+  included:
+  - core/noyau/revue.py
+  - core/noyau/etats.py
+  - core/noyau/execution.py
+  - core/noyau/contexte.py
+  - policies/transitions.yaml
+  - policies/human-approval.yaml
+  - policies/execution.yaml
+  - scripts/factory_approve.py
+  - core/tests/test_etats.py
+  - core/tests/test_execution.py
+  - core/tests/test_garde.py
+  - adr/accepted/ADR-0012-revue-humaine.md
+  excluded:
+  - audit/approvals/human/ (jamais écrit par l'agent)
+  - configuration de l'agent
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules:
+  - une revue déclarée n'est pas une preuve
+  - la revue est liée à l'empreinte du diff complet ; tout changement de code l'invalide
+  functional_requirements:
+  - demande de revue préparée par la plateforme
+  - affichage du diff vérifié par la commande humaine
+  - preuve REVIEW tirée de l'enregistrement humain
+  non_functional_requirements:
+  - aucune création d'enregistrement humain par l'agent
+  acceptance_criteria:
+  - revue déclarée par l'agent refusée
+  - revue APPROVED → QA ; CHANGES_REQUESTED → IN_PROGRESS
+  - diff modifié après la revue → revue invalide
+  - revue d'un autre ticket ou approbation ordinaire refusée
+design:
+  architecture_ref: adr/accepted/ADR-0012-revue-humaine.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0006
+  - ADR-0012
+security:
+  required: true
+  assessment_ref: adr/accepted/ADR-0012-revue-humaine.md
+  risks:
+  - imitation d'une revue humaine par un agent (T14)
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-007
+  - T-FACTORY-016
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: retirer les exigences human_review de policies/transitions.yaml (dépôt non commité)
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: PENDING
+evidence:
+  required:
+  - tests
+  collected:
+  - 'test_etats : revue déclarée refusée + 8 tests RevueHumaine'
+  - 'test_execution : 6 tests RevueHumaine (dépôt git temporaire)'
+  - 'test_garde : 3 tests DiffDeRevue'
+  - 'suites : core 250 OK, bootstrap 2 OK'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: 'revue humaine — relecteur distinct requis : WAITING_HUMAN'

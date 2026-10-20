@@ -1,0 +1,53 @@
+# Classement des commandes pour le Policy Engine (Master §12). Une commande non reconnue est REFUSÉE.
+# Les commandes s'écrivent en argv ; les noms d'outils vivent ici, jamais dans le code du moteur.
+schema_version: "1.0"
+id: command-classes
+version: "1.0"
+
+# Toujours refusées à un agent, quelle que soit la criticité (préfixe d'argv, ou jeton n'importe où).
+forbidden_prefixes:
+  - [rm]
+  - [del]
+  - [rmdir]
+  - [rd]
+  - [Remove-Item]
+  - [format]
+  - [mkfs]
+  - [shutdown]
+  - [git, push]
+  - [git, reset, --hard]
+  - [git, clean]
+  - [git, checkout, --]
+  - [git, restore]
+  - [git, rebase]
+  - [git, filter-branch]
+  - [git, worktree, remove]
+  - [git, branch, -D]
+  - [curl]
+  - [wget]
+  - [Invoke-WebRequest]
+  - [Invoke-RestMethod]
+  - [ssh]
+  - [scp]
+  - [psql]
+  - [pg_dump]
+  - [pg_restore]
+  - [dropdb]
+  - [createdb]
+  - [npm, publish]
+  - [cargo, publish]
+  - [npm, install]
+  - [cargo, install]
+  - [claude, mcp]
+forbidden_tokens: [--dangerously-skip-permissions, --force, --force-with-lease, --no-verify]
+
+# C0 : la liste blanche de lecture du Bootstrap (policies/command-whitelist.yaml) est reprise telle quelle.
+c0_from: command-whitelist
+
+# Contrôlées : exigent une approbation humaine même si la criticité du ticket est basse (guide §12).
+controlled_prefixes:
+  - [git, add]
+  - [git, commit]
+
+# C1 : les commandes de Quality Gates déclarées par le manifest du projet (quality.gates.*.command).
+c1_from: project_manifest_quality_gates

@@ -1,0 +1,654 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+regle: Une transition absente de cette table est refusée (Executable Schemas §22).
+ticket:
+  states:
+  - DRAFT
+  - ANALYSIS
+  - DESIGN
+  - READY
+  - ASSIGNED
+  - IN_PROGRESS
+  - IMPLEMENTED
+  - CODE_REVIEW
+  - SPECIALIST_REVIEW
+  - DB_REVIEW
+  - SECURITY_REVIEW
+  - QA
+  - ACCEPTED
+  - READY_TO_MERGE
+  - HUMAN_APPROVAL
+  - MERGED
+  - RELEASED
+  - CLOSED
+  - BLOCKED
+  - WAITING_HUMAN
+  - WAITING_DEPENDENCY
+  - WAITING_CLARIFICATION
+  - CANCELLED
+  - REOPENED
+  initial: DRAFT
+  transitions:
+  - from: DRAFT
+    to: ANALYSIS
+  - from: ANALYSIS
+    to: DESIGN
+  - from: DESIGN
+    to: READY
+  - from: READY
+    to: ASSIGNED
+  - from: ASSIGNED
+    to: IN_PROGRESS
+  - from: IN_PROGRESS
+    to: IMPLEMENTED
+  - from: IMPLEMENTED
+    to: CODE_REVIEW
+  - from: CODE_REVIEW
+    to: SPECIALIST_REVIEW
+  - from: CODE_REVIEW
+    to: DB_REVIEW
+  - from: CODE_REVIEW
+    to: SECURITY_REVIEW
+  - from: CODE_REVIEW
+    to: QA
+  - from: SPECIALIST_REVIEW
+    to: DB_REVIEW
+  - from: SPECIALIST_REVIEW
+    to: SECURITY_REVIEW
+  - from: SPECIALIST_REVIEW
+    to: QA
+  - from: DB_REVIEW
+    to: SECURITY_REVIEW
+  - from: DB_REVIEW
+    to: QA
+  - from: SECURITY_REVIEW
+    to: QA
+  - from: QA
+    to: ACCEPTED
+  - from: ACCEPTED
+    to: READY_TO_MERGE
+  - from: READY_TO_MERGE
+    to: HUMAN_APPROVAL
+  - from: READY_TO_MERGE
+    to: MERGED
+    condition: human_approval_not_required
+  - from: HUMAN_APPROVAL
+    to: MERGED
+    condition: explicit_human_approval
+  - from: MERGED
+    to: RELEASED
+  - from: RELEASED
+    to: CLOSED
+  - from: MERGED
+    to: CLOSED
+  - from: CODE_REVIEW
+    to: IN_PROGRESS
+    reason: changes_requested
+  - from: SPECIALIST_REVIEW
+    to: IN_PROGRESS
+    reason: changes_requested
+  - from: DB_REVIEW
+    to: IN_PROGRESS
+    reason: changes_requested
+  - from: SECURITY_REVIEW
+    to: IN_PROGRESS
+    reason: changes_requested
+  - from: QA
+    to: IN_PROGRESS
+    reason: changes_requested
+  - from: CLOSED
+    to: REOPENED
+  - from: REOPENED
+    to: ANALYSIS
+  terminal:
+  - CLOSED
+  - CANCELLED
+  any_to:
+  - BLOCKED
+  - WAITING_HUMAN
+  - WAITING_DEPENDENCY
+  - WAITING_CLARIFICATION
+  - CANCELLED
+execution:
+  states:
+  - REQUESTED
+  - AUTHORIZED
+  - RESERVED
+  - PREPARED
+  - STARTED
+  - RUNNING
+  - ARTIFACTS_PRODUCED
+  - TESTING
+  - COMPLETED
+  - FAILED
+  - BLOCKED
+  - CANCELLED
+  - TIMEOUT
+  - INTERRUPTED
+  - SECURITY_STOP
+  - BUDGET_STOP
+  initial: REQUESTED
+  transitions:
+  - from: REQUESTED
+    to: AUTHORIZED
+  - from: AUTHORIZED
+    to: RESERVED
+  - from: RESERVED
+    to: PREPARED
+  - from: PREPARED
+    to: STARTED
+  - from: STARTED
+    to: RUNNING
+  - from: RUNNING
+    to: ARTIFACTS_PRODUCED
+  - from: ARTIFACTS_PRODUCED
+    to: TESTING
+  - from: TESTING
+    to: COMPLETED
+  terminal:
+  - COMPLETED
+  - FAILED
+  - BLOCKED
+  - CANCELLED
+  - TIMEOUT
+  - INTERRUPTED
+  - SECURITY_STOP
+  - BUDGET_STOP
+  any_to:
+  - FAILED
+  - BLOCKED
+  - CANCELLED
+  - TIMEOUT
+  - INTERRUPTED
+  - SECURITY_STOP
+  - BUDGET_STOP
+tool:
+  states:
+  - DISCOVERED
+  - CANDIDATE
+  - EVALUATING
+  - LAB
+  - TESTED
+  - APPROVED
+  - AVAILABLE
+  - ACTIVE
+  - REEVALUATION
+  - UPDATED
+  - WATCHLIST
+  - REJECTED
+  - DEPRECATED
+  - REMOVED
+  initial: DISCOVERED
+  transitions:
+  - from: DISCOVERED
+    to: CANDIDATE
+  - from: CANDIDATE
+    to: EVALUATING
+  - from: EVALUATING
+    to: LAB
+  - from: LAB
+    to: TESTED
+  - from: TESTED
+    to: APPROVED
+  - from: APPROVED
+    to: AVAILABLE
+  - from: AVAILABLE
+    to: ACTIVE
+  - from: ACTIVE
+    to: REEVALUATION
+  - from: REEVALUATION
+    to: UPDATED
+  - from: EVALUATING
+    to: TESTED
+    condition: lab_not_required_by_risk
+  - from: UPDATED
+    to: ACTIVE
+  - from: REEVALUATION
+    to: ACTIVE
+  - from: DISCOVERED
+    to: APPROVED
+    condition: factory_owner_initial_adoption
+    reason: adoption humaine initiale (instruction du 15/10/2026), évaluation formelle due
+  terminal:
+  - REMOVED
+  any_to:
+  - WATCHLIST
+  - REJECTED
+  - DEPRECATED
+  - REMOVED
+  aliases:
+    REEVALUATED: REEVALUATION
+    RETIRED: REMOVED
+agent:
+  states:
+  - DISCOVERED
+  - EVALUATING
+  - TESTED
+  - APPROVED
+  - AVAILABLE
+  - ACTIVE
+  - REEVALUATION
+  - DEPRECATED
+  - REMOVED
+  initial: DISCOVERED
+  transitions:
+  - from: DISCOVERED
+    to: EVALUATING
+  - from: EVALUATING
+    to: TESTED
+  - from: TESTED
+    to: APPROVED
+  - from: APPROVED
+    to: AVAILABLE
+  - from: AVAILABLE
+    to: ACTIVE
+  - from: ACTIVE
+    to: REEVALUATION
+  - from: REEVALUATION
+    to: ACTIVE
+  terminal:
+  - REMOVED
+  any_to:
+  - DEPRECATED
+  - REMOVED
+model:
+  states:
+  - DISCOVERED
+  - BENCHMARK
+  - EVALUATED
+  - APPROVED
+  - DEPLOYED
+  - MONITORED
+  - REEVALUATION
+  - RETIRED
+  initial: DISCOVERED
+  transitions:
+  - from: DISCOVERED
+    to: BENCHMARK
+  - from: BENCHMARK
+    to: EVALUATED
+  - from: EVALUATED
+    to: APPROVED
+  - from: APPROVED
+    to: DEPLOYED
+  - from: DEPLOYED
+    to: MONITORED
+  - from: MONITORED
+    to: REEVALUATION
+  - from: REEVALUATION
+    to: MONITORED
+  terminal:
+  - RETIRED
+  any_to:
+  - RETIRED
+skill:
+  states:
+  - DRAFT
+  - REVIEW
+  - TESTED
+  - APPROVED
+  - AVAILABLE
+  - ACTIVE
+  - UPDATED
+  - REEVALUATION
+  - DEPRECATED
+  - REMOVED
+  initial: DRAFT
+  transitions:
+  - from: DRAFT
+    to: REVIEW
+  - from: REVIEW
+    to: TESTED
+  - from: TESTED
+    to: APPROVED
+  - from: APPROVED
+    to: AVAILABLE
+  - from: AVAILABLE
+    to: ACTIVE
+  - from: ACTIVE
+    to: UPDATED
+  - from: UPDATED
+    to: REEVALUATION
+  - from: REEVALUATION
+    to: ACTIVE
+  terminal:
+  - REMOVED
+  any_to:
+  - DEPRECATED
+  - REMOVED
+mcp:
+  states:
+  - DISCOVERED
+  - SECURITY_EVALUATION
+  - LAB
+  - APPROVED
+  - AVAILABLE
+  - AUTHORIZED_FOR_PROJECT
+  - ACTIVE
+  - REVOKED
+  - DEPRECATED
+  - REMOVED
+  initial: DISCOVERED
+  transitions:
+  - from: DISCOVERED
+    to: SECURITY_EVALUATION
+  - from: SECURITY_EVALUATION
+    to: LAB
+  - from: LAB
+    to: APPROVED
+  - from: APPROVED
+    to: AVAILABLE
+  terminal:
+  - REMOVED
+  any_to:
+  - REVOKED
+  - DEPRECATED
+  - REMOVED
+mcp_project_authorization:
+  states:
+  - AUTHORIZED_FOR_PROJECT
+  - ACTIVE
+  - REVOKED
+  initial: AUTHORIZED_FOR_PROJECT
+  transitions:
+  - from: AUTHORIZED_FOR_PROJECT
+    to: ACTIVE
+  terminal:
+  - REVOKED
+  any_to:
+  - REVOKED
+workflow:
+  states:
+  - DRAFT
+  - ACTIVE
+  - DEPRECATED
+  - ARCHIVED
+  initial: DRAFT
+  transitions:
+  - from: DRAFT
+    to: ACTIVE
+  - from: ACTIVE
+    to: DEPRECATED
+  - from: DEPRECATED
+    to: ARCHIVED
+  terminal:
+  - ARCHIVED
+  any_to:
+  - ARCHIVED
+project:
+  states:
+  - REGISTERED
+  - BOOTSTRAPPING
+  - READY_FOR_ANALYSIS
+  - ANALYZING
+  - SPECIFYING
+  - ARCHITECTING
+  - DESIGNING
+  - PLANNING
+  - READY_FOR_EXECUTION
+  - EXECUTING
+  - VALIDATING
+  - READY_FOR_RELEASE
+  - RELEASING
+  - OPERATING
+  - IMPROVING
+  - BLOCKED
+  - WAITING_HUMAN
+  - WAITING_DEPENDENCY
+  - WAITING_CLARIFICATION
+  - DEGRADED
+  - CANCELLED
+  - ARCHIVED
+  initial: REGISTERED
+  transitions:
+  - from: REGISTERED
+    to: BOOTSTRAPPING
+  - from: BOOTSTRAPPING
+    to: READY_FOR_ANALYSIS
+  - from: READY_FOR_ANALYSIS
+    to: ANALYZING
+  - from: ANALYZING
+    to: SPECIFYING
+  - from: SPECIFYING
+    to: ARCHITECTING
+  - from: ARCHITECTING
+    to: DESIGNING
+  - from: DESIGNING
+    to: PLANNING
+  - from: PLANNING
+    to: READY_FOR_EXECUTION
+  - from: READY_FOR_EXECUTION
+    to: EXECUTING
+  - from: EXECUTING
+    to: VALIDATING
+  - from: VALIDATING
+    to: READY_FOR_RELEASE
+  - from: READY_FOR_RELEASE
+    to: RELEASING
+  - from: RELEASING
+    to: OPERATING
+  - from: OPERATING
+    to: IMPROVING
+  terminal:
+  - ARCHIVED
+  - CANCELLED
+  any_to:
+  - BLOCKED
+  - WAITING_HUMAN
+  - WAITING_DEPENDENCY
+  - WAITING_CLARIFICATION
+  - DEGRADED
+  - CANCELLED
+  - ARCHIVED
+factory:
+  states:
+  - INITIALIZING
+  - CHECKING
+  - READY
+  - DEGRADED
+  - BLOCKED
+  - RECOVERY
+  initial: INITIALIZING
+  transitions:
+  - from: INITIALIZING
+    to: CHECKING
+  - from: CHECKING
+    to: READY
+  - from: CHECKING
+    to: DEGRADED
+  - from: CHECKING
+    to: BLOCKED
+  - from: READY
+    to: CHECKING
+  - from: DEGRADED
+    to: CHECKING
+  - from: DEGRADED
+    to: RECOVERY
+  - from: BLOCKED
+    to: RECOVERY
+  - from: RECOVERY
+    to: CHECKING
+  terminal: []
+need:
+  states:
+  - RECEIVED
+  - CLASSIFIED
+  - CLARIFICATION
+  - ACCEPTED
+  - ANALYZED
+  - SPECIFIED
+  - PLANNED
+  - IMPLEMENTED
+  - VALIDATED
+  - RELEASED
+  - CLOSED
+  initial: RECEIVED
+  transitions:
+  - from: RECEIVED
+    to: CLASSIFIED
+  - from: CLASSIFIED
+    to: CLARIFICATION
+  - from: CLARIFICATION
+    to: ACCEPTED
+  - from: ACCEPTED
+    to: ANALYZED
+  - from: ANALYZED
+    to: SPECIFIED
+  - from: SPECIFIED
+    to: PLANNED
+  - from: PLANNED
+    to: IMPLEMENTED
+  - from: IMPLEMENTED
+    to: VALIDATED
+  - from: VALIDATED
+    to: RELEASED
+  - from: RELEASED
+    to: CLOSED
+  - from: CLASSIFIED
+    to: ACCEPTED
+    condition: no_clarification_needed
+  - from: VALIDATED
+    to: CLOSED
+    condition: no_release_needed
+  terminal:
+  - CLOSED
+# Évolution E (Master Evolution Prompt v4 §15, §21) : tâche du graphe dynamique et mission.
+# WAITING_HUMAN n'est atteint que pour une frontière humaine déclarée (contrôlé par noyau.graphe).
+task:
+  states:
+  - PENDING
+  - READY
+  - RUNNING
+  - BLOCKED
+  - FAILED
+  - RETRYING
+  - WAITING_DEPENDENCY
+  - WAITING_HUMAN
+  - SUCCEEDED
+  - CANCELLED
+  initial: PENDING
+  transitions:
+  - from: PENDING
+    to: READY
+  - from: PENDING
+    to: WAITING_DEPENDENCY
+  - from: WAITING_DEPENDENCY
+    to: READY
+  - from: READY
+    to: RUNNING
+  - from: READY
+    to: WAITING_DEPENDENCY
+  - from: RUNNING
+    to: SUCCEEDED
+  - from: RUNNING
+    to: FAILED
+  - from: RUNNING
+    to: READY
+  - from: FAILED
+    to: RETRYING
+  - from: RETRYING
+    to: READY
+  - from: BLOCKED
+    to: READY
+  - from: WAITING_HUMAN
+    to: READY
+  terminal:
+  - SUCCEEDED
+  - CANCELLED
+  any_to:
+  - BLOCKED
+  - WAITING_HUMAN
+  - CANCELLED
+mission:
+  states:
+  - RECEIVED
+  - PLANNING
+  - RUNNING
+  - WAITING_HUMAN
+  - SUCCEEDED
+  - FAILED
+  - BUDGET_STOP
+  - CANCELLED
+  initial: RECEIVED
+  transitions:
+  - from: RECEIVED
+    to: PLANNING
+  - from: PLANNING
+    to: RUNNING
+  - from: RUNNING
+    to: PLANNING
+  - from: RUNNING
+    to: SUCCEEDED
+  - from: RUNNING
+    to: WAITING_HUMAN
+  - from: WAITING_HUMAN
+    to: RUNNING
+  terminal:
+  - SUCCEEDED
+  - FAILED
+  - BUDGET_STOP
+  - CANCELLED
+  any_to:
+  - FAILED
+  - BUDGET_STOP
+  - CANCELLED
+# Environnement jetable (Master Evolution Prompt v4 §11–§12) : créé, réinitialisé et détruit par la Factory.
+environment:
+  states:
+  - REQUESTED
+  - PROVISIONING
+  - READY
+  - RESETTING
+  - DESTROYING
+  - DESTROYED
+  - FAILED
+  initial: REQUESTED
+  transitions:
+  - from: REQUESTED
+    to: PROVISIONING
+  - from: PROVISIONING
+    to: READY
+  - from: READY
+    to: RESETTING
+  - from: RESETTING
+    to: READY
+  - from: READY
+    to: DESTROYING
+  - from: FAILED
+    to: DESTROYING
+  - from: DESTROYING
+    to: DESTROYED
+  terminal:
+  - DESTROYED
+  any_to:
+  - FAILED
+# Bail de capacités (Master Evolution Prompt v4 §6) : n'existe qu'actif ou terminé ; jamais réactivé.
+capability_lease:
+  states:
+  - REQUESTED
+  - ACTIVE
+  - DENIED
+  - RELEASED
+  - EXPIRED
+  - REVOKED
+  - INVALIDATED       # condition obligatoire perdue (politique changée, bail altéré) — ADR-0017 §3.2, étape G1
+  initial: REQUESTED
+  transitions:
+  - from: REQUESTED
+    to: ACTIVE
+  - from: REQUESTED
+    to: DENIED
+  - from: ACTIVE
+    to: RELEASED
+  - from: ACTIVE
+    to: EXPIRED
+  terminal:
+  - DENIED
+  - RELEASED
+  - EXPIRED
+  - REVOKED
+  - INVALIDATED
+  any_to:
+  - REVOKED
+  - INVALIDATED

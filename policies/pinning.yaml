@@ -1,0 +1,58 @@
+# Épinglage L1 des artefacts de gouvernance (ADR-0017 proposé, étape G1 ; annexe E « Épinglage »).
+# La référence est une approbation humaine W1 (contexte PIN_REFERENCE) : l'agent prépare la demande
+# (« factory pin request »), l'humain l'approuve avec scripts/factory_approve.py. Au lancement d'une mission,
+# un fichier couvert modifié, ajouté ou supprimé depuis la référence = BLOCKED (lancement refusé).
+# Les motifs vérifiés sont ceux de la RÉFÉRENCE approuvée ; ce fichier ne sert qu'à préparer la prochaine demande.
+# Niveau : IMPLEMENTED (aucune preuve de l'annexe E produite) ; L1 seulement : détecte, n'empêche pas.
+schema_version: "1.0"
+id: pinning
+version: "1.0"
+roles: [factory_owner]
+# Rôle de chaque fichier couvert, affiché en clair à l'humain quand il approuve une référence (préfixe le plus long).
+file_roles:
+  policies/policy-engine.yaml: règles du moteur de décision (qui peut faire quoi)
+  policies/autonomy.yaml: autonomie des agents en environnement jetable
+  policies/rule-catalog.yaml: catalogue des règles (nature des refus, exceptions possibles)
+  policies/human-approval.yaml: règles des approbations humaines et des demandes
+  policies/execution.yaml: commandes git permises à la plateforme d'exécution des tickets
+  policies/pinning.yaml: liste des fichiers surveillés par l'épinglage
+  policies/exceptions/: exceptions accordées par l'humain
+  policies/: politique de la Factory
+  core/schemas/: schémas des objets de la Factory (cycles de vie, formats)
+  core/noyau/explication.py: texte en clair affiché lors de vos approbations
+  registry/agents/: fiche d'un agent IA (capacités, habilitation, domaines, workflows, consigne du rôle)
+  policies/control-profiles.yaml: profils de contrôle des tickets (revue, décisions humaines, évidence, budget)
+  registry/prompts/roles/: consigne d'un rôle, partie B du prompt (ne donne aucun droit)
+  registry/prompts/: profil de prompt (ordre et gabarits du prompt effectif ; ne donne aucun droit)
+  registry/skills/: skill (savoir-faire et ses instructions ; ne donne aucun droit)
+  core/schemas/objects/: schéma d'un objet de la Factory (ticket, agent, outil…)
+  registry/models/: fiche d'un modèle d'IA (approbation)
+  scripts/hooks/: garde de sécurité appliquée à chaque session d'agent
+  scripts/factory_approve.py: la commande de vos approbations
+  docs/playbook/: texte normatif de la Factory (Playbook)
+  docs/normative/: texte normatif
+  .claude/settings.json: réglages de sécurité de Claude Code pour ce dépôt
+  factory.yaml: description de la Factory
+# factory.yaml n'est plus couvert : le Factory Owner a décidé de ne plus l'utiliser ni le maintenir (17/10/2026).
+patterns:
+  - policies/*.yaml
+  - policies/exceptions/*.yaml
+  - core/schemas/*.yaml
+  - docs/playbook/*.md
+  - docs/normative/*.md
+  - .claude/settings.json
+  - scripts/hooks/*.py
+  # Outil de la cérémonie humaine et son affichage (TCB d'affichage, ADR-0017 D42) : toute modification est signalée.
+  - scripts/factory_approve.py
+  - core/noyau/explication.py
+  # G4 : l'habilitation d'un agent et l'approbation d'un modèle sont lues dans ces registres (AUDIT-0003 §5).
+  - registry/agents/*.yaml
+  - registry/models/*.yaml
+  # ADR-0022 v2 : profils de prompt, gabarits, consignes des rôles et skills ne valent que s'ils figurent, à leur
+  # empreinte, dans la référence approuvée ; les profils de contrôle sont dans policies/*.yaml ; les schémas d'objets
+  # n'étaient pas couverts (« core/schemas/*.yaml » ne descend pas dans objects/).
+  - registry/prompts/*.yaml
+  - registry/prompts/*/*.md
+  - registry/skills/*.yaml
+  - registry/skills/*/*.md
+  - core/schemas/objects/*.yaml

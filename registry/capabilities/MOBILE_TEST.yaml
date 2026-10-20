@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: MOBILE_TEST
+name: MOBILE_TEST
+description: Tests sur appareil mobile
+status: DEFINED
+implementations: []

@@ -1,0 +1,88 @@
+schema_version: '1.0'
+id: T-FACTORY-015
+project_id: software-factory
+workflow_id: feature
+title: J13 — plateforme d'exécution v1 + correction de généricité
+objective: Un ticket → une exécution → un espace isolé → une branche ; non-débordement ; gates avec preuves
+requester: Factory Owner
+state: IMPLEMENTED
+criticality: C3
+criticality_justification: 'Politique de sécurité et autorisation : C3 au minimum (Playbook §9.1, §10.4).'
+scope:
+  included:
+  - factory.py
+  - factory.cmd
+  - core/noyau/contexte.py
+  - core/tests/test_cli.py
+  - README.md
+  excluded:
+  - toute commande d'approbation
+  - configuration de l'agent
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules: []
+  functional_requirements: []
+  non_functional_requirements:
+  - la CLI ne modifie rien (hors rapport du Bootstrap)
+  - aucune commande inventée
+  acceptance_criteria:
+  - codes de sortie documentés et testés
+  - paths PROPOSED non normatifs
+  - aucune approbation par la CLI
+design:
+  architecture_ref: adr/accepted/ADR-0009-plateforme-execution-et-pilote.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0009
+security:
+  required: false
+  assessment_ref: null
+  risks: []
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-007
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: déplacements inverses listés dans ADR-0003 (dépôt non commité)
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: PENDING
+evidence:
+  required:
+  - tests
+  collected:
+  - 'core/tests/test_execution.py : 11 OK (dépôts Git temporaires)'
+  - 'suites complètes : 223 OK'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: 'revue humaine — relecteur distinct requis : WAITING_HUMAN'

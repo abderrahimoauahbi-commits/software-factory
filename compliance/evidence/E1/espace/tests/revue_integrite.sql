@@ -1,0 +1,1 @@
+DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name='fournisseur' AND column_name='remise_pct' AND is_nullable='NO' AND column_default IS NOT NULL) THEN RAISE EXCEPTION 'remise_pct nullable ou sans défaut'; END IF; END $$;

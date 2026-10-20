@@ -1,0 +1,56 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Clés « references », « mandatory », « limits », « version_fields » : extensions ADR-0004.
+schema_version: '1.1'          # 1.1 : extensions facultatives (ADR-0022 v2) ; un ticket 1.0 reste valide
+object: ticket
+required:
+- id
+- project_id
+- workflow_id
+- title
+- objective
+- requester
+- state
+- criticality
+- scope
+- specification
+- quality
+- approvals
+- evidence
+enums:
+  state: lifecycle:ticket
+  criticality: CRITICALITY
+  approvals.status: APPROVAL_STATUS
+# T-FACTORY-020 : un workflow ou un projet inconnu est refusé (« bugfix » pour « bug-fix » passait, 15/10/2026).
+references:
+  workflow_id: workflows
+  project_id: projects
+  dependencies.tickets[]: tickets
+# Extensions facultatives du modèle canonique (ADR-0022 v2, 19/10/2026) : un ticket qui porte `control_profile` est un
+# CONTRAT D'EXÉCUTION ; il est alors résolu (READY/BLOCKED) avant toute exécution (`factory ticket check`).
+#   version (entier) · expected_result · classification {domain, wave, flow, business_priority}
+#   agent {role {id, version}, authorization {required_level, required_domains[]}}
+#   execution {agent_id, environment_profile} · skills [{id, version}] · tools [] · tool_versions {} · mcp []
+#   context {specification[], design[], adr[], related_tickets[]} (références « chemin#ancre » ou RG-xx / CA-xx)
+#   prompt {profile {id, version}, instructions[], forbidden_actions[]} · inputs {required[], optional[]}
+#   outputs {required[]} · dependencies {tickets[], informational[], decisions[]}
+#   specification {acceptance_criteria[], business_rules[], stop_conditions[], block_conditions[]}
+#   quality {required_gates[], required_tests[]} · control_profile {id, version} · governance {ticket_decisions[]}
+#   budget {max_attempts, time_limit_minutes} · rollback {strategy_ref}
+# Une valeur encore inconnue s'écrit TO_COMPLETE : le ticket reste BLOCKED (rien n'est inventé).
+fields:
+  budget.max_attempts:
+    default: 3
+relative_paths:
+- scope.paths[]
+rules:
+- objectif obligatoire
+- 'C3/C4 : justification de criticité explicite'
+- critères d'acceptation avant READY
+- opération destructive = C4   # NE8 (16/10/2026) : « hors environnement jetable » (ADR-0016 ; Playbook v3.3 proposé §9.1, §13.1) ; texte v1.0 inchangé, à ratifier en v1.1
+- modification de production = C4
+- 'ambiguïté critique non résolue : pas de READY'
+- changement de périmètre = nouvelle décision ou nouveau ticket
+limits:
+  budget.max_attempts:
+    max: 3   # NE1 (16/10/2026) : borne fixe à ratifier en v1.1 ; à lire dans la politique d'exécution (Playbook v3.3 proposé §8.6). Valeur v1.0 inchangée.

@@ -1,0 +1,50 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Clés « references », « mandatory », « limits », « version_fields » : extensions ADR-0004.
+schema_version: '1.0'
+object: mcp
+required:
+- id
+- name
+- version
+- lifecycle
+- capabilities
+- permissions
+- credentials
+- data
+- projects_allowed
+- agents_allowed
+- environments_allowed
+- production
+- security
+- health
+- approval
+enums:
+  lifecycle: lifecycle:mcp
+fields:
+  production.read:
+    default: false
+  production.write:
+    default: false
+  production.delete:
+    default: false
+  security.audit_required:
+    default: true
+rules:
+- écriture et suppression en production à false par défaut
+- ne contourne pas la politique du projet
+- aucun identifiant stocké dans la fiche
+- accès limité au ticket ou à l'exécution quand c'est requis
+references:
+  capabilities[]: capabilities
+mandatory:
+  production.write: false
+  production.delete: false
+active_requires_approval:
+  states:
+  - APPROVED
+  - AVAILABLE
+  - AUTHORIZED_FOR_PROJECT
+  - ACTIVE
+  field: approval.status
+  equals: APPROVED

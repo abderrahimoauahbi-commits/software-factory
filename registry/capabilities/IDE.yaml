@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: IDE
+name: IDE
+description: Environnement de développement humain
+status: DEFINED
+implementations:
+- vscode

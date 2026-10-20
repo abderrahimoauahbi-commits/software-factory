@@ -1,0 +1,30 @@
+# Découverte (Master Package v3.2 §59) : propose une évaluation, ne modifie jamais l'environnement actif.
+schema_version: "1.0"
+discovery:
+  date: "2026-10-15"
+  category: factory-implementation
+  candidates:
+    - id: factory-implementation-powershell-v1.0
+      name: AI_Software_Factory_Implementation_v1.0.zip (scripts PowerShell)
+      source: cité par « AI Software Factory — Guide d'implémentation v1.0 » ; archive NON transmise
+      status: DISCOVERED
+      contents_declared: [scripts/Factory.ps1, scripts/ReadinessAudit.ps1, scripts/PolicyEngine.ps1,
+                          scripts/New-Project.ps1]
+      overlap: "même périmètre que bootstrap/ et que le Policy Engine prévu (J4) : implémentations concurrentes"
+      concerns:
+        - "lancement documenté avec « -ExecutionPolicy Bypass » : désactive un contrôle de sécurité du poste ;
+           au mieux « -ExecutionPolicy RemoteSigned -Scope Process » sur des scripts relus"
+        - "mode SETUP créant une arborescence : à confronter à la structure existante (ADR-0001, ADR-0003)"
+      decision: "candidat seulement (ADR-0005, M3) — l'implémentation Python reste la référence"
+      next_step: "PATH_ACCESS_REQUIRED : chemin de l'archive à fournir par le Factory Owner pour une analyse en lecture seule"
+      analysis_attempts:
+        - date: "2026-10-15"
+          path_given: /mnt/data/AI_Software_Factory_Implementation_v1.0.zip
+          result: PATH_NOT_FOUND
+          evidence: "Test-Path (PowerShell) → False ; test -e (Git Bash) → absent ; C:\\mnt\\data → False"
+          note: "chemin de type espace de travail d'un autre assistant, pas un chemin de ce poste ; aucune recherche ailleurs (périmètre)"
+  urgent_updates: []
+  rejected: []
+  needs_lab: [factory-implementation-powershell-v1.0]
+  recommendations:
+    - "ne rien exécuter de l'archive avant sa relecture complète (Playbook §6.5, Lab)"

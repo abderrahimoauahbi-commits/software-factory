@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: KNOWLEDGE_WRITE
+name: KNOWLEDGE_WRITE
+description: Écriture dans la base de connaissance
+status: DEFINED
+implementations: []

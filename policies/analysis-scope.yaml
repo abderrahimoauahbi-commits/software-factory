@@ -1,0 +1,34 @@
+schema_version: '1.0'
+id: analysis-scope
+name: Exceptions d'analyse technique
+version: '1.0'
+source: instruction « Exceptions d'analyse technique » du 15/10/2026
+principle: Lire plus profond quand c'est justifié ; jamais plus large parce qu'un accès plus profond a été donné.
+types:
+- STRUCTURE
+- CODE
+- IMPACT
+- SECURITY
+- DATABASE
+- FRONTEND
+- TESTS_QUALITY
+request_fields:
+- objectif
+- question
+- racine
+- zones nécessaires
+- profondeur
+- raison
+- exclusions
+- mode
+propagation: A → B autorisé si B est nécessaire ; B → C réexaminé (nécessité, périmètre, sensibilité, objectif)
+budget_required: true
+on_exceed: 'ANALYSIS_SCOPE_EXCEEDED : arrêt, résultats conservés, demande humaine'
+never:
+- lire un secret
+- lire une base réelle
+- exécuter du SQL
+- exécuter des tests sans autorisation distincte
+- écrire
+- installer
+- accéder au réseau

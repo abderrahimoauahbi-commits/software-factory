@@ -1,0 +1,101 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "T-GF-005",
+  "criticality": "C1",
+  "objective": "Créer frontend/tests/statuts.test.ts : estSupprimable / SUPPRIMABLES (src/lib/statuts.ts) et leur accord avec la garde du serveur supprimer_bc (backend/src/routes/stock.rs, lue sans modification), sans modifier le code source",
+  "scope": {
+   "data": [],
+   "excluded": [
+    "frontend/src/",
+    "backend/",
+    "db/",
+    "deploiement/"
+   ],
+   "files": [
+    "frontend/tests/statuts.test.ts"
+   ],
+   "included": [
+    "frontend/tests/statuts.test.ts"
+   ],
+   "modules": [],
+   "paths": [
+    "frontend/tests/statuts.test.ts"
+   ],
+   "roots": [
+    "PROJECT_ROOT"
+   ],
+   "services": []
+  }
+ },
+ "execution": {
+  "id": "EX-20261015T190027789201-381a64",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-005-EX-20261015T190027789201-381a64",
+  "branch": "factory/T-GF-005/EX-20261015T190027789201-381a64",
+  "base": "1552e4770f61070eb7998211fecb57fa23c62ab9",
+  "extraction_differences": {
+   "db/pg/socle/schema.sql": "0d3795fefbf1ce4fd9aebdf54a644e266b3eab702b6fb9fb662035e42efeffde"
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/tests/statuts.test.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

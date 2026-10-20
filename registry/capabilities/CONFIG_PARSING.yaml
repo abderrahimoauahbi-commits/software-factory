@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: CONFIG_PARSING
+name: CONFIG_PARSING
+description: Lecture des fichiers de configuration YAML de la Factory
+status: DEFINED
+implementations:
+- pyyaml

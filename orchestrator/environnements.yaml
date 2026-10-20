@@ -1,0 +1,32 @@
+# Caractéristiques opérationnelles des profils d'environnement (Master Evolution Prompt v4 §7, §11, §12).
+# Lues par l'Environment Manager (core/noyau/environnements.py) : ce que le profil EST (jetable, rétention,
+# nettoyage), jamais ce qu'un agent a le DROIT d'y faire — la matrice des droits relève de la politique
+# (ADR-0016, proposé ; à poser par le Factory Owner).
+schema_version: "1.0"
+id: environnements
+version: "1.0"
+
+profiles:
+  LOCAL_SANDBOX: { disposable: true,  criticality: C1, retention_hours: 24, cleanup: destroy, network: loopback }
+  LOCAL_TEST:    { disposable: true,  criticality: C1, retention_hours: 24, cleanup: destroy, network: loopback }
+  CI:            { disposable: true,  criticality: C2, retention_hours: 72, cleanup: destroy, network: loopback }
+  DEV_SHARED:    { disposable: false, criticality: C2, cleanup: keep }
+  STAGING:       { disposable: false, criticality: C3, cleanup: keep }
+  PRODUCTION:    { disposable: false, criticality: C4, cleanup: keep }
+
+# Quotas du Resource Broker (ADR-0017 annexe A, étape G1) : refus à la création au-delà du nombre
+# d'environnements vivants ou de l'espace disque occupé ; un dépassement EN COURS d'exécution est constaté
+# (`factory env list`), pas empêché : aucun quota du système de fichiers n'est posé. IMPLEMENTED, détectif.
+quotas:
+  max_active_environments: 8
+  max_disk_mb_per_environment: 2048
+  max_disk_mb_total: 10240
+  # Espaces isolés des campagnes d'évaluation (copie des dépendances par tâche) : une campagne s'arrête proprement
+  # sous ce plancher d'espace libre (disque plein constaté lors de l'auto-test du 17/10/2026). Chaque espace est
+  # retiré après sa tâche : la pointe est d'une seule copie des dépendances (~300 Mo pour le pilote).
+  min_free_disk_mb: 1536
+
+# Racines (sous workspaces_root de policies/execution.yaml).
+roots:
+  environments: environments          # un répertoire par environnement, marqué .factory-environment
+  state: .factory-state               # fiches des ressources et des baux

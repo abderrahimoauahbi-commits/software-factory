@@ -1,0 +1,24 @@
+# Profil de prompt (ADR-0022 v2, F-4) : un seul profil au départ (modèle canonique GMAO v1.0 § 2.7, § 9).
+# Fichier épinglé, avec ses gabarits : toute modification exige une nouvelle version et une nouvelle référence
+# d'épinglage approuvée par l'humain (W1) ; c'est cette approbation qui rend le profil utilisable.
+schema_version: '1.0'
+id: execution-standard
+version: 1.0.0
+lifecycle: REVIEW
+grants_rights: false
+sections:                      # ordre fixe du prompt effectif (modèle canonique § 4.2)
+- {part: A, title: Système de la Factory, source: template}
+- {part: B, title: Rôle, source: role_prompt}
+- {part: C, title: Skills, source: skill_instructions}
+- {part: D, title: Projet, source: project_context}
+- {part: E, title: Domaine, source: context_sections}
+- {part: F, title: Ticket, source: ticket}
+- {part: G, title: Contraintes, source: execution_profile}
+- {part: H, title: Acceptation, source: acceptance}
+templates:
+  A: registry/prompts/execution-standard/A-systeme.md
+limits:
+  max_chars: 120000
+governance:
+  owner: Factory Owner
+  approval: référence d'épinglage W1 (policies/pinning.yaml)

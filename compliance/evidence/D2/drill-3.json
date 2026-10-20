@@ -1,0 +1,40 @@
+{
+ "operation": "drill",
+ "statut": "OK",
+ "archive": "F:\\software-factory-backups\\factory-backup-20261015T172250-0bbb51c0c93e.zip",
+ "details": [],
+ "mesures": {
+  "files": 311,
+  "required_scopes": [
+   "factory.yaml",
+   "registry",
+   "policies",
+   "workflows",
+   "quality",
+   "security",
+   "audit",
+   "knowledge",
+   "adr",
+   "risks",
+   "compliance",
+   "docs",
+   "scripts",
+   "registry/projects"
+  ],
+  "etapes": [
+   {
+    "commande": "-P C:\\Users\\vboxuser\\AppData\\Local\\Temp\\factory-drill-8_lrtdk0/factory.py check",
+    "code": 0,
+    "secondes": 3.0,
+    "fin": "== bootstrap check (Factory seule)\nFACTORY READY — exécution d'agents : BLOCKED"
+   },
+   {
+    "commande": "-P -m unittest discover -s C:\\Users\\vboxuser\\AppData\\Local\\Temp\\factory-drill-8_lrtdk0/core/tests -t C:\\Users\\vboxuser\\AppData\\Local\\Temp\\factory-drill-8_lrtdk0/core -p test_*.py",
+    "code": 0,
+    "secondes": 48.5,
+    "fin": ""
+   }
+  ],
+  "rto_seconds": 53.1
+ }
+}

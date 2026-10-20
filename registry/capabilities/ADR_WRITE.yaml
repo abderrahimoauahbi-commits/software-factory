@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: ADR_WRITE
+name: ADR_WRITE
+description: Rédaction d'ADR
+status: DEFINED
+implementations: []

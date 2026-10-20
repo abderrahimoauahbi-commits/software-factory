@@ -1,0 +1,30 @@
+# Plateforme d'exécution v1 (jalon J13, Playbook §8.1–§8.3) : un ticket → une exécution → un espace isolé → une
+# branche dédiée. Données lues par core/noyau/execution.py, qui ne contient aucune commande d'outil :
+# les opérations de l'espace isolé sont ici, implémentées par l'outil approuvé pour ISOLATED_WORKSPACE.
+schema_version: "1.0"
+id: execution
+version: "1.0"
+workspaces_root: "C:/Users/vboxuser/Desktop/factory-workspaces"   # hors de tout dépôt ; à confirmer (WAITING_HUMAN)
+branch_prefix: "factory/"
+max_attempts: 3
+workspace_capability: ISOLATED_WORKSPACE
+# Opérations (gabarits d'argv ; {base}, {branche}, {espace} remplacés par la plateforme).
+operations:
+  resolve_base:      [git, rev-parse, "{base}"]
+  create_workspace:  [git, worktree, add, -b, "{branche}", "{espace}", "{base}"]
+  current_branch:    [git, branch, --show-current]
+  changed_tracked:   [git, diff, --name-only, "{base}"]
+  changed_untracked: [git, ls-files, --others, --exclude-standard]
+  ignored_entries:   [git, ls-files, --others, --ignored, --exclude-standard, --directory]   # NE3 : fichiers ignorés par git
+  diff_summary:      [git, diff, --stat, "{base}"]
+  diff_file:         [git, diff, "{base}", --, "{fichier}"]   # revue humaine : diff d'un fichier de l'agent (ADR-0013)
+  diff_numstat:      [git, diff, --numstat, "{base}", --, "{fichier}"]   # preuve des changements (T-FACTORY-020)
+placeholders:
+  "{branche}": "^factory/[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$"
+  "{espace}": "^.+$"                 # contrôlé à part : doit être sous workspaces_root
+  "{base}": "^[A-Za-z0-9._/-]{1,100}$"
+  "{fichier}": "^(?!-)(?!.*\\.\\.)[\\w./@+ ()-]{1,400}$"   # chemin relatif : ni option, ni remontée
+never:
+  - supprimer un espace isolé (acte humain, après fusion)
+  - pousser, fusionner
+  - exécuter une commande de l'agent : la plateforme n'exécute que ses opérations et les gates du manifest

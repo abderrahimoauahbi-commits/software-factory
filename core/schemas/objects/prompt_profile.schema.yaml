@@ -1,0 +1,24 @@
+# AI Software Factory — profil de prompt (ADR-0022 v2, F-4 ; modèle canonique GMAO v1.0 § 2.7 et § 4.2).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Dit COMMENT le prompt effectif est assemblé (ordre et source de chaque partie), pas ce qu'il contient.
+# Un profil de prompt NE DONNE AUCUN DROIT : les droits viennent des politiques, de l'habilitation et du manifest ; la
+# consigne de sécurité du runtime est ajoutée après le prompt effectif, et prévaut.
+# Il ne vaut que s'il figure, avec ses gabarits, à leur empreinte exacte, dans la référence d'épinglage approuvée (W1).
+schema_version: '1.0'
+object: prompt_profile
+required:
+- id
+- version
+- lifecycle
+- grants_rights
+- sections            # liste ordonnée {part, source} ; sources connues de la résolution (core/noyau/resolution.py)
+- templates           # gabarits Markdown versionnés avec le profil (chemins relatifs à la Factory)
+- limits              # max_chars : au-delà, BLOCKED
+- governance
+mandatory:
+  grants_rights: false
+enums:
+  lifecycle: lifecycle:skill
+rules:
+- un seul profil tant qu'aucun besoin réel n'en demande un second
+- aucun droit, aucune permission, aucune exception dans un profil de prompt

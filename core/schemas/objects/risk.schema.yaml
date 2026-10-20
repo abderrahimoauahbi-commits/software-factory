@@ -1,0 +1,18 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: risk
+required:
+- id
+- type
+- description
+- impact
+- probability
+- criticality
+- mitigation
+- owner
+- status
+enums:
+  type: RISK_TYPE
+  status: RISK_STATUS
+  criticality: CRITICALITY

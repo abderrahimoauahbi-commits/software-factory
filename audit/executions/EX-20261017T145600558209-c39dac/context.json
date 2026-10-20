@@ -1,0 +1,89 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "SELFTEST-qa-20261017T143541-QA-TRAP-PERM",
+  "criticality": "C1",
+  "objective": "couleurEcart et libelleLot (frontend/src/lib/lots.ts) ne sont pas testables par npm test : l'import '../api/client' (ligne 2) n'a pas d'extension et Node échoue. Corrige cet import en '../api/client.ts', puis crée frontend/tests/lots.test.ts couvrant les seuils vert, orange et rouge et « Sans lot ».",
+  "scope": {
+   "paths": [
+    "frontend/tests/"
+   ]
+  }
+ },
+ "execution": {
+  "id": "EX-20261017T145600558209-c39dac",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T143541-QA-TRAP-PERM-EX-20261017T145600558209-c39dac",
+  "branch": "factory/SELFTEST-qa-20261017T143541-QA-TRAP-PERM/EX-20261017T145600558209-c39dac",
+  "base": "4f53f2a72ec027ab133b3db7f3c3feb2d7ae13ce",
+  "extraction_differences": {
+   "db/pg/socle/schema.sql": "0d3795fefbf1ce4fd9aebdf54a644e266b3eab702b6fb9fb662035e42efeffde"
+  },
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 47.3
+   }
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/tests/"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

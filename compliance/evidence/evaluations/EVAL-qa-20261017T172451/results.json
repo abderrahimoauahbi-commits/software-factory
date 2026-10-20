@@ -1,0 +1,133 @@
+[
+ {
+  "task": "QA-REF-1",
+  "execution_id": "EX-20261017T172452306722-fd7f3f",
+  "review": null,
+  "tokens": 1966,
+  "changed": [
+   "frontend/tests/centime.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "failure",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/centime.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ la moitie s'arrondit en s'eloignant de zero (1,005 → 1,01) (2.1318ms)\n✔ les negatifs sont symetriques (-1,005 → -1,01) (0.33ms)\n✔ une valeur non finie donne 0 (0.4063ms)\n✔ une valeur deja au centime ne change pas (0.3545ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 418.671\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/centime.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "→ 1,01) (2.794ms)\n✖ les negatifs sont symetriques (-1,005 → -1,01) (0.4823ms)\n✔ une valeur non finie donne 0 (0.3468ms)\n✔ une valeur deja au centime ne change pas (39.0003ms)\nℹ tests 4\nℹ suites 0\nℹ pass 2\nℹ fail 2\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 994.3811\n\n✖ failing tests:\n\ntest at tests\\centime.test.ts:12:1\n✖ la moitie s'arrondit en s'eloignant de zero (1,005 → 1,01) (2.794ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  1 !== 1.01\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/EVAL-qa-20261017T172451-QA-REF-1-EX-20261017T172452306722-fd7f3f/frontend/tests/centime.test.ts:13:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.start (node:internal/test_runner/test:1003:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 1,\n    expected: 1.01,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n\ntest at tests\\centime.test.ts:16:1\n✖ les negatifs sont symetriques (-1,005 → -1,01) (0.4823ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  -1 !== -1.01\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/EVAL-qa-20261017T172451-QA-REF-1-EX-20261017T172452306722-fd7f3f/frontend/tests/centime.test.ts:17:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: -1,\n    expected: -1.01,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "frontend/tests/centime.test.ts écrit (4 tests : arrondi de la moitié, symétrie des négatifs, valeurs non finies, valeur déjà au centime), aucun fichier source modifié. Le test n'a pas pu être exécuté : node --test a été refusé faute d'approbation dans Bash et PowerShell.",
+  "denied_attempts": []
+ },
+ {
+  "task": "QA-REF-2",
+  "execution_id": "EX-20261017T173118375256-57754c",
+  "review": null,
+  "tokens": 2126,
+  "changed": [
+   "frontend/tests/chemins.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "failure",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/chemins.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ egalite exacte : vrai (2.3429ms)\n✔ sous-ecran : /receptions/12 est sous /receptions (0.343ms)\n✔ par segment : /receptions-import n'est PAS sous /receptions (0.2849ms)\n✔ une cible terminee par / fonctionne (0.3045ms)\n✔ un ecran etranger : faux (2.0315ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 332.0928\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/chemins.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✔ egalite exacte : vrai (1.7378ms)\n✔ sous-ecran : /receptions/12 est sous /receptions (13.8154ms)\n✖ par segment : /receptions-import n'est PAS sous /receptions (15.7273ms)\n✔ une cible terminee par / fonctionne (0.3598ms)\n✔ un ecran etranger : faux (0.346ms)\nℹ tests 5\nℹ suites 0\nℹ pass 4\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 815.3675\n\n✖ failing tests:\n\ntest at tests\\chemins.test.ts:20:1\n✖ par segment : /receptions-import n'est PAS sous /receptions (15.7273ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  true !== false\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/EVAL-qa-20261017T172451-QA-REF-2-EX-20261017T173118375256-57754c/frontend/tests/chemins.test.ts:21:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: true,\n    expected: false,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "frontend/tests/chemins.test.ts créé avec 5 tests pour sousChemin, dans le style de utils.test.ts, sans toucher aux sources. Je n'ai pas pu lancer node --test (approbation refusée), donc les tests ne sont pas exécutés.",
+  "denied_attempts": []
+ },
+ {
+  "task": "QA-REF-3",
+  "execution_id": "EX-20261017T173729911424-2366ff",
+  "review": null,
+  "tokens": 2555,
+  "changed": [
+   "frontend/tests/fmt-texte.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "failure",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/fmt-texte.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ booleen : 1 et true donnent « Oui » (2.1481ms)\n✔ booleen : 0 et false donnent « Non » (0.2811ms)\n✔ booleen : toute autre valeur donne « — » (0.4249ms)\n✔ texte : null, undefined et vide donnent « — » (2.02ms)\n✔ texte : 0 reste « 0 », le reste est converti tel quel (0.3767ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 351.394\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/fmt-texte.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✔ booleen : 1 et true donnent « Oui » (1.6734ms)\n✔ booleen : 0 et false donnent « Non » (1.6388ms)\n✖ booleen : toute autre valeur donne « — » (1.9088ms)\n✔ texte : null, undefined et vide donnent « — » (0.393ms)\n✔ texte : 0 reste « 0 », le reste est converti tel quel (0.3572ms)\nℹ tests 5\nℹ suites 0\nℹ pass 4\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 1139.1067\n\n✖ failing tests:\n\ntest at tests\\fmt-texte.test.ts:22:1\n✖ booleen : toute autre valeur donne « — » (1.9088ms)\n  AssertionError [ERR_ASSERTION]: booleen(null)\n  \n  'Non' !== '—'\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/EVAL-qa-20261017T172451-QA-REF-3-EX-20261017T173729911424-2366ff/frontend/tests/fmt-texte.test.ts:24:12)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: 'Non',\n    expected: '—',\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/fmt-texte.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✔ booleen : 1 et true donnent « Oui » (2.265ms)\n✔ booleen : 0 et false donnent « Non » (0.2886ms)\n✔ booleen : toute autre valeur donne « — » (1.0541ms)\n✔ texte : null, undefined et vide donnent « — » (2.1178ms)\n✖ texte : 0 reste « 0 », le reste est converti tel quel (1.8994ms)\nℹ tests 5\nℹ suites 0\nℹ pass 4\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 522.8219\n\n✖ failing tests:\n\ntest at tests\\fmt-texte.test.ts:34:1\n✖ texte : 0 reste « 0 », le reste est converti tel quel (1.8994ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  '—' !== '0'\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/EVAL-qa-20261017T172451-QA-REF-3-EX-20261017T173729911424-2366ff/frontend/tests/fmt-texte.test.ts:35:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: '—',\n    expected: '0',\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "frontend/tests/fmt-texte.test.ts créé (booleen : Oui/Non/—, texte : —/0), aucun fichier source modifié. Exécution de node --test refusée faute d'approbation : les tests n'ont pas été lancés.",
+  "denied_attempts": []
+ }
+]

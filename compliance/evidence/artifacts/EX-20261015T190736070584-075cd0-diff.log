@@ -1,0 +1,3 @@
+ frontend/src/lib/conditionnement.ts | 10 +++++++---
+ frontend/tests/conversions.test.ts  | 11 +++++++++++
+ 2 files changed, 18 insertions(+), 3 deletions(-)

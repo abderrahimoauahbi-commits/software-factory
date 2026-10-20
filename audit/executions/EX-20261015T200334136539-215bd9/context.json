@@ -1,0 +1,105 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "T-GF-011",
+  "criticality": "C2",
+  "objective": "Retour.tsx : la lecture locale nombre() transforme « 1.234,56 » en NaN puis 0 ; l'avoir est enregistré à 0 DH et une ligne de « 1.234,5 kg » disparaît sans prévenir. Lire par lireNombre et bloquer l'envoi sur une valeur illisible",
+  "scope": {
+   "data": [],
+   "excluded": [
+    "les autres fichiers de frontend/src/",
+    "backend/",
+    "db/",
+    "deploiement/"
+   ],
+   "files": [
+    "frontend/src/pages/retours/Retour.tsx"
+   ],
+   "included": [
+    "frontend/src/pages/retours/Retour.tsx"
+   ],
+   "modules": [],
+   "paths": [
+    "frontend/src/pages/retours/Retour.tsx"
+   ],
+   "roots": [
+    "PROJECT_ROOT"
+   ],
+   "services": []
+  }
+ },
+ "execution": {
+  "id": "EX-20261015T200334136539-215bd9",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-011-EX-20261015T200334136539-215bd9",
+  "branch": "factory/T-GF-011/EX-20261015T200334136539-215bd9",
+  "base": "3dc9f1766506354180ab3eedc91c0996a04121af",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 43.8
+   }
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/pages/retours/Retour.tsx"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

@@ -1,0 +1,45 @@
+schema_version: "1.0"
+exception:
+  id: EXC-0003
+  requested_by: agent de construction (claude-opus-5-5)
+  decided_by: Factory Owner (décision B7, option 2, du 16/10/2026)
+  phase: EXECUTION
+  objective: >-
+    Construction bornée de la Factory : (1) correction documentaire A1–C8 et NE1–NE7 du plan de correction
+    validé le 16/10/2026 ; (2) étape G1 (fondations de gouvernance, ADR-0017), seulement après décision humaine
+    de la démarrer. Remplace EXC-0001, épuisée.
+  requested_permission: WRITE dans FACTORY_ROOT pour l'objectif ci-dessus (ADR-0002 K6)
+  scope:
+    roots:
+    - FACTORY_ROOT
+    excluded:
+    - docs/playbook/
+    - docs/normative/
+    - audit/approvals/human/
+    - .claude/settings*.json
+    - réseau
+    - installation de paquets
+    - base de données réelle
+    - commit et push
+  reason: >-
+    Sans exception, ADR-0002 K6 n'admet aucune écriture d'agent dans la Factory ; le mode construction (ADR-0017
+    D37) n'est pas normatif avant le gel. Cette exception évite un vide normatif pendant la transition.
+  compensating_controls:
+  - revue humaine de chaque modification
+  - suite de tests de la Factory verte après chaque étape
+  - aucune modification de frontière présentée comme appliquée sans preuve (ADR-0017 annexe E)
+  risk: MEDIUM — écriture dans le Core ; compensé par les exclusions, la revue humaine et les tests
+  duration: >-
+    jusqu'au gel normatif de l'ADR-0017, et au plus tard la première des deux échéances : 30 jours après
+    l'adoption humaine du Playbook v3.3, ou le 2026-11-15
+  expiration: "2026-11-15"
+  expiration_rule: première des deux échéances (gel de l'ADR-0017, ou adoption du Playbook v3.3 + 30 jours, ou 2026-11-15)
+  on_expiration: aucune prolongation automatique ; nouvelle décision humaine explicite requise
+  superseded_at_freeze_by: ADR-0017 D37 (mode construction)
+  revocable: true
+  retroactive: false   # la dérive passée sous EXC-0001 est tracée, jamais régularisée
+  affected_resources:
+  - C:/Users/vboxuser/Desktop/software-factory
+  approval_required: true
+  approval: décision B7 du Factory Owner, 16/10/2026 (conversation de construction ; pas d'enregistrement W1)
+  audit_reference: audit/journal.jsonl

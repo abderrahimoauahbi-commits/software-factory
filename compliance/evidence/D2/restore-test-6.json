@@ -1,0 +1,26 @@
+{
+ "operation": "restore-test",
+ "statut": "OK",
+ "archive": "F:\\software-factory-backups\\factory-backup-20261015T165758-8be23fa43afe.zip",
+ "details": [],
+ "mesures": {
+  "files": 281,
+  "required_scopes": [
+   "factory.yaml",
+   "registry",
+   "policies",
+   "workflows",
+   "quality",
+   "security",
+   "audit",
+   "knowledge",
+   "adr",
+   "risks",
+   "compliance",
+   "docs",
+   "scripts",
+   "registry/projects"
+  ],
+  "restore_seconds": 2.35
+ }
+}

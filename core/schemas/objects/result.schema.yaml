@@ -1,0 +1,19 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: result
+required:
+- status
+- phase
+- summary
+- findings
+- decisions
+- risks
+- artifacts
+- unresolved
+- next_phase
+- human_action_required
+enums:
+  phase: PHASES
+rules:
+- contrat de sortie universel de toute phase (State Machines & Contracts §28)

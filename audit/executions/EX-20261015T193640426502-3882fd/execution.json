@@ -1,0 +1,373 @@
+{
+ "execution_id": "EX-20261015T193640426502-3882fd",
+ "id": "EX-20261015T193640426502-3882fd",
+ "project_id": "gestionfil",
+ "ticket_id": "T-GF-010",
+ "state": "COMPLETED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "claude-opus-5-5",
+  "version": "claude-opus-5-5"
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-15T19:36:40+00:00",
+  "authorized": "2026-10-15T19:36:40+00:00",
+  "started": "2026-10-15T19:37:25+00:00",
+  "completed": "2026-10-15T19:44:37+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C1 dans le périmètre"
+  ],
+  "criticite_effective": "C1",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "8f1a6b7ce7444118546211fbb0711123e449640c42c079b5e5db2c53e297cec4"
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000193"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000194"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000195"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000196"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000197"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000203"
+  },
+  {
+   "to": "TESTING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000204"
+  },
+  {
+   "to": "COMPLETED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000205"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-010-EX-20261015T193640426502-3882fd",
+  "branch": "factory/T-GF-010/EX-20261015T193640426502-3882fd",
+  "base": "5f8d2d0f427bc22cdae72a9183f89e77d2cf04f3",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {
+   "db/pg/socle/schema.sql": "0d3795fefbf1ce4fd9aebdf54a644e266b3eab702b6fb9fb662035e42efeffde"
+  },
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 43.0
+   }
+  }
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "T-GF-010",
+   "criticality": "C1",
+   "objective": "Dans ReceptionCloture.tsx, la conversion « soit … MAD de marchandise » ne s'affiche que si le taux effectif est un nombre fini (un taux illisible, ex. « 10,8,5 », affichait « soit NaN MAD » ; l'enregistrement est déjà bloqué)",
+   "scope": {
+    "data": [],
+    "excluded": [
+     "les autres fichiers de frontend/src/",
+     "backend/",
+     "db/",
+     "deploiement/"
+    ],
+    "files": [
+     "frontend/src/pages/ReceptionCloture.tsx"
+    ],
+    "included": [
+     "frontend/src/pages/ReceptionCloture.tsx"
+    ],
+    "modules": [],
+    "paths": [
+     "frontend/src/pages/ReceptionCloture.tsx"
+    ],
+    "roots": [
+     "PROJECT_ROOT"
+    ],
+    "services": []
+   }
+  },
+  "execution": {
+   "id": "EX-20261015T193640426502-3882fd",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-010-EX-20261015T193640426502-3882fd",
+   "branch": "factory/T-GF-010/EX-20261015T193640426502-3882fd",
+   "base": "5f8d2d0f427bc22cdae72a9183f89e77d2cf04f3",
+   "extraction_differences": {
+    "db/pg/socle/schema.sql": "0d3795fefbf1ce4fd9aebdf54a644e266b3eab702b6fb9fb662035e42efeffde"
+   },
+   "copied_dependencies": {
+    "frontend/node_modules": {
+     "files": 21043,
+     "seconds": 43.0
+    }
+   },
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/src/pages/ReceptionCloture.tsx"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 1,
+   "max_attempts": 3
+  }
+ },
+ "changes": [
+  "frontend/src/pages/ReceptionCloture.tsx"
+ ],
+ "extraction_unchanged": [
+  "db/pg/socle/schema.sql"
+ ],
+ "post_gates": {
+  "db/pg/socle/schema.sql": "0d3795fefbf1ce4fd9aebdf54a644e266b3eab702b6fb9fb662035e42efeffde",
+  "frontend/src/pages/ReceptionCloture.tsx": "ac60a5ff8680b92f0ddac9a90792ef6ea64aa604756960d4092678ad2cf7574f"
+ },
+ "gate_outputs": [],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "T-GF-010",
+  "execution": "EX-20261015T193640426502-3882fd",
+  "agent": "qa",
+  "model": "claude-opus-5-5",
+  "model_version": "claude-opus-5-5",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/pages/ReceptionCloture.tsx"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/T-GF-010/EX-20261015T193640426502-3882fd",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-010-EX-20261015T193640426502-3882fd",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261015T193640426502-3882fd-diff",
+   "EX-20261015T193640426502-3882fd-changes"
+  ],
+  "tests": [
+   "EX-20261015T193640426502-3882fd-frontend_unit_tests",
+   "EX-20261015T193640426502-3882fd-lint",
+   "EX-20261015T193640426502-3882fd-typecheck"
+  ],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261015T193640426502-3882fd-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat 5f8d2d0f427bc22cdae72a9183f89e77d2cf04f3",
+   "timestamp": "2026-10-15T19:41:41+00:00",
+   "command": "git diff --stat 5f8d2d0f427bc22cdae72a9183f89e77d2cf04f3",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T193640426502-3882fd-diff.log",
+   "hash": "79ad0c53abbd1a1af8eec6cbff601a9401ea6c72d4db6d552b9fdb3f6cca16ab",
+   "generated_by": "plateforme:EX-20261015T193640426502-3882fd",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T193640426502-3882fd-changes",
+   "type": "ARTIFACT",
+   "source": "plateforme : changements de l'agent",
+   "timestamp": "2026-10-15T19:41:41+00:00",
+   "command": null,
+   "exit_code": null,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T193640426502-3882fd-changes.txt",
+   "hash": "424ccb001292b1cb9060357564e2f3ddb0a303d8bd4e6902e511dd1f7b9c5ea0",
+   "generated_by": "plateforme:EX-20261015T193640426502-3882fd",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T193640426502-3882fd-frontend_unit_tests",
+   "type": "TEST",
+   "source": "npm test",
+   "timestamp": "2026-10-15T19:41:42+00:00",
+   "command": "npm test",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T193640426502-3882fd-frontend_unit_tests.log",
+   "hash": "d3987cdac20ce434c20e820c7f95e42a909c2d392b02192307df55eebde4774a",
+   "generated_by": "plateforme:EX-20261015T193640426502-3882fd",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T193640426502-3882fd-lint",
+   "type": "TEST",
+   "source": "npm run lint",
+   "timestamp": "2026-10-15T19:43:37+00:00",
+   "command": "npm run lint",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T193640426502-3882fd-lint.log",
+   "hash": "35dc87602de4ee9cb3a12e58cccd7bac686a6a516e23a4e5dfd4a79fd5a5fe92",
+   "generated_by": "plateforme:EX-20261015T193640426502-3882fd",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T193640426502-3882fd-typecheck",
+   "type": "TEST",
+   "source": "npm run build",
+   "timestamp": "2026-10-15T19:44:36+00:00",
+   "command": "npm run build",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T193640426502-3882fd-typecheck.log",
+   "hash": "5ff1af4b25bdd3a5c89f327fc3bc6c147f548f619089d399bed7c409b0b0bd5e",
+   "generated_by": "plateforme:EX-20261015T193640426502-3882fd",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

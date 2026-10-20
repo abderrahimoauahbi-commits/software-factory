@@ -1,0 +1,8 @@
+schema_version: '1.0'
+id: BUILD
+name: BUILD
+description: Compilation et assemblage
+status: DEFINED
+implementations:
+- cargo
+- npm

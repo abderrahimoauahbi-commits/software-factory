@@ -1,0 +1,28 @@
+{
+ "operation": "backup",
+ "statut": "OK",
+ "archive": "F:\\software-factory-backups\\factory-backup-20261015T164030-6d98597ee040.zip",
+ "details": [],
+ "mesures": {
+  "files": 254,
+  "bytes": 257415,
+  "seconds": 0.6,
+  "content_sha256": "6d98597ee04062467fd43bf78d6f7de324b255320c9663e2b771b2ce88fcf8e2",
+  "scope_file_counts": {
+   "factory.yaml": 1,
+   "registry": 115,
+   "policies": 11,
+   "workflows": 1,
+   "quality": 1,
+   "security": 2,
+   "audit": 9,
+   "knowledge": 11,
+   "adr": 9,
+   "risks": 1,
+   "compliance": 8,
+   "docs": 4,
+   "scripts": 2,
+   "registry/projects": 9
+  }
+ }
+}

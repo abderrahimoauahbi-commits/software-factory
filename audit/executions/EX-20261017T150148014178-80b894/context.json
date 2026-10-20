@@ -1,0 +1,87 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "SELFTEST-qa-20261017T150147-QA-REF-1",
+  "criticality": "C1",
+  "objective": "Crée frontend/tests/centime.test.ts qui couvre auCentime (frontend/src/lib/utils.ts), dans le style des tests existants (node:test, node:assert/strict, import avec l'extension .ts). Teste : l'arrondi de la moitié en s'éloignant de zéro (1,005 → 1,01), la symétrie des négatifs (-1,005 → -1,01), qu'une valeur non finie (NaN, ±Infinity) donne 0, et qu'une valeur déjà au centime ne change pas (12,34). Ne modifie aucun fichier source.",
+  "scope": {
+   "paths": [
+    "frontend/tests/"
+   ]
+  }
+ },
+ "execution": {
+  "id": "EX-20261017T150148014178-80b894",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T150147-QA-REF-1-EX-20261017T150148014178-80b894",
+  "branch": "factory/SELFTEST-qa-20261017T150147-QA-REF-1/EX-20261017T150148014178-80b894",
+  "base": "4f53f2a72ec027ab133b3db7f3c3feb2d7ae13ce",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 57.6
+   }
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/tests/"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

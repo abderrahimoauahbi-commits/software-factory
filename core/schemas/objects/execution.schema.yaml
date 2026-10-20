@@ -1,0 +1,35 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Clés « references », « mandatory », « limits », « version_fields » : extensions ADR-0004.
+schema_version: '1.0'
+object: execution
+required:
+- execution_id
+- project_id
+- workflow_id
+- ticket_id
+- state
+- agent
+- model
+- factory
+- prompt
+- permissions
+- scope
+- budget
+- timestamps
+- result
+- provenance
+enums:
+  state: lifecycle:execution
+rules:
+- une exécution appartient à un seul ticket
+- un seul périmètre déclaré
+- aucun identifiant dans les journaux
+- aucun secret dans les prompts
+- base de production refusée par défaut
+- DELETE = autorisation humaine C4   # NE8 (16/10/2026) : « hors environnement jetable » (ADR-0016 ; Playbook v3.3 proposé §9.1, §13.1) ; texte v1.0 inchangé, à ratifier en v1.1
+- arrêt après max_attempts
+- une exécution interrompue ne réussit jamais seule
+limits:
+  budget.max_attempts:
+    max: 3   # NE1 (16/10/2026) : borne fixe à ratifier en v1.1 ; à lire dans la politique d'exécution (Playbook v3.3 proposé §8.6). Valeur v1.0 inchangée.

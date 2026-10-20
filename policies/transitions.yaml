@@ -1,0 +1,50 @@
+# Exigences des transitions (jalon J5, Executable Schemas §22–§24 et §33, Playbook §12.2). Lu par
+# core/noyau/etats.py : le moteur ne connaît que le vocabulaire des exigences, jamais un cycle particulier.
+# Une transition absente de core/schemas/lifecycles.yaml est refusée ; une transition présente sans exigence
+# ici n'exige que l'état de départ et l'audit.
+schema_version: "1.0"
+id: transitions
+version: "1.0"
+
+# Conditions nommées des tables de cycles de vie → exigences.
+conditions:
+  human_approval_not_required: { criticality_max: C2 }
+  explicit_human_approval:     { human_gate: true }
+  lab_not_required_by_risk:    { human_gate: true }
+  factory_owner_initial_adoption: { human_gate: true }
+  no_clarification_needed:     {}
+  no_release_needed:           {}
+
+# Vocabulaire des exigences (fixe, implémenté par le moteur) :
+#   fields: [chemins pointés non vides]          fields_from: {C3: [...]}  (selon la criticité de l'objet)
+#   evidence: [types]  (au moins une preuve VALIDE et SUCCESS de chacun)   reviewer_not_author: true
+#   human_gate: true   (approbation humaine liée au contexte de la transition)
+#   criticality_max: Cx       provenance: true       attempts_max: N       policy_allow: true
+#   human_review: APPROVED | CHANGES_REQUESTED  (preuve REVIEW adossée à un enregistrement de la commande humaine)
+requirements:
+  ticket:
+    - { from: DESIGN, to: READY, fields: [objective, specification.acceptance_criteria],
+        fields_from: { C3: [criticality_justification], C4: [criticality_justification] } }
+    - { from: READY, to: ASSIGNED, fields: [execution.agent_id] }
+    - { from: IN_PROGRESS, to: IMPLEMENTED, evidence: [ARTIFACT] }
+    - { from: CODE_REVIEW, to: "*", reviewer_not_author: true, evidence: [REVIEW] }
+    # Revue humaine (T-FACTORY-018, ADR-0012) : la preuve REVIEW doit venir de la commande humaine.
+    - { from: CODE_REVIEW, to: QA, human_review: APPROVED }
+    - { from: CODE_REVIEW, to: SPECIALIST_REVIEW, human_review: APPROVED }
+    - { from: CODE_REVIEW, to: DB_REVIEW, human_review: APPROVED }
+    - { from: CODE_REVIEW, to: SECURITY_REVIEW, human_review: APPROVED }
+    - { from: CODE_REVIEW, to: IN_PROGRESS, human_review: CHANGES_REQUESTED }
+    - { from: SPECIALIST_REVIEW, to: "*", reviewer_not_author: true, evidence: [REVIEW] }
+    - { from: DB_REVIEW, to: "*", reviewer_not_author: true, evidence: [REVIEW] }
+    - { from: SECURITY_REVIEW, to: "*", reviewer_not_author: true, evidence: [REVIEW] }
+    - { from: QA, to: ACCEPTED, evidence: [TEST] }                       # Definition of Done : tests prouvés
+    - { from: ACCEPTED, to: READY_TO_MERGE, provenance: true }
+    - { from: READY_TO_MERGE, to: MERGED, provenance: true, evidence: [TEST] }
+    - { from: HUMAN_APPROVAL, to: MERGED, provenance: true, evidence: [TEST] }
+  execution:
+    - { from: REQUESTED, to: AUTHORIZED, policy_allow: true, attempts_max: 3 }
+    - { from: TESTING, to: COMPLETED, evidence: [TEST] }
+    - { from: RUNNING, to: ARTIFACTS_PRODUCED, evidence: [ARTIFACT] }
+
+# Transitions vers un état de reprise : jamais vers un succès (Executable Schemas §7 règle 8).
+never_success_after: [INTERRUPTED, TIMEOUT, FAILED, SECURITY_STOP, BUDGET_STOP, CANCELLED]

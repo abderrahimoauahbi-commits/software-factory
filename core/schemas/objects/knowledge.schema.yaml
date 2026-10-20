@@ -1,0 +1,17 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: knowledge
+required:
+- id
+- scope
+- type
+- title
+- content
+- owner
+- status
+- review_date
+enums:
+  scope: KNOWLEDGE_SCOPE
+  type: KNOWLEDGE_TYPE
+  status: KNOWLEDGE_STATUS

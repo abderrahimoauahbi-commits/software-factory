@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: SOURCE_READ
+name: SOURCE_READ
+description: Lecture des sources dans le périmètre
+status: DEFINED
+implementations: []

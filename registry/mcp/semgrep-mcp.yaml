@@ -1,0 +1,44 @@
+schema_version: '1.0'
+id: semgrep-mcp
+name: Semgrep MCP
+version: '*'
+lifecycle: DISCOVERED
+capabilities:
+- SECURITY_SCAN
+permissions:
+  read:
+  - code du projet
+  write: []
+  delete: []
+  execute: []
+  network: []
+credentials:
+  required: false
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: MEDIUM
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match:
+  - semgrep
+  provided_by_plugin: null
+  observable_locally: true

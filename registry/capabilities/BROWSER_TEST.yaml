@@ -1,0 +1,8 @@
+schema_version: '1.0'
+id: BROWSER_TEST
+name: BROWSER_TEST
+description: Tests dans un vrai navigateur
+status: DEFINED
+implementations:
+- playwright
+- msedge

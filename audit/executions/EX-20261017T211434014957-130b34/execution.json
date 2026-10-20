@@ -1,0 +1,361 @@
+{
+ "execution_id": "EX-20261017T211434014957-130b34",
+ "id": "EX-20261017T211434014957-130b34",
+ "project_id": "gestionfil",
+ "ticket_id": "SELFTEST-qa-20261017T210239-FE-REF-3",
+ "state": "COMPLETED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "reference",
+  "version": "reference"
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-17T21:14:34+00:00",
+  "authorized": "2026-10-17T21:14:34+00:00",
+  "started": "2026-10-17T21:15:44+00:00",
+  "completed": "2026-10-17T21:22:09+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C1 dans le périmètre"
+  ],
+  "criticite_effective": "C1",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "3ae5922faafa557efd415cab3d2c94e6b39c9e8ed536f2c0a67ff7d2fe480cfb",
+  "nature": null,
+  "explication": {
+   "regle": "R99",
+   "nom": "Permission dans le périmètre, ou refus par défaut d'une action connue",
+   "pourquoi": "une action connue est permise dans son périmètre ; sinon, aucune règle ne la permet (refus par défaut)",
+   "risque": "—",
+   "frontiere_humaine": null,
+   "exception": null
+  },
+  "exceptions": null
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000569"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000570"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000571"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000572"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000573"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000574"
+  },
+  {
+   "to": "TESTING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000575"
+  },
+  {
+   "to": "COMPLETED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000576"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T210239-FE-REF-3-EX-20261017T211434014957-130b34",
+  "branch": "factory/SELFTEST-qa-20261017T210239-FE-REF-3/EX-20261017T211434014957-130b34",
+  "base": "64054e2a6bdad060b3a151df24c05709229da4d6",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 64.4
+   }
+  },
+  "ignored_baseline": [
+   "frontend/node_modules/"
+  ]
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "SELFTEST-qa-20261017T210239-FE-REF-3",
+   "criticality": "C1",
+   "objective": "Un 408 (délai de requête dépassé, renvoyé par nginx) est une panne passagère, pas un refus. Dans doitReessayer (frontend/src/lib/reessai.ts), traite-le comme une panne passagère : deux essais. Les autres 4xx, 429 et 503 restent inchangés.",
+   "scope": {
+    "paths": [
+     "frontend/src/lib/reessai.ts"
+    ]
+   }
+  },
+  "execution": {
+   "id": "EX-20261017T211434014957-130b34",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T210239-FE-REF-3-EX-20261017T211434014957-130b34",
+   "branch": "factory/SELFTEST-qa-20261017T210239-FE-REF-3/EX-20261017T211434014957-130b34",
+   "base": "64054e2a6bdad060b3a151df24c05709229da4d6",
+   "extraction_differences": {},
+   "copied_dependencies": {
+    "frontend/node_modules": {
+     "files": 21043,
+     "seconds": 64.4
+    }
+   },
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/src/lib/reessai.ts"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 1,
+   "max_attempts": 3
+  }
+ },
+ "changes": [
+  "frontend/src/lib/reessai.ts"
+ ],
+ "extraction_unchanged": [],
+ "post_gates": {
+  "frontend/src/lib/reessai.ts": "c0f1e81a3db324f0c7c21284134a188dd3b73e1e962f4ee97d33d3d71918c870"
+ },
+ "gate_outputs": [],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "SELFTEST-qa-20261017T210239-FE-REF-3",
+  "execution": "EX-20261017T211434014957-130b34",
+  "agent": "qa",
+  "model": "reference",
+  "model_version": "reference",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/reessai.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/SELFTEST-qa-20261017T210239-FE-REF-3/EX-20261017T211434014957-130b34",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T210239-FE-REF-3-EX-20261017T211434014957-130b34",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261017T211434014957-130b34-diff",
+   "EX-20261017T211434014957-130b34-changes"
+  ],
+  "tests": [
+   "EX-20261017T211434014957-130b34-frontend_unit_tests",
+   "EX-20261017T211434014957-130b34-lint",
+   "EX-20261017T211434014957-130b34-typecheck"
+  ],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261017T211434014957-130b34-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat 64054e2a6bdad060b3a151df24c05709229da4d6",
+   "timestamp": "2026-10-17T21:15:45+00:00",
+   "command": "git diff --stat 64054e2a6bdad060b3a151df24c05709229da4d6",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T211434014957-130b34-diff.log",
+   "hash": "a06e00f6bb7e0a5d4767787d559eccd4f1af6c918e670f4043b122edb9ae4b65",
+   "generated_by": "plateforme:EX-20261017T211434014957-130b34",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T211434014957-130b34-changes",
+   "type": "ARTIFACT",
+   "source": "plateforme : changements de l'agent",
+   "timestamp": "2026-10-17T21:15:46+00:00",
+   "command": null,
+   "exit_code": null,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T211434014957-130b34-changes.txt",
+   "hash": "199e65e9c3e571dcd57a6bfd769036c95c1706cca0624a826f9526e029f01b94",
+   "generated_by": "plateforme:EX-20261017T211434014957-130b34",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T211434014957-130b34-frontend_unit_tests",
+   "type": "TEST",
+   "source": "npm test",
+   "timestamp": "2026-10-17T21:16:01+00:00",
+   "command": "npm test",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T211434014957-130b34-frontend_unit_tests.log",
+   "hash": "8a3003c30a4fb2fd3da0e2a303a9c8c6fc38e893f1e9b30c0183500d4a6d60b6",
+   "generated_by": "plateforme:EX-20261017T211434014957-130b34",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T211434014957-130b34-lint",
+   "type": "TEST",
+   "source": "npm run lint",
+   "timestamp": "2026-10-17T21:20:04+00:00",
+   "command": "npm run lint",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T211434014957-130b34-lint.log",
+   "hash": "bd638a86706c0ac49fefef649e536476e8a82a98adf45d9b100d77d6353670cb",
+   "generated_by": "plateforme:EX-20261017T211434014957-130b34",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T211434014957-130b34-typecheck",
+   "type": "TEST",
+   "source": "npm run build",
+   "timestamp": "2026-10-17T21:22:08+00:00",
+   "command": "npm run build",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T211434014957-130b34-typecheck.log",
+   "hash": "4a6e3154145e92cc79b100581f343df0228674c851cbe3114618b462b2716020",
+   "generated_by": "plateforme:EX-20261017T211434014957-130b34",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

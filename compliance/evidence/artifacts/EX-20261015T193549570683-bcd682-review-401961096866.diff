@@ -1,0 +1,93 @@
+diff --git a/frontend/src/lib/utils.ts b/frontend/src/lib/utils.ts
+index a6747c1..ebe8c6c 100644
+--- a/frontend/src/lib/utils.ts
++++ b/frontend/src/lib/utils.ts
+@@ -12,26 +12,33 @@ export function cn(...entrees: ClassValue[]) {
+   return twMerge(clsx(entrees))
+ }
+ 
++/**
++ * Un nombre affichable : fini. NaN et l'infini s'affichent « — » comme une
++ * valeur absente — une saisie illisible (« 1,2,3 ») ou une division par zero
++ * ecrivait « NaN » ou « ∞ » a l'ecran (T-GF-009, 15/10/2026).
++ */
++const fini = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v)
++
+ /** Formatage francais, uniforme dans toute l'application. */
+ export const fmt = {
+   nombre: (v: unknown, decimales = 2) =>
+-    typeof v === 'number'
++    fini(v)
+       ? v.toLocaleString('fr-FR', {
+           minimumFractionDigits: decimales,
+           maximumFractionDigits: decimales,
+         })
+       : '—',
+ 
+-  entier: (v: unknown) => (typeof v === 'number' ? v.toLocaleString('fr-FR') : '—'),
++  entier: (v: unknown) => (fini(v) ? v.toLocaleString('fr-FR') : '—'),
+ 
+   mad: (v: unknown) =>
+-    typeof v === 'number'
++    fini(v)
+       ? `${v.toLocaleString('fr-FR', { maximumFractionDigits: 2 })} MAD`
+       : '—',
+ 
+   /** Montant compact pour les tuiles : 13 421 922 -> 13,4 M. */
+   compact: (v: unknown) => {
+-    if (typeof v !== 'number') return '—'
++    if (!fini(v)) return '—'
+     if (Math.abs(v) >= 1e6) return `${(v / 1e6).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} M`
+     if (Math.abs(v) >= 1e3) return `${(v / 1e3).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} k`
+     return v.toLocaleString('fr-FR', { maximumFractionDigits: 0 })
+=== nouveau fichier : frontend/tests/utils.test.ts
++/**
++ * LE FORMATAGE DES NOMBRES (fmt, src/lib/utils.ts), par lequel passe tout
++ * l'affichage de l'application : un nombre fini s'affiche a la francaise, une
++ * valeur absente ou non finie (NaN, infini) s'affiche « — ».
++ *
++ * Les attentes sont calculees par toLocaleString plutot qu'ecrites en dur :
++ * l'espace des milliers depend de la version d'ICU embarquee par Node.
++ *
++ * Lancement : npm test (node --test ; Node 24 lit le TypeScript sans outil).
++ */
++import { test } from 'node:test'
++import assert from 'node:assert/strict'
++import { fmt } from '../src/lib/utils.ts'
++
++const NON_FINIS = [Number.NaN, Number.POSITIVE_INFINITY, Number.NEGATIVE_INFINITY, 0 / 0, 1 / 0]
++const ABSENTS = [null, undefined, '', '12', '1 234,5']
++
++test('non fini : « — » partout (T-GF-009)', () => {
++  for (const v of NON_FINIS) {
++    assert.equal(fmt.nombre(v), '—', `nombre(${v})`)
++    assert.equal(fmt.nombre(v, 4), '—', `nombre(${v}, 4)`)
++    assert.equal(fmt.entier(v), '—', `entier(${v})`)
++    assert.equal(fmt.mad(v), '—', `mad(${v})`)
++    assert.equal(fmt.compact(v), '—', `compact(${v})`)
++  }
++})
++
++test('absent ou texte : « — », comme avant', () => {
++  for (const v of ABSENTS) {
++    assert.equal(fmt.nombre(v), '—')
++    assert.equal(fmt.entier(v), '—')
++    assert.equal(fmt.mad(v), '—')
++    assert.equal(fmt.compact(v), '—')
++  }
++})
++
++test('fini : affichage a la francaise inchange', () => {
++  assert.equal(fmt.nombre(1234.5), (1234.5).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
++  assert.equal(fmt.nombre(0.125, 1), (0.125).toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 }))
++  assert.equal(fmt.nombre(0), (0).toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }))
++  assert.equal(fmt.entier(-42), (-42).toLocaleString('fr-FR'))
++  assert.equal(fmt.mad(9876.543), `${(9876.543).toLocaleString('fr-FR', { maximumFractionDigits: 2 })} MAD`)
++})
++
++test('compact : millions, milliers, unites', () => {
++  assert.equal(fmt.compact(13421922), `${(13.421922).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} M`)
++  assert.equal(fmt.compact(-2500), `${(-2.5).toLocaleString('fr-FR', { maximumFractionDigits: 1 })} k`)
++  assert.equal(fmt.compact(999), '999')
++  assert.equal(fmt.compact(0), '0')
++})

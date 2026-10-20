@@ -1,0 +1,212 @@
+# Modèle de menaces de la Factory (jalon J3b, Playbook §10.1, ADR-0005).
+# Statut d'un contrôle : VERIFIED (cite un test existant, contrôlé par core/tests/test_modeles_securite.py),
+# DECLARED (écrit dans une politique, sans application prouvée), PLANNED (jalon cité), ABSENT.
+schema_version: "1.0"
+chain: [EXTERNAL_CONTENT, AGENT, MCP, FILESYSTEM, GIT, DATABASE, CI_CD, PRODUCTION]
+owner_default: Security Owner          # titulaire non désigné : WAITING_HUMAN (factory.yaml)
+threats:
+  - id: T01
+    step: EXTERNAL_CONTENT
+    threat: Injection de prompt — un ticket, un fichier, une page ou une réponse de MCP dicte une action à l'agent
+    impact: HIGH
+    probability: HIGH
+    controls:
+      - { id: C01a, status: DECLARED, description: "P06 : les données ne sont jamais des instructions", ref: "Playbook §1 P06" }
+      - { id: C01b, status: VERIFIED, description: "outillage Factory : commande hors liste blanche refusée sans exécution",
+          evidence: "core/tests/test_noyau.py::test_commande_absente_refusee_sans_execution" }
+      - { id: C01c, status: PLANNED, description: "chaque action de l'agent soumise au Policy Engine", milestone: J4 }
+    detection: "journal des décisions et des actions (J5) ; revue du diff contre le périmètre du ticket"
+    reaction: "SECURITY_STOP de l'exécution, incident de sécurité"
+  - id: T02
+    step: AGENT
+    threat: Débordement de périmètre — lecture ou écriture hors de la racine ou hors du ticket
+    impact: HIGH
+    probability: MEDIUM
+    controls:
+      - { id: C02a, status: VERIFIED, description: "outillage Factory : lecture hors ROOT_SCOPE refusée avant ouverture",
+          evidence: "core/tests/test_noyau.py::test_hors_racine_refuse" }
+      - { id: C02b, status: VERIFIED, description: "chemins de manifest qui sortent de la racine rejetés",
+          evidence: "core/tests/test_validation.py::test_chemins_qui_sortent_de_la_racine_rejetes" }
+      - { id: C02c, status: VERIFIED, description: "moteur : paths et périmètre du ticket appliqués (non encore branché sur l'agent)",
+          evidence: "core/tests/test_politique.py::test_ecriture_hors_ticket" }
+      - { id: C02e, status: VERIFIED, description: "moteur : évasion par lien ou jonction refusée",
+          evidence: "core/tests/test_politique.py::test_lien_vers_l_exterieur" }
+      - { id: C02f, status: VERIFIED, description: "plateforme : diff réel comparé au périmètre du ticket, débordement = échec",
+          evidence: "core/tests/test_execution.py::test_debordement_de_perimetre" }
+      - { id: C02d, status: ABSENT, description: "règles de refus de l'agent d'exécution (0 deny constaté)", ref: "CHECK A-*-DENY" }
+    detection: "diff réel comparé au périmètre déclaré (Playbook §10.1)"
+    reaction: "refus du merge ; ticket CHANGES_REQUESTED"
+  - id: T03
+    step: AGENT
+    threat: Lecture de secrets (.env, sauvegardes, identifiants)
+    impact: CRITICAL
+    probability: MEDIUM
+    controls:
+      - { id: C03a, status: VERIFIED, description: "outillage Factory : fichiers sensibles jamais ouverts",
+          evidence: "core/tests/test_noyau.py::test_fichier_sensible_jamais_ouvert" }
+      - { id: C03b, status: ABSENT, description: "l'agent d'exécution lui-même n'a aucune règle de refus sur ces fichiers", ref: "CHECK X-IGNORED" }
+    detection: "aucune aujourd'hui pour l'agent d'exécution"
+    reaction: "secret présumé compromis : invalidation et incident (Playbook §8.4)"
+  - id: T04
+    step: AGENT
+    threat: Auto-attribution de permission, abaissement de criticité, auto-approbation
+    impact: CRITICAL
+    probability: MEDIUM
+    controls:
+      - { id: C04a, status: VERIFIED, description: "un agent déclaré avec accès production ou secrets est rejeté",
+          evidence: "core/tests/test_validation.py::test_agent_avec_acces_production_rejete" }
+      - { id: C04b, status: VERIFIED, description: "moteur : criticité jamais abaissée",
+          evidence: "core/tests/test_politique.py::test_abaissement_refuse" }
+      - { id: C04d, status: VERIFIED, description: "moteur : un agent n'exerce aucun verbe de pouvoir",
+          evidence: "core/tests/test_politique.py::test_agent_sans_pouvoir" }
+      - { id: C04c, status: PLANNED, description: "règles de refus côté agent sur les approbations (fermeture de W1)", milestone: "configuration agent (humain)" }
+    detection: "invariants du modèle de confiance ; journal d'audit"
+    reaction: "BLOCKED ; revue du Security Owner"
+  - id: T05
+    step: MCP
+    threat: Abus de MCP — écriture en production, exfiltration, version non figée compromise
+    impact: CRITICAL
+    probability: MEDIUM
+    controls:
+      - { id: C05a, status: VERIFIED, description: "fiche MCP avec écriture en production rejetée",
+          evidence: "core/tests/test_validation.py::test_mcp_ecriture_production_rejetee" }
+      - { id: C05b, status: VERIFIED, description: "inventaire des MCP par lecture des configurations, jamais en les démarrant",
+          evidence: "bootstrap/tests/test_bout_en_bout.py::test_aucun_sensible_lu_et_projet_intact" }
+      - { id: C05c, status: ABSENT, description: "7 MCP actifs non approuvés restent actifs", ref: "CHECK M-*" }
+    detection: "Bootstrap CHECK (UNAPPROVED)"
+    reaction: "désactivation par l'humain ; évaluation au Lab"
+  - id: T06
+    step: FILESYSTEM
+    threat: Commande destructive (suppression récursive, écrasement)
+    impact: HIGH
+    probability: LOW
+    controls:
+      - { id: C06a, status: VERIFIED, description: "outillage Factory : aucune commande d'écriture dans la liste blanche",
+          evidence: "core/tests/test_noyau.py::test_commande_absente_refusee_sans_execution" }
+      - { id: C06b, status: ABSENT, description: "agent d'exécution : « git checkout * » autorisé, aucun refus", ref: "CHECK A-*-RISK" }
+    detection: "aucune automatisée"
+    reaction: "restauration (exige D2 : sauvegarde)"
+  - id: T07
+    step: GIT
+    threat: Secret commité, réécriture d'historique, push non contrôlé
+    impact: HIGH
+    probability: MEDIUM
+    controls:
+      - { id: C07a, status: VERIFIED, description: "secret en clair rejeté dans tout objet de la Factory",
+          evidence: "core/tests/test_validation.py::test_secret_en_clair_rejete" }
+      - { id: C07b, status: ABSENT, description: "détecteur de secrets (CANDIDATE) et hooks Git absents", ref: "registry/tools/gitleaks.yaml" }
+    detection: "aucune automatisée"
+    reaction: "invalidation du secret ; nettoyage de l'historique (humain)"
+  - id: T08
+    step: DATABASE
+    threat: Écriture en base de production ou lecture de données réelles
+    impact: CRITICAL
+    probability: MEDIUM
+    controls:
+      - { id: C08a, status: VERIFIED, description: "un manifest qui autorise l'écriture en production est rejeté",
+          evidence: "core/tests/test_validation.py::test_affaiblissement_de_la_securite_rejete" }
+      - { id: C08b, status: VERIFIED, description: "moteur : base de production refusée à un agent (K4)",
+          evidence: "core/tests/test_politique.py::test_base_de_production" }
+      - { id: C08c, status: ABSENT, description: "aucune garde technique côté agent d'exécution", ref: "CHECK A-*-PROD" }
+    detection: "aucune automatisée"
+    reaction: "incident ; restauration de la base (procédure du projet)"
+  - id: T09
+    step: CI_CD
+    threat: Gates contournés — code fusionné sans preuve d'exécution
+    impact: HIGH
+    probability: HIGH
+    controls:
+      - { id: C09a, status: DECLARED, description: "CI source de vérité (règle 11)", ref: "Playbook §12.1" }
+      - { id: C09b, status: ABSENT, description: "aucune CI", ref: "CHECK Q-CI" }
+      - { id: C09c, status: VERIFIED, description: "« tests passed » refusé comme preuve ; transition QA → ACCEPTED exige une preuve réelle",
+          evidence: "core/tests/test_etats.py::test_declaration_de_tests_refusee" }
+    detection: "absence de preuve d'exécution au passage QA → ACCEPTED"
+    reaction: "READY_TO_MERGE = false"
+  - id: T10
+    step: PRODUCTION
+    threat: Déploiement ou modification de production par un agent
+    impact: CRITICAL
+    probability: LOW
+    controls:
+      - { id: C10a, status: DECLARED, description: "production refusée aux agents", ref: "policies/security-defaults.yaml" }
+      - { id: C10b, status: VERIFIED, description: "moteur : PRODUCTION → DENY, même en lecture",
+          evidence: "core/tests/test_politique.py::test_production_interdite_meme_en_lecture" }
+      - { id: C10c, status: ABSENT, description: "scripts de déploiement accessibles sans garde", ref: "CHECK A-*-PROD" }
+    detection: "aucune automatisée"
+    reaction: "retour arrière de la release (procédure du projet) ; incident"
+  - id: T11
+    step: MCP
+    threat: Chaîne d'approvisionnement — outil, skill ou MCP compromis, version non figée
+    impact: HIGH
+    probability: MEDIUM
+    controls:
+      - { id: C11a, status: VERIFIED, description: "aucun MCP, agent ni modèle actif sans approbation au registre",
+          evidence: "core/tests/test_registre.py::test_rien_d_actif_sans_approbation" }
+      - { id: C11b, status: PLANNED, description: "Lab avant approbation", milestone: "phase 2" }
+    detection: "Bootstrap CHECK : non enregistré / UNAPPROVED"
+    reaction: "désactivation, réévaluation"
+  - id: T12
+    step: AGENT
+    threat: Fuite de secret dans un rapport, un journal ou un prompt
+    impact: HIGH
+    probability: MEDIUM
+    controls:
+      - { id: C12a, status: VERIFIED, description: "masquage de toute sortie",
+          evidence: "core/tests/test_noyau.py::test_aucune_valeur_ne_survit" }
+      - { id: C12b, status: VERIFIED, description: "aucun secret dans le rapport du CHECK",
+          evidence: "bootstrap/tests/test_bout_en_bout.py::test_check_sans_ecriture_ni_secret" }
+    detection: "test de non-fuite à chaque exécution des tests"
+    reaction: "invalidation du secret ; incident"
+  - id: T13
+    step: GIT
+    threat: Falsification du journal d'audit
+    impact: HIGH
+    probability: LOW
+    controls:
+      - { id: C13a, status: DECLARED, description: "journal en ajout seul", ref: "Executable Schemas §31" }
+      - { id: C13b, status: VERIFIED, description: "journal chaîné : modification, suppression, permutation détectées",
+          evidence: "core/tests/test_audit_preuves.py::test_modification_detectee" }
+      - { id: C13c, status: VERIFIED, description: "réécriture complète révélée par l'ancre (tête consignée dans la sauvegarde)",
+          evidence: "core/tests/test_audit_preuves.py::test_reecriture_complete_recalculee_detectee_par_ancrage" }
+    detection: "Bootstrap CHECK (F-AUDIT) et restauration d'essai vérifient la chaîne"
+    reaction: "incident ; restauration du journal depuis sauvegarde (exige D2)"
+  - id: T14
+    step: AGENT
+    threat: Approbation humaine forgée — l'agent écrit lui-même les fiches d'approbation à partir d'un message
+    impact: CRITICAL
+    probability: MEDIUM
+    controls:
+      - { id: C14a, status: VERIFIED, description: "approbation liée à l'empreinte du contexte ; contexte modifié = invalide",
+          evidence: "core/tests/test_politique.py::test_contexte_modifie_invalide_l_approbation" }
+      - { id: C14b, status: VERIFIED, description: "enregistrement modifié après création = invalide",
+          evidence: "core/tests/test_politique.py::test_enregistrement_falsifie" }
+      - { id: C14c, status: VERIFIED, description: "la commande d'approbation refuse un environnement non interactif",
+          evidence: "core/tests/test_politique.py::test_refus_hors_console_humaine" }
+      - { id: C14e, status: VERIFIED, description: "garde PreToolUse : écriture d'approbation et commande humaine refusées à l'agent (sessions de la Factory)",
+          evidence: "core/tests/test_garde.py::test_commande_d_approbation_refusee" }
+      - { id: C14d, status: ABSENT, description: "sessions ouvertes hors de la Factory : aucun refus (réglages utilisateur à poser par l'humain)", ref: "policies/human-approval.yaml residual" }
+    detection: "aucune aujourd'hui"
+    reaction: "invalidation des approbations non prouvées"
+  - id: T15
+    step: FILESYSTEM
+    threat: Perte de la Factory (aucune sauvegarde)
+    impact: CRITICAL
+    probability: MEDIUM
+    controls:
+      - { id: C15a, status: VERIFIED, description: "sauvegarde vérifiée et restauration d'essai (archive piégée refusée)",
+          evidence: "core/tests/test_sauvegarde.py::test_restauration_d_essai" }
+      - { id: C15c, status: ABSENT, description: "aucune copie hors du poste ; aucun commit", ref: "policies/backup.yaml offsite_copy" }
+      - { id: C15b, status: PLANNED, description: "planification de la sauvegarde (RPO) et test de restauration périodique", milestone: J8 }
+    detection: "Bootstrap (à ajouter) : dépôt Factory sans commit ni copie"
+    reaction: "restauration depuis F:/software-factory-backups (docs/operations/restauration-factory.md)"
+  - id: T16
+    step: AGENT
+    threat: Donnée sensible transmise au fournisseur du modèle
+    impact: HIGH
+    probability: MEDIUM
+    controls:
+      - { id: C16a, status: VERIFIED, description: "un manifest qui autorise l'envoi de données sensibles à l'IA est rejeté",
+          evidence: "core/tests/test_validation.py::test_affaiblissement_de_la_securite_rejete" }
+      - { id: C16b, status: ABSENT, description: "aucune application au moment de l'exécution", ref: "Playbook §5.3" }
+    detection: "aucune automatisée"
+    reaction: "incident ; Data Owner"

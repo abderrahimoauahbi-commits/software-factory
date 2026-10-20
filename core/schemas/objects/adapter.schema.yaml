@@ -1,0 +1,15 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: adapter
+required:
+- id
+- name
+- version
+- capabilities
+- kind
+- read_only
+- lifecycle
+rules:
+- un adaptateur du Bootstrap est en lecture seule
+- il produit des preuves, jamais de décision

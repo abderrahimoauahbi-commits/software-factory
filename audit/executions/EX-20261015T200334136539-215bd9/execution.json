@@ -1,0 +1,366 @@
+{
+ "execution_id": "EX-20261015T200334136539-215bd9",
+ "id": "EX-20261015T200334136539-215bd9",
+ "project_id": "gestionfil",
+ "ticket_id": "T-GF-011",
+ "state": "COMPLETED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "claude-opus-5-5",
+  "version": "claude-opus-5-5"
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-15T20:03:34+00:00",
+  "authorized": "2026-10-15T20:03:34+00:00",
+  "started": "2026-10-15T20:04:19+00:00",
+  "completed": "2026-10-15T20:08:02+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C2 dans le périmètre"
+  ],
+  "criticite_effective": "C2",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "120d9812a6e9675127458126d8bfb428b91d34a75e57b34dd0562c7b0ade7286"
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000223"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000224"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000225"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000226"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000227"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000228"
+  },
+  {
+   "to": "TESTING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000229"
+  },
+  {
+   "to": "COMPLETED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000230"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-011-EX-20261015T200334136539-215bd9",
+  "branch": "factory/T-GF-011/EX-20261015T200334136539-215bd9",
+  "base": "3dc9f1766506354180ab3eedc91c0996a04121af",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 43.8
+   }
+  }
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "T-GF-011",
+   "criticality": "C2",
+   "objective": "Retour.tsx : la lecture locale nombre() transforme « 1.234,56 » en NaN puis 0 ; l'avoir est enregistré à 0 DH et une ligne de « 1.234,5 kg » disparaît sans prévenir. Lire par lireNombre et bloquer l'envoi sur une valeur illisible",
+   "scope": {
+    "data": [],
+    "excluded": [
+     "les autres fichiers de frontend/src/",
+     "backend/",
+     "db/",
+     "deploiement/"
+    ],
+    "files": [
+     "frontend/src/pages/retours/Retour.tsx"
+    ],
+    "included": [
+     "frontend/src/pages/retours/Retour.tsx"
+    ],
+    "modules": [],
+    "paths": [
+     "frontend/src/pages/retours/Retour.tsx"
+    ],
+    "roots": [
+     "PROJECT_ROOT"
+    ],
+    "services": []
+   }
+  },
+  "execution": {
+   "id": "EX-20261015T200334136539-215bd9",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-011-EX-20261015T200334136539-215bd9",
+   "branch": "factory/T-GF-011/EX-20261015T200334136539-215bd9",
+   "base": "3dc9f1766506354180ab3eedc91c0996a04121af",
+   "extraction_differences": {},
+   "copied_dependencies": {
+    "frontend/node_modules": {
+     "files": 21043,
+     "seconds": 43.8
+    }
+   },
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/src/pages/retours/Retour.tsx"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 1,
+   "max_attempts": 3
+  }
+ },
+ "changes": [
+  "frontend/src/pages/retours/Retour.tsx"
+ ],
+ "extraction_unchanged": [],
+ "post_gates": {
+  "frontend/src/pages/retours/Retour.tsx": "378afaa5f53f4a4eda4b7148c69727d901118a90335bd9da6aebb624049993c6"
+ },
+ "gate_outputs": [],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "T-GF-011",
+  "execution": "EX-20261015T200334136539-215bd9",
+  "agent": "qa",
+  "model": "claude-opus-5-5",
+  "model_version": "claude-opus-5-5",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/pages/retours/Retour.tsx"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/T-GF-011/EX-20261015T200334136539-215bd9",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-011-EX-20261015T200334136539-215bd9",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261015T200334136539-215bd9-diff",
+   "EX-20261015T200334136539-215bd9-changes"
+  ],
+  "tests": [
+   "EX-20261015T200334136539-215bd9-frontend_unit_tests",
+   "EX-20261015T200334136539-215bd9-lint",
+   "EX-20261015T200334136539-215bd9-typecheck"
+  ],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261015T200334136539-215bd9-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat 3dc9f1766506354180ab3eedc91c0996a04121af",
+   "timestamp": "2026-10-15T20:04:55+00:00",
+   "command": "git diff --stat 3dc9f1766506354180ab3eedc91c0996a04121af",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T200334136539-215bd9-diff.log",
+   "hash": "ee0347556d7c9f853a4232769592189cef2f0a6917e3cc18dbe5377d9d541d68",
+   "generated_by": "plateforme:EX-20261015T200334136539-215bd9",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T200334136539-215bd9-changes",
+   "type": "ARTIFACT",
+   "source": "plateforme : changements de l'agent",
+   "timestamp": "2026-10-15T20:04:55+00:00",
+   "command": null,
+   "exit_code": null,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T200334136539-215bd9-changes.txt",
+   "hash": "b89ccc8b8bf772a7a74e8903447bd46da1fa1e733cddff81d1a4f21c3be0aa95",
+   "generated_by": "plateforme:EX-20261015T200334136539-215bd9",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T200334136539-215bd9-frontend_unit_tests",
+   "type": "TEST",
+   "source": "npm test",
+   "timestamp": "2026-10-15T20:04:57+00:00",
+   "command": "npm test",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T200334136539-215bd9-frontend_unit_tests.log",
+   "hash": "68870b75660c6a78cc66b92d33d1dc715749ef5b48d63ca5884fc67aff168d87",
+   "generated_by": "plateforme:EX-20261015T200334136539-215bd9",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T200334136539-215bd9-lint",
+   "type": "TEST",
+   "source": "npm run lint",
+   "timestamp": "2026-10-15T20:06:48+00:00",
+   "command": "npm run lint",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T200334136539-215bd9-lint.log",
+   "hash": "bedf72c6cc0c296124a389ba2ca452ad7aaedc9a8559e73b2e14177806000655",
+   "generated_by": "plateforme:EX-20261015T200334136539-215bd9",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T200334136539-215bd9-typecheck",
+   "type": "TEST",
+   "source": "npm run build",
+   "timestamp": "2026-10-15T20:08:02+00:00",
+   "command": "npm run build",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T200334136539-215bd9-typecheck.log",
+   "hash": "6ebb9f9df779f188ed6f6629b723b7ca38c7328e9b68357f18351b58a0b9f948",
+   "generated_by": "plateforme:EX-20261015T200334136539-215bd9",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

@@ -1,0 +1,3 @@
+$ psql -f test_remise.sql
+code=0
+

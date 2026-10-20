@@ -1,0 +1,18 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: policy
+required:
+- id
+- name
+- version
+- scope
+- priority
+- rules
+- prohibited_actions
+- mandatory_actions
+- escalation
+- effective_from
+rules:
+- 'ordre : sécurité Factory > gouvernance Factory > projet > workflow > ticket > exécution'
+- un niveau inférieur n'affaiblit jamais une politique obligatoire supérieure

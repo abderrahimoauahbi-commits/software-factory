@@ -1,0 +1,77 @@
+schema_version: '1.0'
+id: vscode
+name: Visual Studio Code
+version: '1.142'          # ADR-0022 D5 : épinglée (major.minor) sur le relevé du Bootstrap du 19/10/2026
+type: ide
+lifecycle: APPROVED
+capabilities:
+- IDE
+compatibility:
+  os:
+  - windows
+  - linux
+  - macos
+  languages: []
+  frameworks: []
+  projects: []
+permissions:
+  read: []
+  write: []
+  execute: []
+  network:
+  - marketplace d'extensions
+  - télémétrie
+  database: []
+security:
+  risk_level: MEDIUM
+  secret_access: false
+  production_access: false
+evaluation:
+  maturity: null
+  stability: null
+  security: null
+  documentation: null
+  integration: null
+  portability: null
+  lock_in: null
+  cost: null
+  performance: null
+  recoverability: null
+  maintenance: null
+  license: null
+  confidentiality: null
+  permissions: null
+  interoperability: null
+  observability: null
+  update: null
+  status: PENDING
+  last: null
+  next: '2027-01-15'
+approval:
+  status: APPROVED
+  owner: Factory Owner
+  approved_by: Factory Owner — instruction du 15/10/2026
+health:
+  status: UNKNOWN
+  last_check: null
+update:
+  current_version: null
+  latest_evaluated_version: null
+  reevaluation_required: false
+owner: Factory Owner
+license: licence produit Microsoft (binaire) ; sources Code - OSS sous MIT
+documentation: https://code.visualstudio.com/docs
+review_date: '2027-01-15'
+detection:
+  adapter: command_version
+  command:
+  - code
+  - --version
+  pattern: ^(\S+)
+lifecycle_history:
+- date: '2026-10-15'
+  state: APPROVED
+  reason: adoption humaine initiale, évaluation formelle due (Playbook §6.3)
+inventory:
+  adapter: vscode_config
+notes: Extensions et MCP de l'éditeur à inventorier ; aucune n'est approuvée par la Factory.

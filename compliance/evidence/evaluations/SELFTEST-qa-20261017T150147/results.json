@@ -1,0 +1,41 @@
+[
+ {
+  "task": "QA-REF-1",
+  "execution_id": "EX-20261017T150148014178-80b894",
+  "review": null,
+  "tokens": 0,
+  "changed": [
+   "frontend/tests/centime.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "success",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/centime.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ la moitie s'arrondit en s'eloignant de zero (1.5637ms)\n✔ les negatifs sont symetriques (0.3073ms)\n✔ une valeur non finie donne 0 (0.2895ms)\n✔ une valeur deja au centime ne change pas (1.5589ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 391.283\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/centime.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✖ la moitie s'arrondit en s'eloignant de zero (11.544ms)\n✖ les negatifs sont symetriques (0.8114ms)\n✔ une valeur non finie donne 0 (0.4594ms)\n✔ une valeur deja au centime ne change pas (1.8858ms)\nℹ tests 4\nℹ suites 0\nℹ pass 2\nℹ fail 2\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 518.5982\n\n✖ failing tests:\n\ntest at tests\\centime.test.ts:13:1\n✖ la moitie s'arrondit en s'eloignant de zero (11.544ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  1 !== 1.01\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T150147-QA-REF-1-EX-20261017T150148014178-80b894/frontend/tests/centime.test.ts:14:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.start (node:internal/test_runner/test:1003:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 1,\n    expected: 1.01,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n\ntest at tests\\centime.test.ts:17:1\n✖ les negatifs sont symetriques (0.8114ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  -1 !== -1.01\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T150147-QA-REF-1-EX-20261017T150148014178-80b894/frontend/tests/centime.test.ts:18:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: -1,\n    expected: -1.01,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "solution de référence"
+ }
+]

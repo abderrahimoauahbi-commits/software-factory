@@ -1,0 +1,99 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "T-GF-002",
+  "criticality": "C1",
+  "objective": "Créer frontend/tests/export.test.ts, qui fige le comportement actuel de versCsv (frontend/src/lib/export.ts, aucun test aujourd'hui), sans modifier le code source",
+  "scope": {
+   "paths": [
+    "frontend/tests/export.test.ts"
+   ],
+   "included": [
+    "frontend/tests/export.test.ts"
+   ],
+   "excluded": [
+    "frontend/src/",
+    "backend/",
+    "db/",
+    "deploiement/"
+   ],
+   "roots": [
+    "PROJECT_ROOT"
+   ],
+   "files": [
+    "frontend/tests/export.test.ts"
+   ],
+   "modules": [],
+   "services": [],
+   "data": []
+  }
+ },
+ "execution": {
+  "id": "EX-20261015T184158149063-9b1c9b",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-002-EX-20261015T184158149063-9b1c9b",
+  "branch": "factory/T-GF-002/EX-20261015T184158149063-9b1c9b",
+  "base": "f06df9d049ae00dea4ef8708fb23814f4b32f6eb",
+  "extraction_differences": {},
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/tests/export.test.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 2,
+  "max_attempts": 3
+ }
+}

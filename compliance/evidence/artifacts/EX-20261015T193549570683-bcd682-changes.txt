@@ -1,0 +1,3 @@
+Changements de l'agent — exécution EX-20261015T193549570683-bcd682, base 5f8d2d0f427bc22cdae72a9183f89e77d2cf04f3
+modifié  +11 -4  frontend/src/lib/utils.ts
+nouveau  2297 octets  frontend/tests/utils.test.ts

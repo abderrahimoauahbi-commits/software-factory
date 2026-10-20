@@ -1,0 +1,4 @@
+$ psql -f 2026-10-15_remise_fournisseur.sql
+code=3
+
+psql:C:/Users/vboxuser/AppData/Local/Temp/tmp9tflhv0w/espace/migrations/2026-10-15_remise_fournisseur.sql:2: ERROR:  relation "public.fournisseurs" does not exist

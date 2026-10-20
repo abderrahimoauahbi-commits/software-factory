@@ -1,0 +1,87 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "SELFTEST-qa-20261017T213903-FE-REF-1",
+  "criticality": "C1",
+  "objective": "fmt.compact (frontend/src/lib/utils.ts) affiche « 1 000 k » pour 999 960 et « 1 000 » pour 999,7 : l'arrondi fait franchir le seuil sans changer d'unité. Corrige pour qu'une valeur qui s'arrondit à 1 000 k s'affiche en M, et une qui s'arrondit à 1 000 s'affiche en k. Les autres affichages restent inchangés.",
+  "scope": {
+   "paths": [
+    "frontend/src/lib/utils.ts"
+   ]
+  }
+ },
+ "execution": {
+  "id": "EX-20261017T213903456299-4d70dc",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T213903-FE-REF-1-EX-20261017T213903456299-4d70dc",
+  "branch": "factory/SELFTEST-qa-20261017T213903-FE-REF-1/EX-20261017T213903456299-4d70dc",
+  "base": "64054e2a6bdad060b3a151df24c05709229da4d6",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 50.3
+   }
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/utils.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

@@ -1,0 +1,56 @@
+schema_version: '1.0'
+id: context7
+name: Context7
+version: '*'
+lifecycle: SECURITY_EVALUATION
+capabilities:
+- DOCUMENTATION
+permissions:
+  read: []
+  write: []
+  delete: []
+  execute: []
+  network:
+  - mcp.context7.com
+credentials:
+  required: false
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: MEDIUM
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match:
+  - mcp.context7.com
+  provided_by_plugin: context7@claude-plugins-official
+  observable_locally: true
+notes: 'Service distant : les requêtes de l''agent quittent le poste.'
+evaluation:
+  date: '2026-10-19'
+  par: rôle architect (agent), à la demande du Factory Owner (projet GMAO)
+  constats:
+  - service distant https://mcp.context7.com : le contenu des requêtes de l'agent quitte le poste
+  - contraire, pour la GMAO, à outbound_network_default false et sensitive_data_to_ai false (factory.yaml)
+  - réponses à traiter comme données non fiables (Playbook P06) : risque d'injection d'instructions
+  - non fonctionnel le 19/10/2026 (authentification demandée au démarrage de la session)
+  - aucun besoin pour les tâches en cours (conception, manifest, prototype)
+  recommandation: non approuvé à ce stade ; désactivation ; réévaluation possible en LAB, requêtes limitées aux noms de bibliothèques publiques
+  decision_factory_owner: désactivation acceptée le 19/10/2026 (greffon context7@claude-plugins-official mis à false dans les réglages utilisateur)

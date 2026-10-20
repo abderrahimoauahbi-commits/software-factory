@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: SOURCE_WRITE
+name: SOURCE_WRITE
+description: Écriture des sources dans le périmètre du ticket
+status: DEFINED
+implementations: []

@@ -1,0 +1,19 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: human_gate
+required:
+- id
+- type
+- required_role
+- requested_by
+- status
+- scope
+- created_at
+enums:
+  status: APPROVAL_STATUS
+rules:
+- aucune approbation automatique
+- aucun héritage d'approbation entre tickets sans rapport
+- aucun héritage d'approbation entre projets sans rapport
+- aucun héritage d'approbation après un changement de périmètre important

@@ -1,0 +1,87 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "SELFTEST-qa-20261017T213903-FE-REF-3",
+  "criticality": "C1",
+  "objective": "Un 408 (délai de requête dépassé, renvoyé par nginx) est une panne passagère, pas un refus. Dans doitReessayer (frontend/src/lib/reessai.ts), traite-le comme une panne passagère : deux essais. Les autres 4xx, 429 et 503 restent inchangés.",
+  "scope": {
+   "paths": [
+    "frontend/src/lib/reessai.ts"
+   ]
+  }
+ },
+ "execution": {
+  "id": "EX-20261017T214850748986-0526d6",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T213903-FE-REF-3-EX-20261017T214850748986-0526d6",
+  "branch": "factory/SELFTEST-qa-20261017T213903-FE-REF-3/EX-20261017T214850748986-0526d6",
+  "base": "64054e2a6bdad060b3a151df24c05709229da4d6",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 45.3
+   }
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/reessai.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

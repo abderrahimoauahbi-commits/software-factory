@@ -1,0 +1,78 @@
+# Manifest de TEST, fictif et générique : sert aux tests du validateur (J2) et au test multi-projets (J6).
+# Aucun projet réel ; aucune donnée ; aucun identifiant.
+schema_version: "1.0"
+project:
+  id: project-a
+  name: Project A (test)
+  description: Service fictif servant de témoin de validation
+  factory:
+    version: "3.2"
+    minimum_version: "3.0"
+  lifecycle:
+    state: REGISTERED
+    criticality_default: C1
+  stack:
+    languages: [python]
+    frameworks: []
+    databases: []
+    frontend: []
+    backend: []
+    mobile: []
+    infrastructure: []
+    build_systems: []
+    test_systems: []
+  capabilities:
+    required: [SOURCE_CONTROL, LANGUAGE_TOOLCHAIN, TEST]
+    optional: [SECRET_SCAN]
+  repositories:
+    - { id: main, type: git, path: ".", remote: null, branch: main }
+  paths:
+    read: [src/, tests/, docs/, README.md]
+    write: [src/, tests/]
+    forbidden: [.env, secrets/, backups/]
+  environments:
+    - { id: local, type: LOCAL, allowed: true, write_allowed: true, data_classification: INTERNAL }
+    - { id: prod, type: PRODUCTION, allowed: false, write_allowed: false, data_classification: CONFIDENTIAL }
+  agents:
+    required: [backend, qa]
+    allowed: []
+  tools:
+    required: [git, python]
+    allowed: []
+  skills:
+    required: []
+    allowed: []
+  models:
+    allowed: []
+    preferred: null
+    fallback: null
+  mcp:
+    allowed: []
+    production_write: false
+    production_delete: false
+  security:
+    production_write: false
+    production_delete: false
+    secrets_allowed: false
+    outbound_network_default: false
+    sensitive_data_to_ai: false
+  data:
+    classification: INTERNAL
+    owners: [data-owner-a]
+    retention_policy: null
+  compliance:
+    frameworks: []
+  quality:
+    required: [unit_tests]
+    optional: []
+  budgets:
+    token_limit: null
+    cost_limit: null
+    time_limit_minutes: null
+    max_attempts: 3
+  governance:
+    project_owner: owner-a
+    release_approver: null
+    security_owner: null
+    data_owner: data-owner-a
+    architect: null

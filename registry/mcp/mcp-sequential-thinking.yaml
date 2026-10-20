@@ -1,0 +1,43 @@
+schema_version: '1.0'
+id: mcp-sequential-thinking
+name: Sequential Thinking MCP
+version: '*'
+lifecycle: DISCOVERED
+capabilities: []
+permissions:
+  read: []
+  write: []
+  delete: []
+  execute: []
+  network: []
+credentials:
+  required: false
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: LOW
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match:
+  - server-sequential-thinking
+  provided_by_plugin: null
+  observable_locally: true
+notes: Version non figée.

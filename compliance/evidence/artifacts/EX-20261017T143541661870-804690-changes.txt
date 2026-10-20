@@ -1,0 +1,3 @@
+Changements de l'agent — exécution EX-20261017T143541661870-804690, base a6eb2f86bf9776bd28956de19fdb021a58502f28
+nouveau  857 octets  frontend/tests/centime.test.ts
+écarté (différence d'extraction inchangée, ADR-0013)  db/pg/socle/schema.sql

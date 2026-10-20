@@ -1,0 +1,20 @@
+# La Factory traitée comme un projet à part entière (décision K6, ADR-0002) : son évolution suit le même
+# cycle (besoin, tickets, revue, validation humaine). L'agent n'y écrit que sous exception : EXC-0001 (épuisée
+# le 16/10/2026), puis EXC-0003 (construction bornée, attestée HA-20261016T164016-06fa3814).
+schema_version: "1.0"
+id: software-factory
+name: AI Software Factory
+lifecycle:
+  state: EXECUTING
+  role_in_factory: self
+root:
+  path: C:/Users/vboxuser/Desktop/software-factory
+  resolution:
+    method: "priorité 1 (chemin choisi par le Factory Owner le 15/10/2026)"
+    identity_markers:
+      - { file: factory.yaml, pattern: '^\s*id: software-factory' }
+    validated_by: Factory Owner
+    validated_on: "2026-10-15"
+manifest:
+  path: factory.yaml
+sensitive_paths: [".env*", "*.local.*"]

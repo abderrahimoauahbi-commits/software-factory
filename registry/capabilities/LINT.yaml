@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: LINT
+name: LINT
+description: Analyse statique de style et d'erreurs
+status: DEFINED
+implementations:
+- clippy

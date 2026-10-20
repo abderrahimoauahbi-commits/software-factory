@@ -1,0 +1,2 @@
+Changements de l'agent — exécution EX-20261017T181233910582-ca008d, base 9192566a358c9003c1fb068c0227eeeda7a3ade3
+nouveau  1816 octets  frontend/tests/lots.test.ts

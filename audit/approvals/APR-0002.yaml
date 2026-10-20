@@ -1,0 +1,20 @@
+schema_version: '1.0'
+id: APR-0002
+type: ARCHITECTURE
+project_id: software-factory
+ticket_id: T-FACTORY-003
+execution_id: null
+criticality: C2
+requested_by: agent de construction (claude-opus-5-5)
+approver_role: Factory Owner / Chief Architect
+approver_id: Factory Owner
+status: APPROVED
+reason: 'Réponses écrites du 15/10/2026 : « 1- suis le guide » (G1, ordre de construction du guide) ; « 2- votre
+  recommandation » (G2, noms existants + cœur partagé core/noyau, déplacement de fichiers accepté) ; « 3- reconstruis
+  toi-même les prompts jusqu''où le projet est exactement arrivé » (G4).'
+interpretation_note: 'G3 (premier commit) non traité dans la réponse : reste un geste humain.'
+evidence_refs:
+- adr/accepted/ADR-0003-ordre-de-construction-et-coeur-partage.md
+requested_at: '2026-10-15'
+decided_at: '2026-10-15'
+expires_at: null

@@ -1,0 +1,21 @@
+schema_version: '1.0'
+id: APR-0005
+type: ARCHITECTURE
+project_id: software-factory
+ticket_id: T-FACTORY-005
+execution_id: null
+criticality: C3
+requested_by: agent de construction (claude-opus-5-5)
+approver_role: Factory Owner
+approver_id: Factory Owner
+status: APPROVED
+reason: 'Décisions écrites du 15/10/2026 : J3 approuvé ; M1, M2 (paths GestionFil non normatifs), M3 (analyse du
+  zip), M4 (docs/normative et hiérarchie), D2 (sauvegarde obligatoire avant J4 opérationnel), W1 (commande humaine,
+  liaison au contexte), J4 autorisé (ALLOW/DENY/APPROVAL_REQUIRED, refus par défaut).'
+interpretation_note: 'Fiche recopiée par l''agent (canal ancien, faiblesse W1) : le Policy Engine ne l''accepte
+  pas comme approbation d''action. Liste des tests J4 reçue tronquée, complétée par l''agent.'
+evidence_refs:
+- adr/accepted/ADR-0006-policy-engine-approbation-sauvegarde.md
+requested_at: '2026-10-15'
+decided_at: '2026-10-15'
+expires_at: null

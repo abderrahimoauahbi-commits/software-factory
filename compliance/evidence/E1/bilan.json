@@ -1,0 +1,116 @@
+{
+ "jalon": "E1",
+ "date": "2026-10-16T10:33:08+00:00",
+ "etat": "SUCCEEDED",
+ "construction_base_s": 17.5,
+ "taches": {
+  "SUCCEEDED": 5
+ },
+ "metriques": {
+  "AUTONOMY_RATE": 1.0,
+  "TASK_SUCCESS_RATE": 1.0,
+  "RECOVERY_RATE": 1.0,
+  "HUMAN_INTERVENTION_RATE": 0.0,
+  "RETRY_RATE": 0.286,
+  "QUALITY_FAILURE_RATE": 0.0,
+  "SECURITY_FAILURE_RATE": 0.0,
+  "AVERAGE_TASK_DURATION": 0.252,
+  "COST_PER_TASK": 357.1,
+  "COST_PER_MISSION": 2500,
+  "TOOL_CALLS": 13,
+  "AGENT_UTILIZATION": 0.8,
+  "PARALLELISM": 2,
+  "TASKS_RUN": 7,
+  "FAILURES": 2
+ },
+ "trace": [
+  "migration#1 2026-10-15_remise_fournisseur.sql → code 3",
+  "RESET (migration) → socle + 0 migration(s) rejouée(s)",
+  "migration#2 2026-10-15_remise_fournisseur.sql → code 0",
+  "seeder#1 seed_test_remise.sql → code 3",
+  "RESET (seeder) → socle + 1 migration(s) rejouée(s)",
+  "seeder#2 seed_test_remise.sql → code 0",
+  "tests#1 test_remise.sql → code 0",
+  "revue-integrite#1 revue_integrite.sql → code 0"
+ ],
+ "baux": [
+  {
+   "id": "lease-115030ce7fb729d9",
+   "state": "RELEASED",
+   "capabilities": [
+    "DATABASE_MIGRATION",
+    "DATABASE_SCHEMA_CHANGE"
+   ],
+   "execution_id": "E1/migration"
+  },
+  {
+   "id": "lease-1afba5236220ad10",
+   "state": "RELEASED",
+   "capabilities": [
+    "DATABASE_MIGRATION",
+    "DATABASE_SCHEMA_CHANGE"
+   ],
+   "execution_id": "E1/migration"
+  },
+  {
+   "id": "lease-24b3ab91a1431165",
+   "state": "RELEASED",
+   "capabilities": [
+    "DATABASE_SEED",
+    "DATABASE_WRITE"
+   ],
+   "execution_id": "E1/seeder"
+  },
+  {
+   "id": "lease-4070abbada6ef0db",
+   "state": "RELEASED",
+   "capabilities": [
+    "DATABASE_SEED",
+    "DATABASE_WRITE"
+   ],
+   "execution_id": "E1/seeder"
+  },
+  {
+   "id": "lease-50372ad3c0412306",
+   "state": "RELEASED",
+   "capabilities": [
+    "DATABASE_READ"
+   ],
+   "execution_id": "E1/revue-integrite"
+  },
+  {
+   "id": "lease-caadb9ef73b69ddc",
+   "state": "RELEASED",
+   "capabilities": [
+    "DATABASE_READ",
+    "TEST"
+   ],
+   "execution_id": "E1/tests"
+  }
+ ],
+ "sans_registre_des_ressources": {
+  "decision": "DENY",
+  "regle": "R04"
+ },
+ "qa_DATABASE_DROP": {
+  "decision": "DENY",
+  "regle": "R39"
+ },
+ "decision_de_capacite": "Policy Engine réel (policies/autonomy.yaml active, ADR-0016 accepté)",
+ "regles_des_baux": [
+  "R35"
+ ],
+ "agent": "runtime scripté (erreurs volontaires)",
+ "journal": {
+  "valide": true,
+  "evenements": 64,
+  "rupture": null,
+  "motif": "",
+  "tete": "9b2b9365c7007423688042125026dbd9aebea06fff99f117f55ed40a99c95de4"
+ },
+ "destruction": {
+  "environment": "gestionfil-e1",
+  "destroyed": true,
+  "archive": "C:\\Users\\vboxuser\\AppData\\Local\\Temp\\tmp9tflhv0w\\envs\\_archives\\gestionfil-e1"
+ }
+}

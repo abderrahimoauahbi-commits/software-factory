@@ -1,0 +1,9 @@
+schema_version: '1.0'
+id: ISOLATED_WORKSPACE
+name: ISOLATED_WORKSPACE
+description: Espace de travail isolé par ticket (Playbook §8.3)
+status: DEFINED
+implementations:
+- git
+verification:
+  adapter: git_worktree

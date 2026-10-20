@@ -1,0 +1,36 @@
+diff --git a/frontend/src/lib/conditionnement.ts b/frontend/src/lib/conditionnement.ts
+index c2c1413..5bbbd13 100644
+--- a/frontend/src/lib/conditionnement.ts
++++ b/frontend/src/lib/conditionnement.ts
+@@ -181,9 +181,13 @@ export function depuisUnite(valeur: unknown, unite: string, c: Conditionnement):
+   }
+ }
+ 
+-/** Formate un nombre pour un champ de saisie : vide plutôt que « null ». */
++/**
++ * Formate un nombre pour un champ de saisie : vide plutôt que « null » — ou que
++ * « NaN » : une quantité multipliée par un facteur manquant écrivait « NaN »
++ * dans la grille des lignes (T-GF-007, 15/10/2026).
++ */
+ export function pourChamp(n: number | null, decimales = 0): string {
+-  if (n === null) return ''
++  if (n === null || !Number.isFinite(n)) return ''
+   return decimales > 0 ? String(Number(n.toFixed(decimales))) : String(Math.round(n))
+ }
+ 
+diff --git a/frontend/tests/conversions.test.ts b/frontend/tests/conversions.test.ts
+index 729dde4..4b3d49a 100644
+--- a/frontend/tests/conversions.test.ts
++++ b/frontend/tests/conversions.test.ts
+@@ -155,3 +155,11 @@ test('pourChamp : vide plutot que « null », arrondi ou decimales', () => {
+   assert.equal(pourChamp(1.5, 2), '1.5')             // pas de zero inutile
+   assert.equal(pourChamp(1234.5, 1), '1234.5')
+ })
++
++test('pourChamp : un nombre non fini donne un champ vide (T-GF-007)', () => {
++  assert.equal(pourChamp(Number.NaN), '')
++  assert.equal(pourChamp(Number.NaN, 3), '')
++  assert.equal(pourChamp(Number.POSITIVE_INFINITY), '')
++  assert.equal(pourChamp(Number.NEGATIVE_INFINITY, 2), '')
++  assert.equal(pourChamp(12 * Number.NaN, 3), '')    // quantite x facteur manquant
++})

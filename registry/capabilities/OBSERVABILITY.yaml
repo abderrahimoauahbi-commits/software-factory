@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: OBSERVABILITY
+name: OBSERVABILITY
+description: Journaux, métriques, traces
+status: DEFINED
+implementations: []

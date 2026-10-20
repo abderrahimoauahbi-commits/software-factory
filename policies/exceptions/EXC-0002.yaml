@@ -1,0 +1,18 @@
+schema_version: "1.0"
+exception:
+  id: EXC-0002
+  requested_by: agent de construction (claude-opus-5-5)
+  phase: EXECUTION
+  objective: "D2 : sauvegarde de la Factory hors de son répertoire"
+  requested_permission: "WRITE (création seulement) dans F:/software-factory-backups"
+  scope:
+    roots: ["F:/software-factory-backups"]
+    excluded: ["tout autre chemin de F:", "écrasement ou suppression d'une archive"]
+  reason: "une sauvegarde dans la Factory elle-même ne protège pas de sa perte (décision D2)"
+  risk: "LOW — répertoire neuf, création exclusive, aucune suppression"
+  duration: "permanente pour l'opération « backup » ; révocable par le Factory Owner"
+  affected_resources: ["F:/software-factory-backups"]
+  approval_required: true
+  approval: APR-0005
+  expiration: null
+  audit_reference: audit/events.jsonl

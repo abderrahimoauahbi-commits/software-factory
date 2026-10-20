@@ -1,0 +1,32 @@
+# Supervision et reprise (Master Evolution Prompt v4 §29, §30, §48, §49, §52). Lu par core/noyau/superviseur.py
+# et l'orchestrateur. Rien ici n'accorde un droit : budgets, stratégies, et liste RESTRICTIVE des seules causes
+# légitimes de WAITING_HUMAN.
+schema_version: "1.0"
+id: supervision
+version: "1.0"
+
+human_boundaries: [PRODUCTION_WRITE, PRODUCTION_DELETE, DESTRUCTIVE_PRODUCTION_MIGRATION, CRITICAL_SECURITY_POLICY_CHANGE,
+                   PERMISSION_MODEL_CHANGE, MAJOR_ARCHITECTURE_CHANGE, SENSITIVE_DATA_ACCESS,
+                   IRREVERSIBLE_BUSINESS_ACTION, RELEASE]
+
+recoverable_failures: [BUILD_FAILED, TEST_FAILED, MIGRATION_FAILED, SEED_FAILED, TOOL_FAILED, AGENT_STUCK,
+                       PLAN_INVALID, TASK_TOO_LARGE, ENVIRONMENT_FAILED, QUALITY_GATE_FAILED]
+
+budgets:
+  mission:   { max_duration_s: 28800, max_tokens: 2000000, max_tool_calls: 5000, max_agents: 16, max_parallel: 4,
+               max_retries: 20 }
+  execution: { max_duration_s: 7200, max_tokens: 400000, max_tool_calls: 800, max_agents: 6, max_parallel: 4,
+               max_retries: 5 }
+  lease:     { max_duration_s: 7200, max_parallel_operations: 4 }
+
+recovery:
+  default: [RETRY, CHANGE_STRATEGY, SPAWN_SPECIALIST, SPLIT_TASK, REASSIGN, CHANGE_MODEL, REDUCE_SCOPE, ESCALATE]
+  MIGRATION_FAILED: [RESET_ENVIRONMENT, RETRY, SPAWN_SPECIALIST, ESCALATE]
+  SEED_FAILED: [RESET_ENVIRONMENT, RETRY, SPAWN_SPECIALIST, ESCALATE]
+  ENVIRONMENT_FAILED: [RECREATE_ENVIRONMENT, RETRY, ESCALATE]
+  TOOL_FAILED: [RETRY, CHANGE_TOOL, ESCALATE]
+  TASK_TOO_LARGE: [SPLIT_TASK, RETRY, ESCALATE]
+  QUALITY_GATE_FAILED: [RETRY, CHANGE_STRATEGY, SPAWN_SPECIALIST, ESCALATE]
+  specialists: { MIGRATION_FAILED: database, SEED_FAILED: database, BUILD_FAILED: backend, TEST_FAILED: qa,
+                 QUALITY_GATE_FAILED: qa }
+loop_threshold: 3

@@ -1,0 +1,25 @@
+{
+ "operation": "verify",
+ "statut": "OK",
+ "archive": "F:\\software-factory-backups\\factory-backup-20261015T164030-6d98597ee040.zip",
+ "details": [],
+ "mesures": {
+  "files": 254,
+  "required_scopes": [
+   "factory.yaml",
+   "registry",
+   "policies",
+   "workflows",
+   "quality",
+   "security",
+   "audit",
+   "knowledge",
+   "adr",
+   "risks",
+   "compliance",
+   "docs",
+   "scripts",
+   "registry/projects"
+  ]
+ }
+}

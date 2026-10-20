@@ -1,0 +1,79 @@
+schema_version: '1.0'
+id: root-scope
+name: Résolution des racines et périmètre de lecture
+version: '1.0'
+source: instructions « PROCÉDURE DE RÉSOLUTION DES RACINES » et « PÉRIMÈTRE FILESYSTEM » du 15/10/2026
+sequence:
+- repository courant
+- FACTORY_ROOT
+- PROJECT_ROOT
+- canonicalisation
+- identité
+- périmètre
+- ROOT_SCOPE
+- lecture
+- diagnostic
+priorities:
+- chemin explicite (contexte ou configuration)
+- chemin déclaré par un manifest
+- dépôt Git courant identifié sans ambiguïté
+- découverte locale limitée
+- ROOT_NOT_RESOLVED
+reject_if:
+- inexistant
+- pas un répertoire
+- lien symbolique ou jonction
+- identité incertaine
+- plusieurs candidats
+- répertoire de données ou de sauvegarde
+sensitive_file_patterns:
+- .env
+- .env.*
+- '*.env'
+- '*.secret'
+- '*.secrets'
+- '*.credential'
+- '*.credentials'
+- '*.password'
+- '*.passwd'
+- '*.token'
+- '*.key'
+- '*.pem'
+- '*.p12'
+- '*.pfx'
+- '*.jks'
+- credentials.json
+- secrets.json
+- secret.json
+- tokens.json
+- '*.dump'
+- '*.backup'
+- '*.bak'
+sensitive_dir_names:
+- backup
+- backups
+- sauvegardes
+- dump
+- dumps
+- secrets
+- credentials
+- private
+backup_root:
+  path_from: policies/backup.yaml#destination
+  access: "liste des archives seulement (Bootstrap F-BACKUP) ; contenu lu par verify/restore-test/drill uniquement"
+  approval: "D2 / EXC-0002"
+never_traverse:
+- node_modules
+- target
+- .git/objects
+outside_roots_files_approved:
+  approved_by: Factory Owner
+  approved_on: '2026-10-15'
+  approval: APR-0001
+  mode: READ_ONLY, clé par clé, secrets masqués
+  files:
+  - ~/.claude/settings.json
+  - ~/.claude.json
+  - '%APPDATA%/Code/User/settings.json'
+  - '%APPDATA%/Code/User/mcp.json'
+  - '%APPDATA%/Code/User/globalStorage/storage.json'

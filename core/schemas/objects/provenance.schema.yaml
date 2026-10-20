@@ -1,0 +1,31 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: provenance
+required:
+- project
+- ticket
+- execution
+- agent
+- model
+- model_version
+- factory_version
+- schema_version
+- prompt_version
+- tools
+- skills
+- mcp
+- permissions
+- branch
+- worktree
+- sandbox
+- artifacts
+- tests
+- reviews
+- approvals
+# Champs facultatifs (ADR-0022 v2, F-8), versions RÉELLEMENT résolues au démarrage : ticket_version · role_version ·
+# skill_versions · tool_versions · prompt_profile · control_profile · policy_fingerprint · context (références et
+# empreintes) · decisions (demandes « factory decide » utilisées) · snapshot (instantané complet).
+rules:
+- toute exécution qui modifie du code enregistre sa provenance
+- 'provenance inconnue = PROVENANCE_INVALID : jamais fusionné'

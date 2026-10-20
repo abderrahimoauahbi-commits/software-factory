@@ -1,0 +1,45 @@
+diff --git a/frontend/src/lib/conditionnement.ts b/frontend/src/lib/conditionnement.ts
+index 4454792..c2c1413 100644
+--- a/frontend/src/lib/conditionnement.ts
++++ b/frontend/src/lib/conditionnement.ts
+@@ -50,11 +50,15 @@ export interface Colisage {
+ 
+ const VIDE: Colisage = { kg: null, bobines: null, palettes: null }
+ 
+-/** Un nombre utilisable, ou null. Une chaîne vide n'est pas un zéro. */
++/**
++ * Un nombre utilisable, ou null. Une chaîne vide n'est pas un zéro — ni une
++ * chaîne faite d'espaces : elle valait 0 et affichait « 0 bobine, 0 palette »
++ * pour un champ que personne n'avait rempli (T-GF-006, 15/10/2026).
++ */
+ function nombre(v: unknown): number | null {
+   if (v === null || v === undefined || v === '') return null
+-  const n = typeof v === 'number' ? v : (lireNombre(String(v)) ?? 0)
+-  return Number.isFinite(n) ? n : null
++  const n = typeof v === 'number' ? v : lireNombre(String(v))
++  return n !== null && Number.isFinite(n) ? n : null
+ }
+ 
+ /** Les comptes de colis sont entiers : on ne manutentionne pas 3,4 bobines. */
+diff --git a/frontend/tests/conversions.test.ts b/frontend/tests/conversions.test.ts
+index 76d8264..729dde4 100644
+--- a/frontend/tests/conversions.test.ts
++++ b/frontend/tests/conversions.test.ts
+@@ -83,6 +83,17 @@ test('depuisBobines : vide ou illisible ne donne rien', () => {
+   assert.deepEqual(depuisBobines('abc', FICHE), VIDE)
+ })
+ 
++test('une saisie faite d\'espaces n\'est pas un zero (T-GF-006)', () => {
++  for (const blanc of ['   ', ' ', ' ', '\t'])
++    for (const r of [
++      depuisBobines(blanc, FICHE),
++      depuisKg(blanc, FICHE),
++      depuisPalettes(blanc, FICHE),
++      depuisUnite(blanc, 'Lot', FICHE),
++    ])
++      assert.deepEqual(r, VIDE, JSON.stringify(blanc))
++})
++
+ test('depuisKg : le poids pese fait foi', () => {
+   const r = depuisKg(211, FICHE)
+   assert.equal(r.kg, 211)                            // jamais ramene a 100 bobines x 2,1

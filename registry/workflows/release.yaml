@@ -1,0 +1,19 @@
+schema_version: '1.0'
+id: release
+name: RELEASE
+version: 0.1.0
+project_id: factory-catalog
+type: RELEASE
+criticality: C2
+phases: []
+entry_conditions: []
+exit_conditions: []
+human_gates: []
+policies:
+- security-defaults
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+status: DRAFT
+notes: 'Brouillon : phases à préciser à l''étape « workflows » ; aucun workflow n''est actif.'

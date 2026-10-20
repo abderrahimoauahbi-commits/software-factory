@@ -1,0 +1,28 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: skill
+required:
+- id
+- name
+- version
+- lifecycle
+- purpose
+- capabilities
+- permissions_requested
+- security
+- evaluation
+- governance
+enums:
+  lifecycle: lifecycle:skill
+# Champ facultatif (ADR-0022 v2, F-2) : instructions — fichier Markdown versionné avec la fiche ; partie C du
+# prompt effectif. Une skill ne donne aucune permission.
+rules:
+- une skill n'hérite jamais des permissions illimitées d'un agent
+active_requires_approval:
+  states:
+  - APPROVED
+  - AVAILABLE
+  - ACTIVE
+  field: governance.approved_by
+  non_empty: true

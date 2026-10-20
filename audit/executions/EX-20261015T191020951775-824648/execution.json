@@ -1,0 +1,316 @@
+{
+ "execution_id": "EX-20261015T191020951775-824648",
+ "id": "EX-20261015T191020951775-824648",
+ "project_id": "gestionfil",
+ "ticket_id": "T-GF-007",
+ "state": "COMPLETED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "claude-opus-5-5",
+  "version": "claude-opus-5-5"
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-15T19:10:20+00:00",
+  "authorized": "2026-10-15T19:10:20+00:00",
+  "started": "2026-10-15T19:10:22+00:00",
+  "completed": "2026-10-15T19:10:43+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C1 dans le périmètre"
+  ],
+  "criticite_effective": "C1",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "8be2f5b6fb85fd74c2f63726adac36d2f851b9704f3f7e6a0d9f7b6e7d69825e"
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000163"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000164"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000165"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000166"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000167"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000168"
+  },
+  {
+   "to": "TESTING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000169"
+  },
+  {
+   "to": "COMPLETED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000170"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-007-EX-20261015T191020951775-824648",
+  "branch": "factory/T-GF-007/EX-20261015T191020951775-824648",
+  "base": "ebaa0fbf4688040602e7e23bd3e1bdcb38cc861c",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {}
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "T-GF-007",
+   "criticality": "C1",
+   "objective": "Dans pourChamp (frontend/src/lib/conditionnement.ts), NaN et ±Infinity donnent '' comme null, au lieu d'écrire « NaN » ou « Infinity » dans un champ de saisie (ex. GrilleLignes : quantité × facteur manquant)",
+   "scope": {
+    "paths": [
+     "frontend/src/lib/conditionnement.ts",
+     "frontend/tests/conversions.test.ts"
+    ],
+    "included": [
+     "frontend/src/lib/conditionnement.ts",
+     "frontend/tests/conversions.test.ts"
+    ],
+    "excluded": [
+     "les autres fichiers de frontend/src/",
+     "backend/",
+     "db/",
+     "deploiement/"
+    ],
+    "roots": [
+     "PROJECT_ROOT"
+    ],
+    "files": [
+     "frontend/src/lib/conditionnement.ts",
+     "frontend/tests/conversions.test.ts"
+    ],
+    "modules": [],
+    "services": [],
+    "data": []
+   }
+  },
+  "execution": {
+   "id": "EX-20261015T191020951775-824648",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-007-EX-20261015T191020951775-824648",
+   "branch": "factory/T-GF-007/EX-20261015T191020951775-824648",
+   "base": "ebaa0fbf4688040602e7e23bd3e1bdcb38cc861c",
+   "extraction_differences": {},
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/src/lib/conditionnement.ts",
+      "frontend/tests/conversions.test.ts"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 1,
+   "max_attempts": 3
+  }
+ },
+ "changes": [
+  "frontend/src/lib/conditionnement.ts",
+  "frontend/tests/conversions.test.ts"
+ ],
+ "extraction_unchanged": [],
+ "post_gates": {
+  "frontend/src/lib/conditionnement.ts": "95763ad404501d89973894ed58ceba84a369d6be21101aa91446e3ea9cfdff59",
+  "frontend/tests/conversions.test.ts": "683902d0fa44ae6e079aa1338e6f61cb57bc6e7ccd806c6e328e589be224a45f"
+ },
+ "gate_outputs": [],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "T-GF-007",
+  "execution": "EX-20261015T191020951775-824648",
+  "agent": "qa",
+  "model": "claude-opus-5-5",
+  "model_version": "claude-opus-5-5",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/conditionnement.ts",
+     "frontend/tests/conversions.test.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/T-GF-007/EX-20261015T191020951775-824648",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-007-EX-20261015T191020951775-824648",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261015T191020951775-824648-diff"
+  ],
+  "tests": [
+   "EX-20261015T191020951775-824648-frontend_unit_tests"
+  ],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261015T191020951775-824648-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat ebaa0fbf4688040602e7e23bd3e1bdcb38cc861c",
+   "timestamp": "2026-10-15T19:10:39+00:00",
+   "command": "git diff --stat ebaa0fbf4688040602e7e23bd3e1bdcb38cc861c",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T191020951775-824648-diff.log",
+   "hash": "3b09db9780918f3600aa298ea74864105cd4afcc7117d5bf6d2960180b5dfcc1",
+   "generated_by": "plateforme:EX-20261015T191020951775-824648",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T191020951775-824648-frontend_unit_tests",
+   "type": "TEST",
+   "source": "npm test",
+   "timestamp": "2026-10-15T19:10:43+00:00",
+   "command": "npm test",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T191020951775-824648-frontend_unit_tests.log",
+   "hash": "7f238bd695d5ccec6150778f945d5273b1652abcec5d6d4f58089e7379dd6dde",
+   "generated_by": "plateforme:EX-20261015T191020951775-824648",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

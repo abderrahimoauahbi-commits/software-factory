@@ -1,0 +1,20 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: policy_decision_request
+required:
+- request_id
+- project_id
+- phase
+- actor
+- action
+- resource
+- environment
+- criticality
+- requested_permissions
+- justification
+enums:
+  actor.type: ACTOR_TYPE
+  environment: ENVIRONMENT
+  criticality: CRITICALITY
+  phase: PHASES

@@ -1,0 +1,2 @@
+Changements de l'agent — exécution EX-20261017T213903456299-4d70dc, base 64054e2a6bdad060b3a151df24c05709229da4d6
+modifié  +2 -2  frontend/src/lib/utils.ts

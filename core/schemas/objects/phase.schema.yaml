@@ -1,0 +1,26 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: phase
+required:
+- id
+- type
+- project_id
+- workflow_id
+- objective
+- scope
+- permissions
+- criticality
+- entry_conditions
+- exit_conditions
+- evidence_required
+- human_gate
+- status
+enums:
+  criticality: CRITICALITY
+  status: PHASE_STATUS
+rules:
+- permissions évaluées par le Policy Engine
+- jamais au-delà des permissions du projet ni du workflow
+- pas de DELETE sans politique C4 explicite   # NE8 (16/10/2026) : « hors environnement jetable » (ADR-0016 ; Playbook v3.3 proposé §9.1, §13.1) ; texte v1.0 inchangé, à ratifier en v1.1
+- une phase n'approuve jamais sa propre porte humaine

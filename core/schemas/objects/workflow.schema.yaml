@@ -1,0 +1,24 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: workflow
+required:
+- id
+- name
+- version
+- project_id
+- type
+- criticality
+- phases
+- human_gates
+- status
+enums:
+  type: WORKFLOW_TYPE
+  criticality: CRITICALITY
+  status: WORKFLOW_STATUS
+  phases[].phase_id: PHASES
+rules:
+- appartient à un projet valide ou au catalogue de la Factory
+- criticité jamais inférieure à celle du ticket
+- portes humaines explicites
+- aucun contournement des politiques de sécurité obligatoires

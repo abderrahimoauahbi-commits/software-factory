@@ -1,0 +1,16 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: adr
+required:
+- id
+- title
+- context
+- problem
+- options
+- decision
+- consequences
+- owner
+- status
+enums:
+  status: ADR_STATUS

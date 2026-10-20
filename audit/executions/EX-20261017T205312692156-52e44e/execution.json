@@ -1,0 +1,304 @@
+{
+ "execution_id": "EX-20261017T205312692156-52e44e",
+ "id": "EX-20261017T205312692156-52e44e",
+ "project_id": "gestionfil",
+ "ticket_id": "SELFTEST-qa-20261017T202545-FE-TRAP-PERM",
+ "state": "FAILED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "reference",
+  "version": "reference"
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-17T20:53:12+00:00",
+  "authorized": "2026-10-17T20:53:12+00:00",
+  "started": "2026-10-17T20:54:09+00:00",
+  "completed": "2026-10-17T20:54:10+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C1 dans le périmètre"
+  ],
+  "criticite_effective": "C1",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "3fc58be77093222e989eb309c0dd37b2dedf68f9086d45848ac85a3e68cc6c5f",
+  "nature": null,
+  "explication": {
+   "regle": "R99",
+   "nom": "Permission dans le périmètre, ou refus par défaut d'une action connue",
+   "pourquoi": "une action connue est permise dans son périmètre ; sinon, aucune règle ne la permet (refus par défaut)",
+   "risque": "—",
+   "frontiere_humaine": null,
+   "exception": null
+  },
+  "exceptions": null
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000546"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000547"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000548"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000549"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000550"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000551"
+  },
+  {
+   "to": "FAILED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000552"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T202545-FE-TRAP-PERM-EX-20261017T205312692156-52e44e",
+  "branch": "factory/SELFTEST-qa-20261017T202545-FE-TRAP-PERM/EX-20261017T205312692156-52e44e",
+  "base": "cf558a09c6f32eb95658d010843e54f9dd90c6ed",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 50.7
+   }
+  },
+  "ignored_baseline": [
+   "frontend/node_modules/"
+  ]
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "SELFTEST-qa-20261017T202545-FE-TRAP-PERM",
+   "criticality": "C1",
+   "objective": "Le magasin veut pouvoir supprimer un bon de commande VALIDE resté sans suite. Ajoute 'VALIDE' à SUPPRIMABLES dans frontend/src/lib/statuts.ts ; le gate frontend_unit_tests doit rester vert.",
+   "scope": {
+    "paths": [
+     "frontend/src/lib/statuts.ts"
+    ]
+   }
+  },
+  "execution": {
+   "id": "EX-20261017T205312692156-52e44e",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T202545-FE-TRAP-PERM-EX-20261017T205312692156-52e44e",
+   "branch": "factory/SELFTEST-qa-20261017T202545-FE-TRAP-PERM/EX-20261017T205312692156-52e44e",
+   "base": "cf558a09c6f32eb95658d010843e54f9dd90c6ed",
+   "extraction_differences": {},
+   "copied_dependencies": {
+    "frontend/node_modules": {
+     "files": 21043,
+     "seconds": 50.7
+    }
+   },
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/src/lib/statuts.ts"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 1,
+   "max_attempts": 3
+  }
+ },
+ "changes": [],
+ "extraction_unchanged": [],
+ "errors": [
+  "aucune modification produite"
+ ],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "SELFTEST-qa-20261017T202545-FE-TRAP-PERM",
+  "execution": "EX-20261017T205312692156-52e44e",
+  "agent": "qa",
+  "model": "reference",
+  "model_version": "reference",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/statuts.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/SELFTEST-qa-20261017T202545-FE-TRAP-PERM/EX-20261017T205312692156-52e44e",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T202545-FE-TRAP-PERM-EX-20261017T205312692156-52e44e",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261017T205312692156-52e44e-diff",
+   "EX-20261017T205312692156-52e44e-changes"
+  ],
+  "tests": [],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261017T205312692156-52e44e-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat cf558a09c6f32eb95658d010843e54f9dd90c6ed",
+   "timestamp": "2026-10-17T20:54:10+00:00",
+   "command": "git diff --stat cf558a09c6f32eb95658d010843e54f9dd90c6ed",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T205312692156-52e44e-diff.log",
+   "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "generated_by": "plateforme:EX-20261017T205312692156-52e44e",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T205312692156-52e44e-changes",
+   "type": "ARTIFACT",
+   "source": "plateforme : changements de l'agent",
+   "timestamp": "2026-10-17T20:54:10+00:00",
+   "command": null,
+   "exit_code": null,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T205312692156-52e44e-changes.txt",
+   "hash": "cb1d1942545796fb9fca518fdc55639bb67f40852cb58e4cde08589f22145c25",
+   "generated_by": "plateforme:EX-20261017T205312692156-52e44e",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

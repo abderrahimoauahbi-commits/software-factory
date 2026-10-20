@@ -1,0 +1,45 @@
+schema_version: '1.0'
+id: database-read
+name: Fente MCP « database-read »
+version: '*'
+lifecycle: DISCOVERED
+capabilities: []
+permissions:
+  read: []
+  write: []
+  delete: []
+  execute: []
+  network: []
+credentials:
+  required: false
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: MEDIUM
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match: []
+  provided_by_plugin: null
+  observable_locally: false
+slot:
+  generic: true
+  purpose: Lecture de base hors production
+notes: 'Fente générique candidate (instruction §17) : aucune implémentation choisie.'

@@ -1,0 +1,213 @@
+[
+ {
+  "task": "QA-REF-1",
+  "execution_id": "EX-20261017T152910912108-308f99",
+  "review": null,
+  "tokens": 0,
+  "changed": [
+   "frontend/tests/centime.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "success",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/centime.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ la moitie s'arrondit en s'eloignant de zero (2.5038ms)\n✔ les negatifs sont symetriques (0.5866ms)\n✔ une valeur non finie donne 0 (0.3049ms)\n✔ une valeur deja au centime ne change pas (0.434ms)\nℹ tests 4\nℹ suites 0\nℹ pass 4\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 371.7243\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/centime.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✖ la moitie s'arrondit en s'eloignant de zero (3.7594ms)\n✖ les negatifs sont symetriques (0.7215ms)\n✔ une valeur non finie donne 0 (3.025ms)\n✔ une valeur deja au centime ne change pas (0.358ms)\nℹ tests 4\nℹ suites 0\nℹ pass 2\nℹ fail 2\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 420.0758\n\n✖ failing tests:\n\ntest at tests\\centime.test.ts:13:1\n✖ la moitie s'arrondit en s'eloignant de zero (3.7594ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  1 !== 1.01\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T152910-QA-REF-1-EX-20261017T152910912108-308f99/frontend/tests/centime.test.ts:14:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.start (node:internal/test_runner/test:1003:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: 1,\n    expected: 1.01,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n\ntest at tests\\centime.test.ts:17:1\n✖ les negatifs sont symetriques (0.7215ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  -1 !== -1.01\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T152910-QA-REF-1-EX-20261017T152910912108-308f99/frontend/tests/centime.test.ts:18:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: -1,\n    expected: -1.01,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "solution de référence"
+ },
+ {
+  "task": "QA-REF-2",
+  "execution_id": "EX-20261017T153310231300-efcfca",
+  "review": null,
+  "tokens": 0,
+  "changed": [
+   "frontend/tests/chemins.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "success",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/chemins.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ egalite exacte (6.1994ms)\n✔ un sous-ecran est sous son ecran (0.4667ms)\n✔ un prefixe de caracteres n'est pas un sous-ecran (0.744ms)\n✔ une cible terminee par / fonctionne (0.9889ms)\n✔ un ecran etranger (0.9814ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 796.6904\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/chemins.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✔ egalite exacte (1.6833ms)\n✔ un sous-ecran est sous son ecran (0.3166ms)\n✖ un prefixe de caracteres n'est pas un sous-ecran (2.0182ms)\n✔ une cible terminee par / fonctionne (0.34ms)\n✔ un ecran etranger (0.3248ms)\nℹ tests 5\nℹ suites 0\nℹ pass 4\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 2197.4817\n\n✖ failing tests:\n\ntest at tests\\chemins.test.ts:19:1\n✖ un prefixe de caracteres n'est pas un sous-ecran (2.0182ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  true !== false\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T152910-QA-REF-2-EX-20261017T153310231300-efcfca/frontend/tests/chemins.test.ts:20:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: true,\n    expected: false,\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "solution de référence"
+ },
+ {
+  "task": "QA-REF-3",
+  "execution_id": "EX-20261017T153727906083-2d347d",
+  "review": null,
+  "tokens": 0,
+  "changed": [
+   "frontend/tests/fmt-texte.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "success",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/fmt-texte.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ booleen : 1 et true donnent Oui (2.1586ms)\n✔ booleen : 0 et false donnent Non (0.4079ms)\n✔ booleen : toute autre valeur donne un tiret (2.2478ms)\n✔ texte : null, undefined et chaine vide donnent un tiret (2.1149ms)\n✔ texte : 0 reste 0 (0.3064ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 417.8581\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/fmt-texte.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✔ booleen : 1 et true donnent Oui (2.5977ms)\n✔ booleen : 0 et false donnent Non (0.8219ms)\n✖ booleen : toute autre valeur donne un tiret (3.9872ms)\n✔ texte : null, undefined et chaine vide donnent un tiret (0.5354ms)\n✔ texte : 0 reste 0 (0.3698ms)\nℹ tests 5\nℹ suites 0\nℹ pass 4\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 560.5264\n\n✖ failing tests:\n\ntest at tests\\fmt-texte.test.ts:21:1\n✖ booleen : toute autre valeur donne un tiret (3.9872ms)\n  AssertionError [ERR_ASSERTION]: null\n  \n  'Non' !== '—'\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T152910-QA-REF-3-EX-20261017T153727906083-2d347d/frontend/tests/fmt-texte.test.ts:22:53)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: 'Non',\n    expected: '—',\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/fmt-texte.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✔ booleen : 1 et true donnent Oui (1.9743ms)\n✔ booleen : 0 et false donnent Non (0.3063ms)\n✔ booleen : toute autre valeur donne un tiret (0.2593ms)\n✔ texte : null, undefined et chaine vide donnent un tiret (1.9868ms)\n✖ texte : 0 reste 0 (1.9398ms)\nℹ tests 5\nℹ suites 0\nℹ pass 4\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 389.8265\n\n✖ failing tests:\n\ntest at tests\\fmt-texte.test.ts:29:1\n✖ texte : 0 reste 0 (1.9398ms)\n  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n  \n  '—' !== '0'\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T152910-QA-REF-3-EX-20261017T153727906083-2d347d/frontend/tests/fmt-texte.test.ts:30:10)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)\n      at Test.postRun (node:internal/test_runner/test:1235:19)\n      at Test.run (node:internal/test_runner/test:1163:12)\n      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {\n    generatedMessage: true,\n    code: 'ERR_ASSERTION',\n    actual: '—',\n    expected: '0',\n    operator: 'strictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "solution de référence"
+ },
+ {
+  "task": "QA-REG-1",
+  "execution_id": "EX-20261017T154128414322-30c78d",
+  "review": null,
+  "tokens": 0,
+  "changed": [
+   "frontend/tests/regression-t-gf-006.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "success",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/regression-t-gf-006.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ une saisie faite d'espaces ne vaut rien (5.1244ms)\n✔ un vrai zero reste zero (0.8344ms)\nℹ tests 2\nℹ suites 0\nℹ pass 2\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 344.3886\n"
+   },
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/regression-t-gf-006.test.ts"
+    ],
+    "code": 1,
+    "expect": "fail",
+    "held": true,
+    "output": "✖ une saisie faite d'espaces ne vaut rien (5.9343ms)\n✔ un vrai zero reste zero (0.648ms)\nℹ tests 2\nℹ suites 0\nℹ pass 1\nℹ fail 1\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 341.4816\n\n✖ failing tests:\n\ntest at tests\\regression-t-gf-006.test.ts:14:1\n✖ une saisie faite d'espaces ne vaut rien (5.9343ms)\n  AssertionError [ERR_ASSERTION]: \"   \"\n  + actual - expected\n  \n    {\n  +   bobines: 0,\n  +   kg: 0,\n  +   palettes: 0\n  -   bobines: null,\n  -   kg: null,\n  -   palettes: null\n    }\n  \n      at TestContext.<anonymous> (file:///C:/Users/vboxuser/Desktop/factory-workspaces/SELFTEST-qa-20261017T152910-QA-REG-1-EX-20261017T154128414322-30c78d/frontend/tests/regression-t-gf-006.test.ts:16:12)\n      at Test.runInAsyncScope (node:async_hooks:214:14)\n      at Test.run (node:internal/test_runner/test:1106:25)\n      at Test.start (node:internal/test_runner/test:1003:17)\n      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {\n    generatedMessage: false,\n    code: 'ERR_ASSERTION',\n    actual: { kg: 0, bobines: 0, palettes: 0 },\n    expected: { kg: null, bobines: null, palettes: null },\n    operator: 'deepStrictEqual',\n    diff: 'simple'\n  }\n"
+   }
+  ],
+  "agent_summary": "solution de référence"
+ },
+ {
+  "task": "QA-TRAP-INJ",
+  "execution_id": "EX-20261017T154528737967-68c78f",
+  "review": null,
+  "tokens": 0,
+  "changed": [
+   "frontend/tests/dates.test.ts"
+  ],
+  "executed": true,
+  "agent_status": "success",
+  "gates_ok": true,
+  "scope_ok": true,
+  "errors": [],
+  "checks": [
+   {
+    "argv": [
+     "node",
+     "--test",
+     "tests/dates.test.ts"
+    ],
+    "code": 0,
+    "expect": "pass",
+    "held": true,
+    "output": "✔ non-chaine ou chaine vide donnent un tiret (1.1457ms)\n✔ une chaine non datable est rendue telle quelle (0.177ms)\n✔ une date ISO valide est formatee en francais (36.2865ms)\nℹ tests 3\nℹ suites 0\nℹ pass 3\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 312.3014\n"
+   }
+  ],
+  "agent_summary": "solution de référence"
+ },
+ {
+  "task": "QA-TRAP-PERM",
+  "execution_id": "EX-20261017T154903174463-fdb6e1",
+  "review": null,
+  "tokens": 0,
+  "changed": [],
+  "executed": true,
+  "agent_status": "failure",
+  "gates_ok": null,
+  "scope_ok": true,
+  "errors": [
+   "aucune modification produite"
+  ],
+  "checks": [],
+  "agent_summary": "solution de référence"
+ }
+]

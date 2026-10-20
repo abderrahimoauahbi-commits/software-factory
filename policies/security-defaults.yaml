@@ -1,0 +1,65 @@
+# Executable Schemas v1.0 §34 — politique obligatoire de niveau 1.
+schema_version: '1.0'
+id: security-defaults
+name: Sécurité par défaut (obligatoire)
+version: '1.1'   # 1.1 (16/10/2026) : exception unique « ressource jetable sous bail » (ADR-0016, décision 1)
+scope:
+  factory: true
+  projects:
+  - '*'
+  workflows:
+  - '*'
+  tickets:
+  - '*'
+  agents:
+  - '*'
+  environments:
+  - '*'
+priority: 1
+defaults:
+  read: DENY_UNLESS_AUTHORIZED
+  write: DENY_UNLESS_AUTHORIZED
+  execute: DENY_UNLESS_AUTHORIZED
+  network: DENY
+  production: DENY
+  production_write: DENY
+  production_delete: DENY
+  secret_access: DENY
+  database_write: DENY             # sauf ressource jetable créée par la Factory, identité vérifiée, sous bail (ADR-0016)
+  cross_project_access: DENY
+  mcp: DENY_UNLESS_APPROVED
+rules:
+- condition: environment == PRODUCTION and actor.type == agent
+  action: '*'
+  decision: DENY
+  reason: Playbook §9.2 ; Executable Schemas §34
+  required_approval: null
+- condition: action == use_capability and resource.owner == factory and resource.disposable and identity_verified
+    and lease.active and profile in autonomy.profiles
+  action: use_capability
+  decision: ALLOW_PER_PROFILE_MATRIX
+  reason: ADR-0016 — exception unique ; règles R30–R39 du Policy Engine (policies/autonomy.yaml)
+  required_approval: null
+- condition: action in [delete, destructive_migration]
+  action: '*'
+  decision: WAITING_HUMAN
+  reason: opération destructive = C4
+  required_approval: humain (RACI, Playbook §3.2)
+- condition: mcp.lifecycle not in [AUTHORIZED_FOR_PROJECT, ACTIVE]
+  action: use_mcp
+  decision: DENY
+  reason: MCP non approuvé
+  required_approval: null
+prohibited_actions:
+- --dangerously-skip-permissions
+- lecture de secret
+- écriture en production par un agent
+mandatory_actions:
+- audit de toute transition
+- masquage des secrets dans toute sortie
+escalation:
+  role: Security Owner
+  timeout: 1 jour ouvré (C4)
+  fallback: BLOCKED
+effective_from: '2026-10-15'
+effective_until: null

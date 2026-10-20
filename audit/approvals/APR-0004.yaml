@@ -1,0 +1,20 @@
+schema_version: '1.0'
+id: APR-0004
+type: ARCHITECTURE
+project_id: software-factory
+ticket_id: T-FACTORY-004
+execution_id: null
+criticality: C2
+requested_by: agent de construction (claude-opus-5-5)
+approver_role: Factory Owner
+approver_id: Factory Owner
+status: APPROVED
+reason: '« ok applique les recommandations et continue le travail » (15/10/2026) : J2 accepté ; M1 à M4 et plan
+  révisé (blocs de maturité) approuvés.'
+interpretation_note: 'D2 (premier commit, copie) et M4 (dépôt des textes normatifs) exigent un acte de l''humain
+  : non réalisés par l''agent. Approbation recopiée par l''agent (faiblesse W1).'
+evidence_refs:
+- adr/accepted/ADR-0005-master-package-et-plan-revise.md
+requested_at: '2026-10-15'
+decided_at: '2026-10-15'
+expires_at: null

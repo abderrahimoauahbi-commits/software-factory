@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: TICKET_WRITE
+name: TICKET_WRITE
+description: Rédaction de tickets
+status: DEFINED
+implementations: []

@@ -1,0 +1,50 @@
+# Détection des domaines d'une mission (Master Evolution Prompt v4 §17). Lu par core/noyau/mission.py.
+# Mots-clés génériques (français et anglais), comparés en minuscules sur QUOI + POURQUOI + contraintes.
+schema_version: "1.0"
+id: domaines
+version: "1.0"
+
+technical:
+  database: [base de données, migration, table, colonne, schéma, seed, seeder, requête, index, contrainte,
+             clé étrangère, vue, déclencheur, database, column, schema, query, trigger, données de test]
+  backend: [api, serveur, service, endpoint, backend, calcul, règle de calcul, traitement, validation côté serveur]
+  frontend: [écran, interface, formulaire, page, affichage, bouton, frontend, ui, ux, saisie]
+  security: [sécurité, droit, permission, authentification, autorisation, rôle, secret, mot de passe, security,
+             auth, chiffrement]
+  performance: [performance, lent, lenteur, rapide, latence, optimisation, temps de réponse]
+  architecture: [architecture, refonte, conception, module, découpage, intégration entre]
+  devops: [déploiement, intégration continue, pipeline, conteneur, sauvegarde, supervision]
+  data: [rapport, tableau de bord, indicateur, analyse, statistique, export]
+  documentation: [documentation, guide, manuel]
+
+business:
+  ACCOUNTING: [comptab, cmup, coût moyen, valorisation, écriture, avoir, facture, tva]
+  INVENTORY: [stock, inventaire, magasin, entrepôt, mouvement]
+  PURCHASING: [achat, fournisseur, commande fournisseur, réception]
+  SALES: [vente, client, devis, commande client]
+  PRODUCTION: [production, fabrication, ordre de fabrication, nomenclature, planification]
+  MAINTENANCE: [maintenance, machine, panne, gmao, intervention]
+  HR: [ressources humaines, salarié, employé, congé]
+  PAYROLL: [paie, salaire, bulletin]
+  IMPORT: [import, dossier d'import, frais d'approche]
+  CUSTOMS: [douane, dédouanement]
+  CRM: [crm, prospect, relation client]
+
+# Domaines toujours présents et règles d'ajout.
+always: [qa]
+architecture_when_domains_at_least: 3
+
+# Gates du plan qualité selon les domaines (§46). Une gate n'est retenue que si le manifest la déclare.
+quality_gates:
+  always: [BUILD, TEST]
+  database: [MIGRATION]
+  security: [SECURITY]
+  performance: [PERFORMANCE]
+
+# Capacités opérationnelles demandées par les tâches d'un domaine (§5) : demandées, jamais accordées ici.
+capabilities:
+  database: [FILESYSTEM_READ, FILESYSTEM_WRITE, DATABASE_READ, DATABASE_WRITE, DATABASE_SCHEMA_CHANGE,
+             DATABASE_MIGRATION, DATABASE_SEED, DATABASE_RESET, TEST]
+  backend: [FILESYSTEM_READ, FILESYSTEM_WRITE, BUILD, TEST, DEBUG]
+  frontend: [FILESYSTEM_READ, FILESYSTEM_WRITE, BUILD, TEST]
+  default: [FILESYSTEM_READ, FILESYSTEM_WRITE, TEST]

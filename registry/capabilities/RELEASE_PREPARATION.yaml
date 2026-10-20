@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: RELEASE_PREPARATION
+name: RELEASE_PREPARATION
+description: Préparation d'une release
+status: DEFINED
+implementations: []

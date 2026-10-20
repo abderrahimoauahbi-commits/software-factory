@@ -1,0 +1,2 @@
+Changements de l'agent — exécution EX-20261017T220329727578-63e658, base 64054e2a6bdad060b3a151df24c05709229da4d6
+écarté (différence d'extraction inchangée, ADR-0013)  db/pg/socle/schema.sql

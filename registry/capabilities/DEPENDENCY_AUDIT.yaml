@@ -1,0 +1,9 @@
+schema_version: '1.0'
+id: DEPENDENCY_AUDIT
+name: DEPENDENCY_AUDIT
+description: Audit des dépendances (vulnérabilités, licences)
+status: DEFINED
+implementations:
+- cargo-audit
+- cargo-deny
+- npm-audit

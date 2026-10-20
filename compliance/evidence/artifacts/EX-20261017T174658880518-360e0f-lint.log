@@ -1,0 +1,782 @@
+
+> gestionfil-frontend@0.4.1 lint
+> eslint . && tsc --noEmit
+
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\auth\AuthContext.tsx
+   77:10  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\auth\AuthContext.tsx:77:10
+  75 |
+  76 |   useEffect(() => {
+> 77 |     void charger()
+     |          ^^^^^^^ Avoid calling setState() directly within an effect
+  78 |   }, [charger])
+  79 |
+  80 |   /**  react-hooks/set-state-in-effect
+  149:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              react-refresh/only-export-components
+  156:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\auth\Verrou.tsx
+   52:35  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\auth\Verrou.tsx:52:35
+  50 |
+  51 |   useEffect(() => {
+> 52 |     if (moi?.session_verrouillee) setVerrouille(true)
+     |                                   ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  53 |   }, [moi?.session_verrouillee])
+  54 |
+  55 |   useEffect(() => {  react-hooks/set-state-in-effect
+  127:7   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\auth\Verrou.tsx:127:7
+  125 |   useEffect(() => {
+  126 |     if (verrouille) {
+> 127 |       setMotDePasse('')
+      |       ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  128 |       setErreur(null)
+  129 |       champ.current?.focus()
+  130 |     }                           react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\components\EcranReferentiel.tsx
+  101:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\components\EcranReferentiel.tsx:101:19
+   99 |   // Resynchronise si l'amorce change sans que l'ecran soit remonte : hors
+  100 |   // atelier, aller de `?reference=A` a `?reference=B` ne remonte rien.
+> 101 |   useEffect(() => setRecherche(rechercheInitiale), [rechercheInitiale])
+      |                   ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  102 |   const [tri, setTri] = useState<{ champ: string | null; sens: 'asc' | 'desc' }>({
+  103 |     champ: null,
+  104 |     sens: 'asc',  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\components\Formulaire.tsx
+  136:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\components\Formulaire.tsx:136:5
+  134 |       }
+  135 |     }
+> 136 |     setDonnees({ ...defauts, ...valeurs })
+      |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  137 |     setInitiales(JSON.stringify({ ...defauts, ...valeurs }))
+  138 |     setManquants([])
+  139 |     // eslint-disable-next-line react-hooks/exhaustive-deps  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\components\ui.tsx
+  5:10  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\AideEcran.tsx
+  35:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\AideEcran.tsx:35:19
+  33 |   // On ferme en changeant d'écran : l'aide d'un autre écran resterait ouverte
+  34 |   // sur le nouveau, ce qui est pire que pas d'aide du tout.
+> 35 |   useEffect(() => setOuvert(false), [emplacement.pathname])
+     |                   ^^^^^^^^^ Avoid calling setState() directly within an effect
+  36 |
+  37 |   // Échap ferme, comme partout ailleurs dans l'application.
+  38 |   useEffect(() => {  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\Apparence.tsx
+   88:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   99:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  110:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  133:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  157:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  203:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  220:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  230:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  237:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  243:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  255:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  265:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  289:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  411:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\BoutonDevalider.tsx
+  37:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\BoutonRafraichir.tsx
+  67:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\ChampRecherche.tsx
+  166:25  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\ChampRecherche.tsx:166:25
+  164 |   const [cadre, setCadre] = useState<{ x: number; y: number; l: number } | null>(null)
+  165 |   useLayoutEffect(() => {
+> 166 |     if (!ouvert) return setCadre(null)
+      |                         ^^^^^^^^ Avoid calling setState() directly within an effect
+  167 |     const placer = () => {
+  168 |       const r = boite.current?.getBoundingClientRect()
+  169 |       if (r) setCadre({ x: r.left, y: r.bottom + 2, l: Math.max(r.width, 320) })  react-hooks/set-state-in-effect
+  185:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\ChampRecherche.tsx:185:19
+  183 |   // Le pointeur revient en tete a chaque nouvelle liste : sans cela il reste
+  184 |   // sur un rang qui ne designe plus la meme ligne.
+> 185 |   useEffect(() => setPointe(0), [motif])
+      |                   ^^^^^^^^^ Avoid calling setState() directly within an effect
+  186 |
+  187 |   // Un clic hors du champ referme la liste. Sans cela elle reste ouverte
+  188 |   // par-dessus le reste de l'ecran, et l'on croit l'application bloquee    react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\ChampReference.tsx
+  47:23  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\Coquille.tsx
+   94:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-refresh/only-export-components
+  155:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-refresh/only-export-components
+  172:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-refresh/only-export-components
+  197:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-refresh/only-export-components
+  223:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-refresh/only-export-components
+  421:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\Coquille.tsx:421:19
+  419 |   const courante = entreeCourante(accessibles, emplacement.pathname)
+  420 |
+> 421 |   useEffect(() => setTiroir(false), [emplacement.pathname])
+      |                   ^^^^^^^^^ Avoid calling setState() directly within an effect
+  422 |
+  423 |   /**
+  424 |    * Alertes : les controles de coherence en anomalie. Ce sont les seules  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\DataTable.tsx
+  247:17  warning  Compilation Skipped: Use of incompatible library
+
+This API returns functions which cannot be memoized without leading to stale UI. To prevent this, by default React Compiler will skip memoizing this component/hook. However, you may see issues if values from this API are passed to other components/hooks that are memoized.
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\DataTable.tsx:247:17
+  245 |   )
+  246 |
+> 247 |   const table = useReactTable({
+      |                 ^^^^^^^^^^^^^ TanStack Table's `useReactTable()` API returns functions that cannot be memoized safely
+  248 |     data: lignes ?? [],
+  249 |     columns: definitions,
+  250 |     state: {  react-hooks/incompatible-library
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\DoubleAuthentification.tsx
+  48:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\DoubleAuthentification.tsx:48:7
+  46 |   useEffect(() => {
+  47 |     if (ouvert) {
+> 48 |       setEtape('debut')
+     |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  49 |       setSecret('')
+  50 |       setCode('')
+  51 |       setMotDePasse('')  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\GrilleLignes.tsx
+   61:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  199:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  240:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  247:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  324:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  332:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  342:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  387:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  395:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  398:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  404:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  415:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  421:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  433:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\MaitreDetail.tsx
+  138:18  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\MaitreDetail.tsx:138:18
+  136 |     if (!window.matchMedia('(min-width: 1024px)').matches) return
+  137 |     const premier = qMaitre.data?.[0]
+> 138 |     if (premier) setPointe(String(premier[maitre.cle] ?? ''))
+      |                  ^^^^^^^^^ Avoid calling setState() directly within an effect
+  139 |   }, [qMaitre.data, pointe, maitre.cle])
+  140 |
+  141 |   const lignes = useMemo(() => {  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\PanneauFiltres.tsx
+  52:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\RobotConnexion.tsx
+  83:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\RobotConnexion.tsx:83:5
+  81 |       // Session storage refuse (navigation privee) : on ouvre quand meme.
+  82 |     }
+> 83 |     setOuvert(true)
+     |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  84 |   }, [moi, q.data, pathname])
+  85 |
+  86 |   // Echap referme, comme tout panneau de l'application  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\SelecteurPeriode.tsx
+  30:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  41:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\SelecteurReference.tsx
+  73:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\SelecteurReference.tsx:73:5
+  71 |   useEffect(() => {
+  72 |     if (!ouvert) return
+> 73 |     setRecherche('')
+     |     ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  74 |     setLimiterAuRole(true)
+  75 |     const t = setTimeout(() => champRef.current?.focus(), 50)
+  76 |     return () => clearTimeout(t)  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\Theme.tsx
+  61:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\atelier\Atelier.tsx
+  378:5  warning  React Hook useMemo has a missing dependency: 'moi?.role'. Either include it or remove the dependency array                                react-hooks/exhaustive-deps
+  629:6  warning  React Hook useMemo has unnecessary dependencies: 'definirSection' and 'destinations'. Either exclude them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\atelier\Palette.tsx
+   84:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\atelier\Palette.tsx:84:5
+  82 |   useEffect(() => {
+  83 |     if (!ouvert) return
+> 84 |     setSaisie(prefixe)
+     |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  85 |     setCurseur(0)
+  86 |     // Le champ doit prendre le focus apres le rendu du portail.
+  87 |     const t = window.setTimeout(() => champ.current?.focus(), 0)  react-hooks/set-state-in-effect
+  105:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\atelier\Palette.tsx:105:19
+  103 |   }, [modeCommande, motif, commandes, destinations])
+  104 |
+> 105 |   useEffect(() => setCurseur(0), [saisie])
+      |                   ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  106 |
+  107 |   /* Maintient l'element sous le curseur dans la zone visible. */
+  108 |   useEffect(() => {           react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\atelier\etat.tsx
+  161:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  192:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  663:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  677:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\graphiques\Visuels.tsx
+  18:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  26:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  64:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\composants\ui\surcouches.tsx
+  156:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\hooks\useGardeSaisie.tsx
+  83:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\lib\navigation.ts
+  61:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\lib\navigation.ts:61:19
+  59 |   const param = useParamVue(nom)
+  60 |   const [valeur, setValeur] = useState(param)
+> 61 |   useEffect(() => setValeur(param), [param])
+     |                   ^^^^^^^^^ Avoid calling setState() directly within an effect
+  62 |   return [valeur, setValeur]
+  63 | }
+  64 |  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\AnalyseAbcXyz.tsx
+  90:9  warning  The 'lignes' logical expression could make the dependencies of useMemo Hook (at line 110) change on every render. To fix this, wrap the initialization of 'lignes' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Assistant.tsx
+  61:9  warning  The 'questions' logical expression could make the dependencies of useMemo Hook (at line 67) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'questions' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\BonCommande.tsx
+  272:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\BonCommande.tsx:272:5
+  270 |   useEffect(() => {
+  271 |     if (!bc) return
+> 272 |     setEntete({
+      |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  273 |       date_bc: bc.date_bc?.slice(0, 10) ?? '',
+  274 |       date_livraison_prevue: bc.date_livraison_prevue?.slice(0, 10) ?? '',
+  275 |       conditions_paiement: bc.conditions_paiement ?? '',  react-hooks/set-state-in-effect
+  281:6  warning  React Hook useEffect has a missing dependency: 'bc'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\BonCommandeNouveau.tsx
+  203:43  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\BonCommandeNouveau.tsx:203:43
+  201 |   useEffect(() => {
+  202 |     const code = qRefDemandee.data?.code_fournisseur
+> 203 |     if (code && !entete.code_fournisseur) setEntete((e) => ({ ...e, code_fournisseur: code }))
+      |                                           ^^^^^^^^^ Avoid calling setState() directly within an effect
+  204 |   }, [qRefDemandee.data, entete.code_fournisseur])
+  205 |
+  206 |   useEffect(() => {  react-hooks/set-state-in-effect
+  211:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\BonCommandeNouveau.tsx:211:5
+  209 |     if (!r) return
+  210 |     dejaAmorce.current = true
+> 211 |     setLignes((ls) => (ls.some((l) => l.code_reference === r.code_reference) ? ls : [...ls, depuisReference(r)]))
+      |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  212 |   }, [qPlan.data, refDemandee])
+  213 |
+  214 |   /**                                                                               react-hooks/set-state-in-effect
+  225:5   warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\BonCommandeNouveau.tsx:225:5
+  223 |   useEffect(() => {
+  224 |     if (!entete.code_fournisseur) return
+> 225 |     setLignes((ls) => (ls.length > 0 ? ls : [ligneVide()]))
+      |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  226 |   }, [entete.code_fournisseur])
+  227 |
+  228 |   /* --- La liste deroulante ------------------------------------------------ */                                              react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Cockpit.tsx
+   445:9  warning  The 'risques' logical expression could make the dependencies of useMemo Hook (at line 447) change on every render. To fix this, wrap the initialization of 'risques' in its own useMemo() Hook                                            react-hooks/exhaustive-deps
+  1008:9  warning  The 'qualites' logical expression could make the dependencies of useMemo Hook (at line 1020) change on every render. To fix this, wrap the initialization of 'qualites' in its own useMemo() Hook                                         react-hooks/exhaustive-deps
+  1008:9  warning  The 'qualites' logical expression could make the dependencies of useMemo Hook (at line 1056) change on every render. To fix this, wrap the initialization of 'qualites' in its own useMemo() Hook                                         react-hooks/exhaustive-deps
+  1009:9  warning  The 'roles' logical expression could make the dependencies of useMemo Hook (at line 1056) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'roles' in its own useMemo() Hook        react-hooks/exhaustive-deps
+  1385:9  warning  The 'familles' logical expression could make the dependencies of useMemo Hook (at line 1397) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'familles' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Configuration.tsx
+  360:51  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Configuration.tsx:360:51
+  358 |   )
+  359 |   useEffect(() => {
+> 360 |     if (SECTIONS.some((x) => x.cle === demandee)) setSection(demandee as CleSection)
+      |                                                   ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  361 |   }, [demandee])
+  362 |   const [brouillon, setBrouillon] = useState<Record<string, string>>({})
+  363 |   const [recherche, setRecherche] = useState('')  react-hooks/set-state-in-effect
+  370:9   warning  The 'parametres' logical expression could make the dependencies of useMemo Hook (at line 375) change on every render. To fix this, wrap the initialization of 'parametres' in its own useMemo() Hook                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+  370:9   warning  The 'parametres' logical expression could make the dependencies of useMemo Hook (at line 386) change on every render. To fix this, wrap the initialization of 'parametres' in its own useMemo() Hook                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+  370:9   warning  The 'parametres' logical expression could make the dependencies of useMemo Hook (at line 426) change on every render. To fix this, wrap the initialization of 'parametres' in its own useMemo() Hook                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\CoutRevient.tsx
+  100:9  warning  The 'lignes' logical expression could make the dependencies of useMemo Hook (at line 110) change on every render. To fix this, wrap the initialization of 'lignes' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Equivalences.tsx
+  170:22  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Equivalences.tsx:170:22
+  168 |   const groupeDeRef = qGroupeDeRef.data?.[0]?.code_groupe_equiv ?? null
+  169 |   useEffect(() => {
+> 170 |     if (groupeDeRef) setPointe(groupeDeRef)
+      |                      ^^^^^^^^^ Avoid calling setState() directly within an effect
+  171 |   }, [groupeDeRef])
+  172 |
+  173 |   const qGroupes = useQuery({  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\EtatStock.tsx
+  117:9   warning  The 'lignes' logical expression could make the dependencies of useMemo Hook (at line 129) change on every render. To fix this, wrap the initialization of 'lignes' in its own useMemo() Hook                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/exhaustive-deps
+  117:9   warning  The 'lignes' logical expression could make the dependencies of useMemo Hook (at line 163) change on every render. To fix this, wrap the initialization of 'lignes' in its own useMemo() Hook                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/exhaustive-deps
+  168:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\EtatStock.tsx:168:19
+  166 |      d'un resultat qui n'en a plus qu'une affiche un tableau vide et donne a
+  167 |      croire que le critere ne trouve rien. */
+> 168 |   useEffect(() => setPage(0), [recherche, statut, magasin, filtres.valeurs])
+      |                   ^^^^^^^ Avoid calling setState() directly within an effect
+  169 |
+  170 |   const pages = Math.max(1, Math.ceil(filtrees.length / taille))
+  171 |   const pageSure = Math.min(page, pages - 1)  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Etats.tsx
+  369:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\FactureFournisseur.tsx
+  180:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\FactureFournisseur.tsx:180:5
+  178 |     if (!lue) return
+  179 |     const e = lue.entete
+> 180 |     setEntete({
+      |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  181 |       numero_facture: e.numero_facture,
+  182 |       code_fournisseur: e.code_fournisseur,
+  183 |       date_facture: e.date_facture?.slice(0, 10) ?? '',              react-hooks/set-state-in-effect
+  254:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\FactureFournisseur.tsx:254:7
+  252 |   useEffect(() => {
+  253 |     if (enDevise && !entete.taux && qTaux.data?.reference) {
+> 254 |       setEntete((e) => ({ ...e, taux: String(qTaux.data!.reference) }))
+      |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  255 |     }
+  256 |   }, [qTaux.data?.reference, enDevise, entete.taux])
+  257 |  react-hooks/set-state-in-effect
+  256:6  warning  React Hook useEffect has a missing dependency: 'qTaux.data'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Machines.tsx
+  29:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Machines.tsx:29:5
+  27 |     const suivre = (e: MediaQueryListEvent) => setLarge(e.matches)
+  28 |     m.addEventListener('change', suivre)
+> 29 |     setLarge(m.matches)
+     |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  30 |     return () => m.removeEventListener('change', suivre)
+  31 |   }, [])
+  32 |  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\PlanAchat.tsx
+  269:9  warning  The 'lignes' logical expression could make the dependencies of useMemo Hook (at line 270) change on every render. To fix this, wrap the initialization of 'lignes' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Plans.tsx
+  432:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Plans.tsx:432:5
+  430 |   useEffect(() => {
+  431 |     if (!lignes.length) return
+> 432 |     setCoefs((actuels) => {
+      |     ^^^^^^^^ Avoid calling setState() directly within an effect
+  433 |       const complet = { ...actuels }
+  434 |       let ajouts = 0
+  435 |       for (const l of lignes) {  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\RapportsFinanciers.tsx
+  113:9  warning  The 'abc' logical expression could make the dependencies of useMemo Hook (at line 130) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'abc' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Reception.tsx
+  442:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Reception.tsx:442:5
+  440 |   useEffect(() => {
+  441 |     if (!rec) return
+> 442 |     setEntete({
+      |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  443 |       num_bon_livraison: rec.num_bon_livraison ?? '',
+  444 |       numero_facture: rec.numero_facture ?? '',
+  445 |       transporteur: rec.transporteur ?? '',  react-hooks/set-state-in-effect
+  451:6  warning  React Hook useEffect has a missing dependency: 'rec'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\ReceptionNouvelle.tsx
+  299:32  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\ReceptionNouvelle.tsx:299:32
+  297 |   })
+  298 |   useEffect(() => {
+> 299 |     if (qCondBon.data?.length) retenir(qCondBon.data as unknown as RefCatalogue[])
+      |                                ^^^^^^^ Avoid calling setState() directly within an effect
+  300 |   }, [qCondBon.data])
+  301 |
+  302 |   const reprendre = (numeroBc: string) => {  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Recettes.tsx
+  59:9  warning  The 'lignes' logical expression could make the dependencies of useMemo Hook (at line 69) change on every render. To fix this, wrap the initialization of 'lignes' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\Statistiques.tsx
+   261:9  warning  The 'mois' logical expression could make the dependencies of useMemo Hook (at line 303) change on every render. To fix this, wrap the initialization of 'mois' in its own useMemo() Hook                                            react-hooks/exhaustive-deps
+   262:9  warning  The 'refs' logical expression could make the dependencies of useMemo Hook (at line 270) change on every render. To fix this, wrap the initialization of 'refs' in its own useMemo() Hook                                            react-hooks/exhaustive-deps
+   528:9  warning  The 'familles' logical expression could make the dependencies of useMemo Hook (at line 596) change on every render. To fix this, wrap the initialization of 'familles' in its own useMemo() Hook                                    react-hooks/exhaustive-deps
+   529:9  warning  The 'croisement' logical expression could make the dependencies of useMemo Hook (at line 541) change on every render. To fix this, wrap the initialization of 'croisement' in its own useMemo() Hook                                react-hooks/exhaustive-deps
+   529:9  warning  The 'croisement' logical expression could make the dependencies of useMemo Hook (at line 548) change on every render. To fix this, wrap the initialization of 'croisement' in its own useMemo() Hook                                react-hooks/exhaustive-deps
+   834:9  warning  The 'mois' logical expression could make the dependencies of useMemo Hook (at line 840) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'mois' in its own useMemo() Hook     react-hooks/exhaustive-deps
+  1031:9  warning  The 'score' logical expression could make the dependencies of useMemo Hook (at line 1044) change on every render. To fix this, wrap the initialization of 'score' in its own useMemo() Hook                                         react-hooks/exhaustive-deps
+  1032:9  warning  The 'mois' logical expression could make the dependencies of useMemo Hook (at line 1038) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'mois' in its own useMemo() Hook    react-hooks/exhaustive-deps
+  1255:9  warning  The 'roles' logical expression could make the dependencies of useMemo Hook (at line 1261) change on every render. Move it inside the useMemo callback. Alternatively, wrap the initialization of 'roles' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\TransfertNouveau.tsx
+  311:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\TransfertNouveau.tsx:311:5
+  309 |     lignesRemplies.current = id ?? null
+  310 |     const reprises = d.lignes.map((l) => depuisLigneTransfert(l, parRef.get(l.code_reference)))
+> 311 |     setLignesReprises(reprises)
+      |     ^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  312 |     setLignes(reprises)
+  313 |   }, [qDossier.data, id, entete.code_magasin_source, stockLu, parRef])
+  314 |  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\import\DossierImport.tsx
+  308:19  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\import\DossierImport.tsx:308:19
+  306 |   const [f, setF] = useState(initial)
+  307 |   // eslint-disable-next-line react-hooks/exhaustive-deps
+> 308 |   useEffect(() => setF(initial()), [dossier])
+      |                   ^^^^ Avoid calling setState() directly within an effect
+  309 |   /* UNE DUM SAISIE NE S'EFFACE PAS (regle 5) : elle se corrige au droit de
+  310 |      valider, avec un motif. */
+  311 |   const dumInitiale = (dossier.numero_dum ?? '').trim()                    react-hooks/set-state-in-effect
+  458:48  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\import\DossierImport.tsx:458:48
+  456 |   const coursPropose = fraisEnDevise ? (qTauxFrais.data?.reference ?? null) : null
+  457 |   useEffect(() => {
+> 458 |     if (coursPropose && n.cours_change === '') setN((x) => ({ ...x, cours_change: String(coursPropose) }))
+      |                                                ^^^^ Avoid calling setState() directly within an effect
+  459 |   }, [coursPropose, n.cours_change])
+  460 |
+  461 |   const corpsFrais = (confirme?: boolean) => ({  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\import\FactureImport.tsx
+  240:5  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\import\FactureImport.tsx:240:5
+  238 |   useEffect(() => {
+  239 |     if (!d) return
+> 240 |     setEntete(enteteInitial())
+      |     ^^^^^^^^^ Avoid calling setState() directly within an effect
+  241 |     const l = lignesServeur.map(versEdition)
+  242 |     setLignes(nouvelle ? [ligneVide()] : l.length ? l : [ligneVide()])
+  243 |     // eslint-disable-next-line react-hooks/exhaustive-deps                                                                react-hooks/set-state-in-effect
+  278:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\import\FactureImport.tsx:278:7
+  276 |   useEffect(() => {
+  277 |     if (enDevise && reference && entete.taux_change === '')
+> 278 |       setEntete((x) => ({ ...x, taux_change: String(reference) }))
+      |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  279 |   }, [enDevise, reference, entete.taux_change])
+  280 |   const tauxSaisi = nombre(entete.taux_change)
+  281 |   const tauxDirham = enDevise && Math.abs(tauxSaisi - 1) < 1e-9  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\import\dialogues.tsx
+  14:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  18:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  25:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  51:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\inventaires\comptage.tsx
+   19:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   26:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   64:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  112:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  125:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  147:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\machines\useFiche.ts
+  69:7  warning  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\machines\useFiche.ts:69:7
+  67 |     if (idFiche && qFiche.data) {
+  68 |       const f = qFiche.data
+> 69 |       setEntete({
+     |       ^^^^^^^^^ Avoid calling setState() directly within an effect
+  70 |         date: f.entete.date_fiche?.slice(0, 10) || aujourdHui(),
+  71 |         magasin: f.entete.code_magasin ?? '',
+  72 |         responsable: f.entete.responsable,  react-hooks/set-state-in-effect
+
+C:\Users\vboxuser\Desktop\factory-workspaces\EVAL-qa-20261017T174658-QA-REF-1-EX-20261017T174658880518-360e0f\frontend\src\pages\tableau-de-bord\commun.tsx
+  50:14  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  57:17  warning  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+✖ 131 problems (0 errors, 131 warnings)
+

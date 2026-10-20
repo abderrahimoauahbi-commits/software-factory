@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: DATABASE_MIGRATION
+name: DATABASE_MIGRATION
+description: Migration de schéma ou de données
+status: DEFINED
+implementations: []

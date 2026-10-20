@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: AGENT_RUNTIME
+name: AGENT_RUNTIME
+description: Exécution d'agents IA sous permissions
+status: DEFINED
+implementations:
+- claude-code

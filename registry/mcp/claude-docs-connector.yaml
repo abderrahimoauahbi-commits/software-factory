@@ -1,0 +1,46 @@
+schema_version: '1.0'
+id: claude-docs-connector
+name: Connecteur « Claude Docs » du compte
+version: '*'
+lifecycle: DISCOVERED
+capabilities:
+- DOCUMENTATION
+permissions:
+  read:
+  - documents du compte
+  write:
+  - documents du compte
+  delete: []
+  execute: []
+  network:
+  - service du fournisseur
+credentials:
+  required: false
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: MEDIUM
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match: []
+  provided_by_plugin: null
+  observable_locally: false
+notes: 'Activé au niveau du compte ; invisible dans les fichiers locaux : UNVERIFIABLE par le Bootstrap.'

@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: DEPLOYMENT
+name: DEPLOYMENT
+description: Déploiement (production = humain, C4)
+status: DEFINED
+implementations: []

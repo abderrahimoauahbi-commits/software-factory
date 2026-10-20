@@ -1,0 +1,21 @@
+schema_version: '1.0'
+id: APR-0001
+type: EXCEPTION
+project_id: software-factory
+ticket_id: null
+execution_id: null
+criticality: C2
+requested_by: agent de construction (claude-opus-5-5)
+approver_role: Factory Owner
+approver_id: Factory Owner
+status: APPROVED
+reason: 'Réponse « ok » du 15/10/2026 aux points en attente, appliquée aux options RECOMMANDÉES : rapport Bootstrap
+  CHECK, ROOT_SCOPE, demandes d''analyse n°1 et n°2, accès masqué aux 5 fichiers de configuration, squelette gardé
+  puis corrigé (F-01 à F-05), contradictions K1, K3, K5, K6 et S1 à S6 tranchées selon les propositions.'
+interpretation_note: '« ok » ne tranchait pas entre garder et supprimer le squelette : l''option non destructive
+  est retenue.'
+evidence_refs:
+- rapport FACTORY BOOTSTRAP CHECK REPORT (session du 15/10/2026)
+requested_at: '2026-10-15'
+decided_at: '2026-10-15'
+expires_at: null

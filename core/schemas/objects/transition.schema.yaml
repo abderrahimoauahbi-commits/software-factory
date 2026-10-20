@@ -1,0 +1,16 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: transition
+required:
+- id
+- from_state
+- to_state
+- conditions
+- required_evidence
+- required_permissions
+- criticality
+- human_approval
+rules:
+- 'valide seulement si : état courant = from_state, conditions remplies, preuves présentes, permissions actives,
+  criticité compatible, approbation humaine présente si requise, aucune politique bloquante'

@@ -1,0 +1,70 @@
+# Profils de contrôle des tickets (ADR-0022 v2, F-5 ; contenu : ADR-0021 § 3, proposé ; EXCEPTION_AMORCAGE : ADR-0020,
+# proposé). La politique NOMME et VERSIONNE ce que les ADR décident ; elle s'appuie sur les portes existantes, ce n'est
+# pas un second mécanisme. Un ticket la référence par `control_profile: {id, version}`.
+# Fichier épinglé : toute modification exige une nouvelle version du profil et une nouvelle référence approuvée (W1).
+# Un profil ne s'abaisse jamais pour faire passer un ticket ; en cas de doute, le plus contrôlé s'applique (§ 9.3).
+schema_version: "1.0"
+id: control-profiles
+version: "1.0"
+evidence_types_from: core/schemas/enums.yaml#EVIDENCE_TYPE
+common:
+  stop_conditions:
+  - conditions d'arrêt du Playbook § 9.6
+  - ambiguïté critique, permission manquante ou risque non prévu : arrêt avant d'agir (Executable Schemas § 24)
+  - trois échecs (gate ou relecture) : arrêt et décision humaine (Playbook § 8.6)
+  - tâche impossible sans sortir du périmètre du ticket : arrêt avant toute écriture
+  rollback_ref: policies/execution.yaml      # espace isolé et branche dédiée : un travail non fusionné est abandonné
+profiles:
+  AUTONOME:
+    version: "1.0"
+    for: tâches simples, déterministes, réversibles, couvertes par les gates (documentation C0, code local et tests C1)
+    criticalities: [C0, C1]
+    agent_execution: true
+    review: {automatic: [quality_gates, independent_agent_review], specialized: NONE, human: SAMPLING}
+    human_points: [aucune par ticket ; contrôle par échantillonnage et bilan de lot]
+    evidence_required: [ARTIFACT, TEST, REVIEW]
+    budget: {max_attempts: 3}
+    transitional_rule: tant que l'ADR-0021 n'est pas accepté et mis en œuvre (F-10), la revue humaine de l'ADR-0012 s'applique à chaque ticket
+  AUTONOME_RELU:
+    version: "1.0"
+    for: changement applicatif réversible en environnement de développement
+    criticalities: [C2]
+    agent_execution: true
+    review: {automatic: [quality_gates, independent_agent_review], specialized: IF_DATABASE_OR_SECURITY, human: END_OF_BATCH_DEMO}
+    human_points: [aucune par ticket ; démonstration humaine en fin de lot]
+    evidence_required: [ARTIFACT, TEST, REVIEW]
+    budget: {max_attempts: 3}
+    transitional_rule: tant que l'ADR-0021 n'est pas accepté et mis en œuvre (F-10), la revue humaine de l'ADR-0012 s'applique à chaque ticket
+  C3:
+    version: "1.0"
+    for: changement sensible (Playbook § 9.1)
+    criticalities: [C3]
+    agent_execution: true
+    review: {automatic: [quality_gates, independent_agent_review], specialized: MANDATORY, human: C3_PATH}
+    human_points:
+    - confirmation de la criticité C3 au démarrage (Playbook § 9.3)
+    - revue et fusion à la fin du chemin C3
+    evidence_required: [ARTIFACT, TEST, REVIEW, APPROVAL]
+    budget: {max_attempts: 3}
+    transitional_rule: tant que l'ADR-0021 n'est pas accepté et mis en œuvre, la revue humaine de l'ADR-0012 s'applique à chaque ticket
+  DECISION_HUMAINE:
+    version: "1.0"
+    for: acte de décision, de responsabilité ou d'irréversibilité (habilitation, acceptation d'ADR, approbation du manifest, mise en service, production, données au-delà d'INTERNAL, suppression, C4)
+    criticalities: [C0, C1, C2, C3, C4]
+    agent_execution: false
+    review: {automatic: [], specialized: NONE, human: ALWAYS}
+    human_points: [la décision elle-même, par la commande d'approbation]
+    evidence_required: [APPROVAL]
+    budget: {max_attempts: 1}
+    transitional_rule: null
+  EXCEPTION_AMORCAGE:
+    version: "1.0"
+    for: construction du banc d'évaluation d'un projet par sa session de conception, sous la supervision du Factory Owner (ADR-0020)
+    criticalities: [C0, C1]
+    agent_execution: false                   # pas un agent de la Factory : la session de conception, supervisée
+    requires_accepted_adr: ADR-0020
+    review: {automatic: [quality_gates, path_isolation], specialized: NONE, human: ONCE_AS_INFRASTRUCTURE}
+    human_points: [validation du banc et des suites, une fois, comme infrastructure d'évaluation]
+    evidence_required: [ARTIFACT, TEST]
+    budget: {max_attempts: 3}
+    transitional_rule: null

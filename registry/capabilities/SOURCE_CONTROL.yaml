@@ -1,0 +1,11 @@
+schema_version: '1.0'
+id: SOURCE_CONTROL
+name: SOURCE_CONTROL
+description: Contrôle de version et traçabilité
+status: DEFINED
+implementations:
+- git
+file_inventory:
+  adapter: git_files
+verification:
+  adapter: git_repository

@@ -1,0 +1,20 @@
+schema_version: '1.0'
+id: APR-0003
+type: ARCHITECTURE
+project_id: software-factory
+ticket_id: T-FACTORY-003
+execution_id: null
+criticality: C1
+requested_by: agent de construction (claude-opus-5-5)
+approver_role: Factory Owner
+approver_id: Factory Owner
+status: APPROVED
+reason: '« valide les 2 » (15/10/2026) : revue du jalon J1 (cœur partagé) et du prompt de construction reconstruit
+  v1.1 ; vaut autorisation du jalon J2 tel que décrit dans le prompt.'
+interpretation_note: 'Le premier commit n''a pas été fait : le contrôle par git diff reste indisponible.'
+evidence_refs:
+- adr/accepted/ADR-0003-ordre-de-construction-et-coeur-partage.md
+- docs/prompts/construction-factory-v1.md
+requested_at: '2026-10-15'
+decided_at: '2026-10-15'
+expires_at: null

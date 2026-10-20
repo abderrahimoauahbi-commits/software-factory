@@ -1,0 +1,92 @@
+schema_version: '1.0'
+id: T-FACTORY-021
+project_id: software-factory
+workflow_id: feature
+title: 'Habilitation provisoire : plafond relevé de C1 à C2 (décision du Factory Owner)'
+objective: Permettre à qa des tickets C2 sur GestionFil (données enregistrées), après nouvelle approbation humaine
+requester: Factory Owner
+state: IMPLEMENTED
+criticality: C3
+criticality_justification: 'Politique d''autorisation : C3 au minimum (Playbook §9.1, §10.4).'
+scope:
+  included:
+  - policies/policy-engine.yaml
+  - registry/agents/qa.yaml
+  - core/tests/test_politique.py
+  - adr/accepted/ADR-0015-plafond-c2.md
+  - audit/approvals/requests/AR-HAB-qa-C2-c8d17056.json
+  excluded:
+  - audit/approvals/human/ (approbation par la commande humaine seulement)
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules:
+  - C3/C4 jamais par habilitation provisoire
+  - nouvelle approbation humaine obligatoire
+  functional_requirements:
+  - criticality_cap C2
+  - fiche qa C2
+  - demande AR-HAB-qa-C2
+  non_functional_requirements:
+  - l'ancienne approbation C1 ne vaut plus
+  acceptance_criteria:
+  - C2 approuvée → C2 permis
+  - C3/C4 refusés
+  - fiche C2 sans nouvelle approbation → refus
+design:
+  architecture_ref: adr/accepted/ADR-0015-plafond-c2.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0010
+  - ADR-0015
+security:
+  required: true
+  assessment_ref: adr/accepted/ADR-0015-plafond-c2.md
+  risks:
+  - 'agent non évalué sur des données enregistrées (C2) : revue humaine et fusion humaine maintenues'
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-020
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: criticality_cap et fiche qa à C1 ; nouvelle approbation C1
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: PENDING
+evidence:
+  required:
+  - tests
+  collected:
+  - 'test_politique : 3 tests (C2 permis, C3/C4 refusés, fiche relevée sans approbation refusée)'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: 'revue humaine — relecteur distinct requis : WAITING_HUMAN'

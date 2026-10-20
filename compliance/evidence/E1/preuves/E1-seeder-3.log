@@ -1,0 +1,5 @@
+$ psql -f seed_test_remise.sql
+code=3
+
+psql:C:/Users/vboxuser/AppData/Local/Temp/tmp9tflhv0w/espace/seeds/seed_test_remise.sql:2: ERROR:  new row for relation "fournisseur" violates check constraint "ck_fournisseur_remise_pct"
+D�TAIL : Failing row contains (TEST-F2, Fournisseur test 2, null, null, null, null, null, Maroc, null, null, null, null, null, null, null, null, null, 1, 2026-10-16T10:33:34.106Z, null, null, 150.00).

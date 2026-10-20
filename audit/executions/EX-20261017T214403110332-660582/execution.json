@@ -1,0 +1,361 @@
+{
+ "execution_id": "EX-20261017T214403110332-660582",
+ "id": "EX-20261017T214403110332-660582",
+ "project_id": "gestionfil",
+ "ticket_id": "SELFTEST-qa-20261017T213903-FE-REF-2",
+ "state": "COMPLETED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "reference",
+  "version": "reference"
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-17T21:44:03+00:00",
+  "authorized": "2026-10-17T21:44:03+00:00",
+  "started": "2026-10-17T21:44:53+00:00",
+  "completed": "2026-10-17T21:48:34+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C1 dans le périmètre"
+  ],
+  "criticite_effective": "C1",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "72fe7e5a7307881eafbc12aa6abfa8d67cd910f3a0896129a3fa885405609800",
+  "nature": null,
+  "explication": {
+   "regle": "R99",
+   "nom": "Permission dans le périmètre, ou refus par défaut d'une action connue",
+   "pourquoi": "une action connue est permise dans son périmètre ; sinon, aucune règle ne la permet (refus par défaut)",
+   "risque": "—",
+   "frontiere_humaine": null,
+   "exception": null
+  },
+  "exceptions": null
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000608"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000609"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000610"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000611"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000612"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000613"
+  },
+  {
+   "to": "TESTING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000614"
+  },
+  {
+   "to": "COMPLETED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000615"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T213903-FE-REF-2-EX-20261017T214403110332-660582",
+  "branch": "factory/SELFTEST-qa-20261017T213903-FE-REF-2/EX-20261017T214403110332-660582",
+  "base": "64054e2a6bdad060b3a151df24c05709229da4d6",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 46.0
+   }
+  },
+  "ignored_baseline": [
+   "frontend/node_modules/"
+  ]
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "SELFTEST-qa-20261017T213903-FE-REF-2",
+   "criticality": "C1",
+   "objective": "versSaisie (frontend/src/lib/nombres.ts) écrit « NaN » ou « Infinity » dans un champ quand on lui passe un nombre non fini. Comme pourChamp (T-GF-007), un nombre non fini doit donner un champ vide. Les chaînes, même illisibles, et les nombres finis restent inchangés.",
+   "scope": {
+    "paths": [
+     "frontend/src/lib/nombres.ts"
+    ]
+   }
+  },
+  "execution": {
+   "id": "EX-20261017T214403110332-660582",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T213903-FE-REF-2-EX-20261017T214403110332-660582",
+   "branch": "factory/SELFTEST-qa-20261017T213903-FE-REF-2/EX-20261017T214403110332-660582",
+   "base": "64054e2a6bdad060b3a151df24c05709229da4d6",
+   "extraction_differences": {},
+   "copied_dependencies": {
+    "frontend/node_modules": {
+     "files": 21043,
+     "seconds": 46.0
+    }
+   },
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/src/lib/nombres.ts"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 1,
+   "max_attempts": 3
+  }
+ },
+ "changes": [
+  "frontend/src/lib/nombres.ts"
+ ],
+ "extraction_unchanged": [],
+ "post_gates": {
+  "frontend/src/lib/nombres.ts": "264dca77395e64f140e3a30598279fa3bae74a1cdc366dc8a46d0802b5c573f9"
+ },
+ "gate_outputs": [],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "SELFTEST-qa-20261017T213903-FE-REF-2",
+  "execution": "EX-20261017T214403110332-660582",
+  "agent": "qa",
+  "model": "reference",
+  "model_version": "reference",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/nombres.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/SELFTEST-qa-20261017T213903-FE-REF-2/EX-20261017T214403110332-660582",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\SELFTEST-qa-20261017T213903-FE-REF-2-EX-20261017T214403110332-660582",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261017T214403110332-660582-diff",
+   "EX-20261017T214403110332-660582-changes"
+  ],
+  "tests": [
+   "EX-20261017T214403110332-660582-frontend_unit_tests",
+   "EX-20261017T214403110332-660582-lint",
+   "EX-20261017T214403110332-660582-typecheck"
+  ],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261017T214403110332-660582-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat 64054e2a6bdad060b3a151df24c05709229da4d6",
+   "timestamp": "2026-10-17T21:44:53+00:00",
+   "command": "git diff --stat 64054e2a6bdad060b3a151df24c05709229da4d6",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T214403110332-660582-diff.log",
+   "hash": "501c291f587d352f98314608aaf4135c75567d4458689a065f0650d36b674323",
+   "generated_by": "plateforme:EX-20261017T214403110332-660582",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T214403110332-660582-changes",
+   "type": "ARTIFACT",
+   "source": "plateforme : changements de l'agent",
+   "timestamp": "2026-10-17T21:44:53+00:00",
+   "command": null,
+   "exit_code": null,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T214403110332-660582-changes.txt",
+   "hash": "0497b1c6c6bc197e8de8d0cc45c40a2031b23a0b1d0d94e7f6ed4a78e621e5b1",
+   "generated_by": "plateforme:EX-20261017T214403110332-660582",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T214403110332-660582-frontend_unit_tests",
+   "type": "TEST",
+   "source": "npm test",
+   "timestamp": "2026-10-17T21:44:57+00:00",
+   "command": "npm test",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T214403110332-660582-frontend_unit_tests.log",
+   "hash": "fa9ae91d05075bd478aea941250aeed7d414cc6ae66f0ead4f383c0d49fe1205",
+   "generated_by": "plateforme:EX-20261017T214403110332-660582",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T214403110332-660582-lint",
+   "type": "TEST",
+   "source": "npm run lint",
+   "timestamp": "2026-10-17T21:47:12+00:00",
+   "command": "npm run lint",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T214403110332-660582-lint.log",
+   "hash": "46240e1dc9f7087eb72a02b2eb93087a0693eea74e03af945a90b619e29f4a04",
+   "generated_by": "plateforme:EX-20261017T214403110332-660582",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261017T214403110332-660582-typecheck",
+   "type": "TEST",
+   "source": "npm run build",
+   "timestamp": "2026-10-17T21:48:34+00:00",
+   "command": "npm run build",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261017T214403110332-660582-typecheck.log",
+   "hash": "cdf88f7c84c034d6ca519056678a76f91e300dcd8369c31419b0ed0fee32035b",
+   "generated_by": "plateforme:EX-20261017T214403110332-660582",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

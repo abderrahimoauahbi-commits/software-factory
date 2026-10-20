@@ -1,0 +1,89 @@
+schema_version: '1.0'
+id: T-FACTORY-011
+project_id: software-factory
+workflow_id: feature
+title: J9 — tests d'acceptation de la Factory (FAT) + ACTIVE_WITHOUT_APPROVAL
+objective: J9 — tests d'acceptation de la Factory (FAT) + ACTIVE_WITHOUT_APPROVAL
+requester: Factory Owner
+state: ACCEPTED
+criticality: C3
+criticality_justification: 'Politique de sécurité et autorisation : C3 au minimum (Playbook §9.1, §10.4).'
+scope:
+  included:
+  - factory.py
+  - factory.cmd
+  - core/noyau/contexte.py
+  - core/tests/test_cli.py
+  - README.md
+  excluded:
+  - toute commande d'approbation
+  - configuration de l'agent
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules: []
+  functional_requirements: []
+  non_functional_requirements:
+  - la CLI ne modifie rien (hors rapport du Bootstrap)
+  - aucune commande inventée
+  acceptance_criteria:
+  - codes de sortie documentés et testés
+  - paths PROPOSED non normatifs
+  - aucune approbation par la CLI
+design:
+  architecture_ref: adr/accepted/ADR-0008-j7-a-j12.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0008
+security:
+  required: false
+  assessment_ref: null
+  risks: []
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-007
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: déplacements inverses listés dans ADR-0003 (dépôt non commité)
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: APPROVED
+  refs:
+  - « valide et continue » du 15/10/2026 (canal ancien, W1)
+evidence:
+  required:
+  - tests
+  collected:
+  - 'core/tests/test_fat.py : 16 OK, dont la restauration réelle'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: READY_TO_MERGE après le premier commit (geste humain)

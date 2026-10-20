@@ -1,0 +1,45 @@
+schema_version: '1.0'
+id: mcp-fetch
+name: Fetch MCP
+version: '*'
+lifecycle: DISCOVERED
+capabilities:
+- WEB_FETCH
+permissions:
+  read: []
+  write: []
+  delete: []
+  execute: []
+  network:
+  - tout site
+credentials:
+  required: false
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: HIGH
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match:
+  - mcp_server_fetch
+  provided_by_plugin: null
+  observable_locally: true
+notes: Lancé avec --ignore-robots-txt ; vecteur d'injection et d'exfiltration (P06).

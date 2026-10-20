@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: DATABASE_INSPECTION
+name: DATABASE_INSPECTION
+description: Client et inspection de base de données (jamais en production pour un agent)
+status: DEFINED
+implementations:
+- postgresql-client

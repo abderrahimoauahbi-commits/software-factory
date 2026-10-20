@@ -1,0 +1,98 @@
+schema_version: '1.0'
+id: T-FACTORY-019
+project_id: software-factory
+workflow_id: feature
+title: 'Différences d''extraction et sorties des gates : relevées, montrées, figées'
+objective: Ne plus confondre avec un changement de l'agent un fichier différent dès l'extraction (fins de ligne)
+  ni un fichier produit par les gates, sans affaiblir le contrôle de périmètre
+requester: Factory Owner
+state: IMPLEMENTED
+criticality: C3
+criticality_justification: 'Contrôle de périmètre (SCOPE_VIOLATION) et preuves de revue : contrôle de sécurité (Playbook
+  §9.1, §10.4).'
+scope:
+  included:
+  - core/noyau/execution.py
+  - core/noyau/revue.py
+  - policies/execution.yaml
+  - scripts/factory_approve.py
+  - core/tests/test_execution.py
+  - adr/accepted/ADR-0013-differences-d-extraction.md
+  excluded:
+  - dépôt GestionFil (sa renormalisation est une décision du propriétaire)
+  - configuration de l'agent
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules:
+  - une différence d'extraction n'est écartée que si son contenu est identique à celui relevé avant le travail de
+    l'agent
+  - le diff relu ne contient que les fichiers de l'agent ; le reste est listé avec son empreinte
+  functional_requirements:
+  - relevé à la création de l'espace
+  - relevé après les gates
+  - revue refusée si l'espace a bougé depuis la clôture
+  non_functional_requirements:
+  - aucun affaiblissement du contrôle de périmètre
+  acceptance_criteria:
+  - différence d'extraction inchangée écartée et montrée
+  - différence retouchée par l'agent → SCOPE_VIOLATION
+  - sorties des gates hors du diff, listées
+  - fichier ajouté ou sortie modifiée après clôture → revue impossible
+design:
+  architecture_ref: adr/accepted/ADR-0013-differences-d-extraction.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0013
+security:
+  required: true
+  assessment_ref: adr/accepted/ADR-0013-differences-d-extraction.md
+  risks:
+  - 'masquer un débordement réel derrière une différence d''extraction (couvert : empreinte)'
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-018
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: revenir à la comparaison brute à la base (plus stricte, faux positifs)
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: PENDING
+evidence:
+  required:
+  - tests
+  collected:
+  - 'test_execution : DifferencesDExtraction (3 + héritage RevueHumaine), SortiesDesGates (3 + héritage)'
+  - 'suites : core 268 OK, bootstrap 2 OK'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: 'revue humaine — relecteur distinct requis : WAITING_HUMAN'

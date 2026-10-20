@@ -1,0 +1,12 @@
+# Rapports du Bootstrap : régénérés à chaque contrôle (un rapport retenu comme preuve va dans compliance/evidence/)
+bootstrap/reports/*
+!bootstrap/reports/README.md
+__pycache__/
+*.pyc
+# Aucun secret dans ce dépôt (Playbook §8.4)
+.env*
+*.local.*
+# Projets d'essai : ni leurs cartes au registre, ni leurs suites d'évaluation (choix du Factory Owner, 20/10/2026)
+registry/projects/gestionfil/
+registry/projects/gmao/
+agents/evaluations/*gestionfil*

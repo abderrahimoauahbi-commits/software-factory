@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: SECURITY_SCAN
+name: SECURITY_SCAN
+description: Analyse de sécurité statique (SAST)
+status: DEFINED
+implementations:
+- semgrep

@@ -1,0 +1,48 @@
+schema_version: '1.0'
+id: dbhub
+name: DBHub
+version: '*'
+lifecycle: DISCOVERED
+capabilities:
+- DATABASE_INSPECTION
+permissions:
+  read:
+  - base visée
+  write: []
+  delete: []
+  execute: []
+  network: []
+credentials:
+  required: true
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: MEDIUM
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match:
+  - '@bytebase/dbhub'
+  provided_by_plugin: null
+  observable_locally: true
+slot:
+  fills: database-read
+notes: 'Version figée (1.5.0). Lecture seule observée le 15/10/2026 : un CREATE TABLE a été refusé (READONLY_VIOLATION).
+  Preuve à reproduire au Lab avant approbation.'

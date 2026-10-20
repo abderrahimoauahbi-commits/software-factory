@@ -1,0 +1,72 @@
+# Règles du Policy Engine v1 (jalon J4, décision 7 du 15/10/2026). Données lues par core/noyau/politique.py :
+# le moteur ne contient aucune règle métier codée en dur. Défaut : DENY.
+schema_version: "1.0"
+id: policy-engine
+version: "1.1"                     # 1.1 (16/10/2026) : action use_capability (ADR-0016)
+
+decisions: [ALLOW, DENY, APPROVAL_REQUIRED]
+# Correspondance avec l'énumération DECISION des Executable Schemas (ADR-0006) :
+decision_mapping: { ALLOW: ALLOW, DENY: DENY, APPROVAL_REQUIRED: WAITING_HUMAN }
+
+actor_types: [human, agent, system]
+approved_agent_states: [APPROVED, AVAILABLE, ACTIVE]
+approved_tool_states: [APPROVED, AVAILABLE, ACTIVE, REEVALUATION, UPDATED]
+approved_mcp_states: [APPROVED, AVAILABLE]
+
+# Criticité intrinsèque de chaque action (Playbook §9.2, Master §7 et §12). Une action absente = DENY.
+actions:
+  read:          { criticality: C0, resource: path }
+  write:         { criticality: C1, resource: path }
+  delete:        { criticality: C4, resource: path,       agent: DENY }      # suppression = humain
+  execute:       { criticality: by_command_class, resource: command }
+  use_mcp:       { criticality: C1, resource: mcp }
+  db_read:       { criticality: C0, resource: database }
+  db_write:      { criticality: C1, resource: database }
+  network:       { criticality: C2, resource: network,    agent: DENY }      # sortant refusé par défaut
+  deploy:        { criticality: C4, resource: deployment, agent: DENY }      # production = humain
+  commit:        { criticality: C2, resource: vcs,        controlled: true } # « commit CONTROLLED »
+  run_ticket:    { criticality: C1, resource: ticket }                       # démarrer une exécution (J13)
+  # Capacité opérationnelle sous bail (ADR-0016) : règles R30–R39, données policies/autonomy.yaml.
+  use_capability: { criticality: by_capability, resource: capability }
+  push:          { criticality: C4, resource: vcs,        agent: DENY }
+  merge:         { criticality: C4, resource: vcs,        agent: DENY }      # merge = humain
+  # « power » = verbe de pouvoir du modèle de confiance (core/schemas/trust.yaml, power_verbs).
+  approve:       { criticality: C4, resource: approval,   power: approves }
+  grant:         { criticality: C4, resource: exception,  power: grants }
+  change_policy: { criticality: C4, resource: policy,     power: changes }
+
+# Actions soumises au drapeau « write_allowed » de l'environnement (données et exécution). Les fichiers source
+# (write, commit) en sont exclus : ils sont gouvernés par paths.write ∩ périmètre du ticket ∩ espace isolé ∩
+# interdits (décision R09 du Factory Owner, 15/10/2026, ADR-0011).
+environment_write_actions: [db_write, execute]
+
+# Ce qu'une criticité effective C4 laisse à un agent, et seulement avec approbation humaine valide
+# (Playbook §9.2 : source « limitée », tests « oui », base de développement « contrôlée »).
+c4_agent_with_approval: [write, db_write, execute]   # lecture : permise à tout niveau, sans approbation
+approval_required_from: C3          # C3 et C4 : approbation humaine liée au contexte exact
+
+# Rôles humains habilités à approuver, par niveau (Playbook §3.2, §9.1).
+approval_roles:
+  C3: [project_owner, reviewer_senior, security_owner, chief_architect, factory_owner]
+  C4: [factory_owner, release_approver, security_owner, data_owner]
+  controlled: [project_owner, factory_owner]
+approval_max_age_hours: 72
+
+# Habilitation PROVISOIRE d'un agent non évalué (décision C-17 du 15/10/2026, ADR-0010) : approuvée par
+# l'humain via la commande d'approbation, liée à son contexte exact, plafonnée, bornée dans le temps et au projet.
+provisional_habilitation:
+  criticality_cap: C2                # C1 → C2 : décision du Factory Owner du 15/10/2026 (ADR-0015) ; C3/C4 jamais
+  approver_roles: [factory_owner]
+  max_days: 30
+
+# Habilitation définitive (Playbook v3.3 §12.6, étape G4) : un état APPROVED|AVAILABLE|ACTIVE du registre ne suffit
+# pas ; il faut une approbation humaine W1 du bloc `habilitation` de la fiche (agent, plafond, projets, modèle,
+# empreintes de la suite et du rapport d'évaluation, dates). Réévaluation au moins trimestrielle (max_days).
+habilitation:
+  approver_roles: [factory_owner]
+  max_days: 92
+
+human_power_roles:                  # qui peut exercer un verbe de pouvoir (trust.yaml)
+  approve: [factory_owner, chief_architect, security_owner, data_owner, project_owner, release_approver, reviewer_senior]
+  grant: [factory_owner, security_owner]
+  change_policy: [factory_owner]

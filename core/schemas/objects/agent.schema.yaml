@@ -1,0 +1,51 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Clés « references », « mandatory », « limits », « version_fields » : extensions ADR-0004.
+schema_version: '1.0'
+object: agent
+required:
+- id
+- name
+- version
+- role
+- lifecycle
+- model
+- capabilities
+- permissions
+- security
+- review
+- evaluation
+- governance
+enums:
+  lifecycle: lifecycle:agent
+  permissions.max_criticality: CRITICALITY
+# Champs facultatifs (ADR-0022 v2, F-1) : domains {projet: [domaines]} · workflows [] · skills [{id, version}] ·
+# prompt (consigne du rôle, fichier sous registry/prompts/roles/) · suspension · revocation ; le relecteur est
+# review.preferred_reviewer. Une fiche modifiée change de version ; une habilitation vaut pour une version.
+fields:
+  security.secret_access:
+    default: false
+  security.production_access:
+    default: false
+  security.destructive_access:
+    default: false
+  review.required:
+    default: true
+rules:
+- ne s'accorde jamais de permission
+- ne modifie ni sa politique ni celle de la Factory
+- n'approuve pas sa propre exécution critique
+- ne contourne aucune porte humaine
+references:
+  capabilities[]: capabilities
+mandatory:
+  security.secret_access: false
+  security.production_access: false
+  security.destructive_access: false
+active_requires_approval:
+  states:
+  - APPROVED
+  - AVAILABLE
+  - ACTIVE
+  field: governance.approved_by
+  non_empty: true

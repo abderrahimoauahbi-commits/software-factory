@@ -1,0 +1,74 @@
+schema_version: '1.0'
+id: rustup
+name: rustup
+version: '1.28'          # ADR-0022 D5 : épinglée (major.minor) sur le relevé du Bootstrap du 19/10/2026
+type: toolchain-manager
+lifecycle: APPROVED
+capabilities:
+- PACKAGE_MANAGEMENT
+compatibility:
+  os:
+  - windows
+  - linux
+  - macos
+  languages:
+  - rust
+  frameworks: []
+  projects: []
+permissions:
+  read: []
+  write: []
+  execute: []
+  network:
+  - static.rust-lang.org (mises à jour)
+  database: []
+security:
+  risk_level: LOW
+  secret_access: false
+  production_access: false
+evaluation:
+  maturity: null
+  stability: null
+  security: null
+  documentation: null
+  integration: null
+  portability: null
+  lock_in: null
+  cost: null
+  performance: null
+  recoverability: null
+  maintenance: null
+  license: null
+  confidentiality: null
+  permissions: null
+  interoperability: null
+  observability: null
+  update: null
+  status: PENDING
+  last: null
+  next: '2027-01-15'
+approval:
+  status: APPROVED
+  owner: Factory Owner
+  approved_by: Factory Owner — instruction du 15/10/2026
+health:
+  status: UNKNOWN
+  last_check: null
+update:
+  current_version: null
+  latest_evaluated_version: null
+  reevaluation_required: false
+owner: Factory Owner
+license: MIT OR Apache-2.0
+documentation: https://rust-lang.github.io/rustup/
+review_date: '2027-01-15'
+detection:
+  adapter: command_version
+  command:
+  - rustup
+  - --version
+  pattern: rustup (\S+)
+lifecycle_history:
+- date: '2026-10-15'
+  state: APPROVED
+  reason: adoption humaine initiale, évaluation formelle due (Playbook §6.3)

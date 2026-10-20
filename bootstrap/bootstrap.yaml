@@ -1,0 +1,57 @@
+# Configuration du Bootstrap v1. Aucun nom de projet, d'outil ni de fournisseur ici : le Bootstrap tire
+# tout du registre et du manifest du projet (Executable Schemas §36). Seuils et motifs seulement.
+schema_version: "1.0"
+version: "1.0.0"
+
+modes:
+  CHECK: implemented          # lecture seule ; seule écriture : bootstrap/reports/
+  SETUP: target               # Playbook §7.2 — non implémenté (exige une exception par opération)
+  REPAIR: target
+
+reports:
+  directory: bootstrap/reports
+  formats: [json, md]
+
+commands:
+  timeout_seconds: 30
+  # Variables posées pour toute commande : empêchent Git d'écrire (rafraîchissement d'index) ou de demander.
+  environment:
+    GIT_OPTIONAL_LOCKS: "0"
+    GIT_TERMINAL_PROMPT: "0"
+
+backup:
+  age_warning_hours: 24                 # en attendant le RPO du Factory Owner (policies/backup.yaml)
+
+file_inventory_capability: SOURCE_CONTROL   # capacité dont l'adaptateur liste les fichiers suivis / ignorés
+agent_context_file: AGENT_CONTEXT.md    # nom neutre du contexte agent (Playbook §16.3, Master §44)
+
+system:
+  disk_free_warning_gb: 20     # en dessous : WARNING (compilations et espaces de travail isolés)
+
+# Lifecycles qui valent approbation pour qu'un outil compte comme implémentation d'une capacité.
+approved_tool_states: [APPROVED, AVAILABLE, ACTIVE, REEVALUATION, UPDATED]
+approved_mcp_project_states: [AUTHORIZED_FOR_PROJECT, ACTIVE]
+
+# Phases qu'un constat bloque, par domaine (décision K5, ADR-0002). Un constat peut aussi les préciser.
+blocks_by_domain:
+  factory: [PROJECT_ANALYSIS, EXECUTION]
+  root_scope: [PROJECT_ANALYSIS, EXECUTION]
+  capability_critical: [PROJECT_ANALYSIS, EXECUTION]
+  capability_required: [EXECUTION]
+  mcp: [EXECUTION]
+  agent_permissions: [EXECUTION]
+  production_protection: [EXECUTION]
+  secrets: [EXECUTION]
+  quality: [EXECUTION]
+
+# Emplacements de configuration de CI reconnus (lecture de leur existence seulement).
+ci_locations: [.github/workflows, .gitlab-ci.yml, azure-pipelines.yml, Jenkinsfile, .circleci, bitbucket-pipelines.yml]
+
+# Règles d'autorisation jugées risquées dans la configuration d'un agent d'exécution (motifs, sans valeur).
+risky_permission_patterns:
+  - { pattern: '^Read\(//[a-z]/Users/[^/]+/(Desktop|Documents|Downloads)/\*\*\)$', why: "lecture d'un dossier personnel entier" }
+  - { pattern: '^Read\(~?/?\*\*\)$', why: "lecture de tout le profil" }
+  - { pattern: '^Bash\(git (checkout|reset|clean|restore|push)', why: "commande Git pouvant détruire ou publier" }
+  - { pattern: '^Bash\((rm|del|Remove-Item)\b', why: "suppression" }
+  - { pattern: '^PowerShell\(Remove-Item', why: "suppression" }
+  - { pattern: '^Bash\(\*\)$|^Bash$', why: "toute commande shell" }

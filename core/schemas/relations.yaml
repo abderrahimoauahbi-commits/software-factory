@@ -1,0 +1,51 @@
+# Modèle de données de la Factory (jalon J3c, ADR-0005) : relations entre les objets des Executable Schemas.
+# Chaque « from »/« to » est un schéma de core/schemas/objects/ ; « via » nomme le champ qui porte le lien.
+# Cardinalités : 1-1, 1-N, N-1, N-N. Le stockage reste libre (fichiers aujourd'hui) — Playbook §4.4.
+schema_version: "1.0"
+relations:
+  # Projet et catalogue
+  - { from: project, to: capability, name: requires, cardinality: N-N, via: "capabilities.required[]" }
+  - { from: project, to: tool, name: allows, cardinality: N-N, via: "tools.required[] / tools.allowed[]" }
+  - { from: project, to: agent, name: allows, cardinality: N-N, via: "agents.required[] / agents.allowed[]" }
+  - { from: project, to: mcp, name: authorizes, cardinality: N-N, via: "mcp.allowed[]" }
+  - { from: project, to: model, name: allows, cardinality: N-N, via: "models.allowed[]" }
+  - { from: capability, to: tool, name: implemented_by, cardinality: N-N, via: "implementations[]" }
+  - { from: tool, to: capability, name: provides, cardinality: N-N, via: "capabilities[]" }
+  - { from: agent, to: capability, name: uses, cardinality: N-N, via: "capabilities[]" }
+  - { from: agent, to: model, name: runs_on, cardinality: N-1, via: "model.primary / model.fallback" }
+  - { from: mcp, to: capability, name: provides, cardinality: N-N, via: "capabilities[]" }
+  - { from: skill, to: tool, name: requires, cardinality: N-N, via: "required_tools[]" }
+  # Travail
+  - { from: workflow, to: project, name: belongs_to, cardinality: N-1, via: "project_id (ou catalogue Factory)" }
+  - { from: ticket, to: project, name: belongs_to, cardinality: N-1, via: project_id }
+  - { from: ticket, to: workflow, name: follows, cardinality: N-1, via: workflow_id }
+  - { from: ticket, to: ticket, name: depends_on, cardinality: N-N, via: "dependencies.tickets[]" }
+  - { from: ticket, to: adr, name: implements, cardinality: N-N, via: "design.adr_refs[]" }
+  - { from: ticket, to: risk, name: carries, cardinality: N-N, via: "security.risks[]" }
+  - { from: phase, to: workflow, name: belongs_to, cardinality: N-1, via: workflow_id }
+  - { from: execution, to: ticket, name: executes, cardinality: N-1, via: ticket_id }
+  - { from: execution, to: agent, name: performed_by, cardinality: N-1, via: "agent.id" }
+  - { from: execution, to: model, name: uses, cardinality: N-1, via: "model.id" }
+  - { from: execution, to: tool, name: uses, cardinality: N-N, via: "tools[]" }
+  - { from: execution, to: mcp, name: uses, cardinality: N-N, via: "mcp[]" }
+  - { from: execution, to: provenance, name: records, cardinality: 1-1, via: provenance }
+  # Contrôle
+  - { from: policy_decision_request, to: execution, name: issued_by, cardinality: N-1, via: execution_id }
+  - { from: policy_decision, to: policy_decision_request, name: answers, cardinality: 1-1, via: request_id }
+  - { from: policy_decision, to: policy, name: applies, cardinality: N-N, via: "applied_policies[]" }
+  - { from: transition, to: audit_event, name: produces, cardinality: 1-1, via: "(événement obligatoire, §31)" }
+  - { from: audit_event, to: policy_decision, name: justified_by, cardinality: N-1, via: policy_decision }
+  - { from: audit_event, to: evidence, name: cites, cardinality: N-N, via: "evidence_refs[]" }
+  - { from: audit_event, to: approval, name: cites, cardinality: N-N, via: "approval_refs[]" }
+  - { from: evidence, to: execution, name: produced_by, cardinality: N-1, via: execution_id }
+  - { from: human_gate, to: ticket, name: guards, cardinality: N-1, via: ticket_id }
+  - { from: approval, to: human_gate, name: resolves, cardinality: N-1, via: "(approbation d'une porte)" }
+  # Livraison et retour
+  - { from: release, to: ticket, name: ships, cardinality: N-N, via: "tickets[]" }
+  - { from: release, to: evidence, name: proven_by, cardinality: N-N, via: "tests[] / security_checks[]" }
+  - { from: release, to: approval, name: approved_by, cardinality: N-1, via: "approvals.release_approver" }
+  - { from: incident, to: release, name: affects, cardinality: N-N, via: "related.releases[]" }
+  - { from: incident, to: risk, name: realizes, cardinality: N-N, via: "related.risks[]" }
+  - { from: incident, to: knowledge, name: teaches, cardinality: N-N, via: "related.knowledge[]" }
+  - { from: knowledge, to: adr, name: references, cardinality: N-N, via: "related.adrs[]" }
+  - { from: risk, to: project, name: concerns, cardinality: N-1, via: project_id }

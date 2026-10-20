@@ -1,0 +1,3 @@
+$ psql -f seed_test_remise.sql
+code=0
+

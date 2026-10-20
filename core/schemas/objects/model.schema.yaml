@@ -1,0 +1,27 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: model
+required:
+- id
+- provider
+- name
+- version
+- lifecycle
+- capabilities
+- context
+- privacy
+- security
+- roles
+- fallback
+- evaluation
+- approval
+enums:
+  lifecycle: lifecycle:model
+active_requires_approval:
+  states:
+  - APPROVED
+  - DEPLOYED
+  - MONITORED
+  field: approval.status
+  equals: APPROVED

@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: FACTORY_RUNTIME
+name: FACTORY_RUNTIME
+description: Exécution de l'outillage propre à la Factory (ADR-0001)
+status: DEFINED
+implementations:
+- python

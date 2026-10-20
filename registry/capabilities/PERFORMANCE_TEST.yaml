@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: PERFORMANCE_TEST
+name: PERFORMANCE_TEST
+description: Mesures de performance
+status: DEFINED
+implementations: []

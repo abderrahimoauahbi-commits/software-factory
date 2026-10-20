@@ -1,0 +1,104 @@
+# Autonomie bornée par capacités (ADR-0016 ; Master Evolution Prompt v4 §4–§13, §37–§42, §49).
+# Données lues par le Policy Engine (core/noyau/politique.py, action « use_capability », règles R30–R37).
+# Activée par le Factory Owner le 16/10/2026 (« modifie les policies et applique vos recommandations » ; règles de
+# permission posées par lui dans .claude/settings.json). Aucun nom d'outil ni de projet ici.
+schema_version: "1.0"
+id: autonomy
+version: "1.0"
+status: active                     # active | suspended — toute autre valeur : toute capacité DENY (R30)
+
+# Niveaux d'autonomie (§4). Un projet déclare le sien (manifest : autonomy.level) ; défaut ci-dessous.
+default_level: A2
+levels:
+  A0: { name: OBSERVE,            mode: read_only }
+  A1: { name: ASSISTED,           mode: approve_writes }    # lecture permise ; le reste APPROVAL_REQUIRED
+  A2: { name: BOUNDED_AUTONOMOUS, mode: profile }           # la matrice du profil décide
+  A3: { name: PROJECT_AUTONOMOUS, mode: profile }
+read_capabilities: [FILESYSTEM_READ, DATABASE_READ]
+
+# Capacités opérationnelles (§5). `destructive` : exige une ressource jetable créée par la Factory (R36).
+# `resource` : genres de ressource que la capacité peut viser (R31).
+capabilities:
+  FILESYSTEM_READ:        { resource: [filesystem, workspace] }
+  FILESYSTEM_WRITE:       { resource: [filesystem, workspace] }
+  FILESYSTEM_DELETE:      { resource: [filesystem, workspace], destructive: true }
+  DATABASE_READ:          { resource: [database] }
+  DATABASE_WRITE:         { resource: [database] }
+  DATABASE_SCHEMA_CHANGE: { resource: [database], destructive: true }
+  DATABASE_MIGRATION:     { resource: [database], destructive: true }
+  DATABASE_SEED:          { resource: [database] }
+  DATABASE_RESET:         { resource: [database], destructive: true }
+  DATABASE_DROP:          { resource: [database], destructive: true }
+  BUILD:                  { resource: [workspace, database] }
+  TEST:                   { resource: [workspace, database] }
+  DEBUG:                  { resource: [workspace, database] }
+  PROCESS_START:          { resource: [process, database] }
+  PROCESS_STOP:           { resource: [process, database] }
+  PACKAGE_INSTALL:        { resource: [workspace] }
+  NETWORK_READ:           { resource: [network] }
+  NETWORK_WRITE:          { resource: [network] }
+  CONTAINER_CREATE:       { resource: [container] }
+  CONTAINER_DELETE:       { resource: [container], destructive: true }
+  VCS_COMMIT_LOCAL:       { resource: [workspace] }
+  DEPLOY:                 { resource: [deployment], destructive: true }
+  RELEASE:                { resource: [deployment], destructive: true }
+
+# Matrice des droits par profil (§7, §12) : ce qui n'est ni dans `allow` ni dans `approval` est DENY (R35).
+profiles:
+  LOCAL_SANDBOX:
+    allow: [FILESYSTEM_READ, FILESYSTEM_WRITE, FILESYSTEM_DELETE, DATABASE_READ, DATABASE_WRITE,
+            DATABASE_SCHEMA_CHANGE, DATABASE_MIGRATION, DATABASE_SEED, DATABASE_RESET, DATABASE_DROP, BUILD, TEST,
+            DEBUG, PROCESS_START, PROCESS_STOP, VCS_COMMIT_LOCAL]
+    approval: []   # PACKAGE_INSTALL, NETWORK_READ : DENY (ADR-0016 décision 3 ; B8 option A, 16/10/2026) tant que la frontière réseau n'est pas ENFORCED_PREVENTIVE
+  LOCAL_TEST:
+    allow: [FILESYSTEM_READ, FILESYSTEM_WRITE, FILESYSTEM_DELETE, DATABASE_READ, DATABASE_WRITE,
+            DATABASE_SCHEMA_CHANGE, DATABASE_MIGRATION, DATABASE_SEED, DATABASE_RESET, DATABASE_DROP, BUILD, TEST,
+            DEBUG, PROCESS_START, PROCESS_STOP, VCS_COMMIT_LOCAL]
+    approval: []   # PACKAGE_INSTALL, NETWORK_READ : DENY (ADR-0016 décision 3 ; B8 option A, 16/10/2026) tant que la frontière réseau n'est pas ENFORCED_PREVENTIVE
+  CI:
+    allow: [FILESYSTEM_READ, FILESYSTEM_WRITE, DATABASE_READ, DATABASE_WRITE, DATABASE_SCHEMA_CHANGE,
+            DATABASE_MIGRATION, DATABASE_SEED, DATABASE_RESET, DATABASE_DROP, BUILD, TEST, PROCESS_START, PROCESS_STOP]
+    approval: []   # PACKAGE_INSTALL, NETWORK_READ : DENY (ADR-0016 décision 3 ; B8 option A, 16/10/2026) tant que la frontière réseau n'est pas ENFORCED_PREVENTIVE
+  DEV_SHARED:
+    allow: [FILESYSTEM_READ, DATABASE_READ, BUILD, TEST]
+    approval: [DATABASE_WRITE, DATABASE_SEED, DATABASE_MIGRATION, PROCESS_START, PROCESS_STOP]
+  STAGING:
+    allow: [DATABASE_READ]
+    approval: [DATABASE_MIGRATION, DEPLOY]
+  PRODUCTION:
+    allow: []
+    approval: [DEPLOY, RELEASE]        # frontières humaines (§49) ; tout le reste DENY pour un agent
+
+# Classification des données (§49 SENSITIVE DATA ACCESS) : au-delà, APPROVAL_REQUIRED.
+data_classification:
+  order: [PUBLIC, INTERNAL, CONFIDENTIAL, RESTRICTED]
+  autonomous_max: INTERNAL
+
+# Un profil n'est utilisable que si le manifest du projet déclare un environnement autorisé (allowed: true) d'un de
+# ces types (ou de `profile` égal au profil) — R33.
+profile_environment_types:
+  LOCAL_SANDBOX: [LOCAL, TEST]
+  LOCAL_TEST: [TEST]
+  CI: [TEST]
+  DEV_SHARED: [DEV]
+  STAGING: [STAGING, PREPROD]
+  PRODUCTION: [PRODUCTION]
+
+# Capacités du catalogue déclarées par une fiche d'agent → capacités opérationnelles qu'elles ouvrent (R39).
+# Un agent n'exerce jamais une capacité que sa fiche ne déclare pas, même dans un environnement jetable.
+agent_capability_grants:
+  SOURCE_READ: [FILESYSTEM_READ]
+  SOURCE_WRITE: [FILESYSTEM_READ, FILESYSTEM_WRITE, FILESYSTEM_DELETE, VCS_COMMIT_LOCAL]
+  BUILD: [FILESYSTEM_READ, BUILD, DEBUG, PROCESS_START, PROCESS_STOP]
+  TEST: [FILESYSTEM_READ, TEST, DEBUG, PROCESS_START, PROCESS_STOP, DATABASE_READ]
+  BROWSER_TEST: [FILESYSTEM_READ, TEST, PROCESS_START, PROCESS_STOP]
+  PERFORMANCE_TEST: [FILESYSTEM_READ, TEST, PROCESS_START, PROCESS_STOP, DATABASE_READ]
+  DATABASE_INSPECTION: [DATABASE_READ]
+  DATABASE_MIGRATION: [DATABASE_READ, DATABASE_WRITE, DATABASE_SCHEMA_CHANGE, DATABASE_MIGRATION, DATABASE_SEED,
+                       DATABASE_RESET, DATABASE_DROP]
+  SECURITY_SCAN: [FILESYSTEM_READ, DATABASE_READ]
+  DOCUMENTATION: [FILESYSTEM_READ]
+  ADR_WRITE: [FILESYSTEM_READ]
+  KNOWLEDGE_WRITE: [FILESYSTEM_READ]
+  TICKET_WRITE: [FILESYSTEM_READ]
+  RELEASE_PREPARATION: [FILESYSTEM_READ, BUILD]

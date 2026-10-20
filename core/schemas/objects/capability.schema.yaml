@@ -1,0 +1,16 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Clés « references », « mandatory », « limits », « version_fields » : extensions ADR-0004.
+schema_version: '1.0'
+object: capability
+required:
+- id
+- name
+- description
+- status
+- implementations
+rules:
+- les politiques autorisent une capacité, jamais un fournisseur
+- une implémentation est un outil du registre
+references:
+  implementations[]: tools

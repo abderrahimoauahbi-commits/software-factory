@@ -1,0 +1,48 @@
+schema_version: '1.0'
+id: mcp-server-postgres
+name: PostgreSQL MCP (serveur de référence)
+version: '*'
+lifecycle: DISCOVERED
+capabilities:
+- DATABASE_INSPECTION
+permissions:
+  read:
+  - base visée par son adresse
+  write: []
+  delete: []
+  execute: []
+  network: []
+credentials:
+  required: true
+  type: null
+  storage: null
+data:
+  classifications_allowed: []
+projects_allowed: []
+agents_allowed: []
+environments_allowed: []
+production:
+  read: false
+  write: false
+  delete: false
+security:
+  risk_level: HIGH
+  audit_required: true
+health:
+  status: UNKNOWN
+  last_check: null
+approval:
+  owner: Security Owner
+  approved_by: null
+  status: PENDING
+owner: Security Owner
+review_date: '2027-01-15'
+observation:
+  match:
+  - '@modelcontextprotocol/server-postgres'
+  provided_by_plugin: null
+  observable_locally: true
+slot:
+  fills: database-read
+notes: 'Version non figée. Mode lecture seule annoncé, NON vérifié par la Factory. Le statut du paquet (maintenance,
+  failles publiées) est à établir au Lab : NETWORK_ACCESS_REQUIRED.'

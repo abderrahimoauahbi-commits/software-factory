@@ -1,0 +1,103 @@
+schema_version: '1.0'
+id: T-FACTORY-006
+project_id: software-factory
+workflow_id: security
+title: J4 — Policy Engine v1 + approbation humaine (W1) + sauvegarde (D2)
+objective: Décider ALLOW / DENY / APPROVAL_REQUIRED, refus par défaut ; approbations liées au contexte ; sauvegarde
+  vérifiée et restaurable
+requester: Factory Owner
+state: ACCEPTED
+criticality: C3
+criticality_justification: 'Politique de sécurité et autorisation : C3 au minimum (Playbook §9.1, §10.4).'
+scope:
+  included:
+  - core/noyau/politique.py
+  - core/noyau/approbation.py
+  - core/noyau/sauvegarde.py
+  - scripts/
+  - policies/
+  - core/tests/
+  - docs/
+  - security/threats.yaml
+  excluded:
+  - configuration de l'agent
+  - dépôt du projet pilote
+  - réseau
+  - installation
+  roots:
+  - FACTORY_ROOT
+  - F:/software-factory-backups (EXC-0002)
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules: []
+  functional_requirements: []
+  non_functional_requirements:
+  - aucune règle dans le code
+  - refus par défaut
+  - trois décisions seulement
+  acceptance_criteria:
+  - tests nominaux et adversariaux verts
+  - approbation liée au contexte
+  - commande humaine refusée hors console
+  - sauvegarde vérifiée et restaurée
+  - CHECK inchangé
+design:
+  architecture_ref: adr/accepted/ADR-0006-policy-engine-approbation-sauvegarde.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0006
+security:
+  required: false
+  assessment_ref: null
+  risks: []
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-005
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: déplacements inverses listés dans ADR-0003 (dépôt non commité)
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: APPROVED
+  refs:
+  - « valide et continue » du 15/10/2026 (canal ancien, W1)
+evidence:
+  required:
+  - tests
+  - sauvegarde vérifiée et restaurée
+  collected:
+  - 'core/tests : 125 OK (dont 57 test_politique, 10 test_sauvegarde)'
+  - 'bootstrap/tests : 2 OK'
+  - empreinte du CHECK identique (cmp)
+  - 'compliance/evidence/D2 : backup-2, verify-2, restore-test-2 OK'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: READY_TO_MERGE après le premier commit (geste humain)

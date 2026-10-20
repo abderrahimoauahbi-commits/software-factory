@@ -1,0 +1,19 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: release
+required:
+- id
+- project_id
+- version
+- environment
+- backup
+- rollback
+- approvals
+- status
+enums:
+  environment: ENVIRONMENT
+  status: RELEASE_STATUS
+rules:
+- 'publication en production : approbation humaine obligatoire'
+- une release C4 n'est jamais autonome

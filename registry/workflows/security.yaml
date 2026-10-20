@@ -1,0 +1,60 @@
+schema_version: '1.0'
+id: security
+name: SECURITY
+version: 0.1.0
+project_id: factory-catalog
+type: SECURITY
+criticality: C3
+phases:
+- phase_id: PROJECT_ANALYSIS
+  type: PHASE
+  required: true
+  order: 1
+- phase_id: RISK_SECURITY_DATA
+  type: PHASE
+  required: true
+  order: 2
+- phase_id: TECHNICAL_DESIGN
+  type: PHASE
+  required: true
+  order: 3
+- phase_id: TICKET_PREPARATION
+  type: PHASE
+  required: true
+  order: 4
+- phase_id: AGENT_ASSIGNMENT
+  type: PHASE
+  required: true
+  order: 5
+- phase_id: EXECUTION
+  type: PHASE
+  required: true
+  order: 6
+- phase_id: QUALITY
+  type: PHASE
+  required: true
+  order: 7
+- phase_id: REVIEW
+  type: PHASE
+  required: true
+  order: 8
+- phase_id: HUMAN_VALIDATION
+  type: PHASE
+  required: true
+  order: 9
+- phase_id: MERGE
+  type: PHASE
+  required: true
+  order: 10
+entry_conditions: []
+exit_conditions: []
+human_gates:
+- HUMAN_VALIDATION avant MERGE
+policies:
+- security-defaults
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+status: DRAFT
+notes: 'Brouillon v0.1 : à relire avant activation.'

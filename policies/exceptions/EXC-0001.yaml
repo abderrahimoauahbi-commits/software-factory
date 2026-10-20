@@ -1,0 +1,32 @@
+schema_version: '1.0'
+exception:
+  id: EXC-0001
+  requested_by: agent de construction (claude-opus-5-5)
+  phase: EXECUTION
+  objective: 'NEED-FACTORY-001 : construire le Registry v1 et le Bootstrap v1'
+  requested_permission: WRITE dans FACTORY_ROOT (un agent ne modifie pas la Factory hors exception, K6)
+  scope:
+    roots:
+    - FACTORY_ROOT
+    excluded:
+    - tout autre chemin
+    - configuration des outils
+    - réseau
+    - installation
+    - bases de données
+    - commit
+  reason: la Factory n'a pas encore de mécanisme pour se construire elle-même (phase 1)
+  risk: MEDIUM — compensé par la revue humaine avant commit et par les tests
+  duration: jusqu'à la revue humaine de T-FACTORY-001 et T-FACTORY-002
+  affected_resources:
+  - C:/Users/vboxuser/Desktop/software-factory
+  approval_required: true
+  approval: APR-0001
+  expiration: à la clôture de NEED-FACTORY-001
+  audit_reference: audit/events.jsonl
+  status: EXHAUSTED            # 16/10/2026 : objectif atteint (NEED-FACTORY-001 ACCEPTED)
+  superseded_by: EXC-0003      # décision B7 (option 2) du Factory Owner, 16/10/2026
+  drift_recorded: >-
+    Après l'atteinte de son objectif, des écritures d'agent dans FACTORY_ROOT ont continué (jalons J4 à J13,
+    évolution E, mise en œuvre de l'ADR-0016) hors de l'objectif déclaré. Cette dérive est tracée au journal
+    d'audit ; elle n'est pas régularisée rétroactivement.

@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: RESTORE_TEST
+name: RESTORE_TEST
+description: Test de restauration
+status: DEFINED
+implementations: []

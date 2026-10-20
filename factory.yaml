@@ -1,0 +1,60 @@
+# AI Software Factory — configuration de la Factory elle-même (niveau « Factory Standard », Playbook §2.1).
+#
+# Ce fichier ne décrit aucun projet : un projet a son propre manifest `factory.yaml` dans son dépôt
+# (ADR-0001, Playbook §16.2). Aucun secret ici.
+
+factory:
+  id: software-factory
+  name: AI Software Factory
+  standard_version: "3.2"          # version du Playbook appliqué
+  implementation_version: "0.1.0"  # version de cette implémentation (Registry v1 + Bootstrap CHECK v1)
+  phase: "1 — MVP"                 # Playbook §17 : C0 à C2, Bootstrap CHECK, un projet pilote
+  schema_version: "1.0"            # Executable Schemas v1.0 (core/schemas/)
+  # Aucun projet n'est nommé ici (Executable Schemas §36) : les instances sont dans registry/projects/.
+
+playbook:
+  path: docs/playbook/playbook-v3.2.md
+  sha256: a98ab8c11aeff6c267c8b1f6474fcd0ea8be46a0fca4c8cc3fee1d2282d38d30
+  status: normative                # toute évolution = décision du Factory Owner + ADR (§15.4)
+
+owners:                            # rôles humains (§3.1) ; suppléants non désignés = WAITING_HUMAN
+  factory_owner: { holder: "Factory Owner (humain)", deputy: WAITING_HUMAN }
+  chief_architect: { holder: "Chief Architect (humain)", deputy: WAITING_HUMAN }
+  security_owner: { holder: WAITING_HUMAN, deputy: WAITING_HUMAN }
+  data_owner: { holder: WAITING_HUMAN, deputy: WAITING_HUMAN }
+  release_approver: { holder: WAITING_HUMAN, deputy: WAITING_HUMAN }
+
+registry:
+  root: registry
+  kinds: [tools, agents, skills, mcp, models, workflows, projects]
+  catalog: catalog                 # index ENGENDRÉ des fiches approuvées — jamais écrit à la main (ADR-0001)
+
+lifecycle_states:                  # Playbook §6.2
+  - discovered
+  - candidate
+  - evaluating
+  - tested
+  - approved
+  - available
+  - active
+  - reevaluated
+  - updated
+  - watchlist
+  - rejected
+  - deprecated
+  - removed
+
+health_states: [READY, WARNING, DEGRADED, BLOCKED, FAILED, UNKNOWN]   # §7.3
+factory_states: [INITIALIZING, CHECKING, READY, DEGRADED, BLOCKED]
+
+criticality_levels: [C0, C1, C2, C3, C4]   # §9.1 — C3 et C4 « cible » en phase 1 (§17)
+
+review:
+  period: quarterly                # §15.5
+  next: 2027-01-15
+
+schemas: core/schemas            # enums.yaml, lifecycles.yaml, objects/*.schema.yaml
+
+# Capacités dont la Factory a besoin pour fonctionner elle-même. Les outils qui les implémentent sont dans
+# le registre (ADR-0001 : Python + PyYAML aujourd'hui) — remplaçables sans toucher à ce fichier.
+critical_capabilities: [FACTORY_RUNTIME, CONFIG_PARSING, SOURCE_CONTROL]

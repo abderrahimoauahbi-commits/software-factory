@@ -1,0 +1,86 @@
+schema_version: '1.0'
+id: T-FACTORY-017
+project_id: software-factory
+workflow_id: feature
+title: 'R09 : write_allowed ne gouverne pas les fichiers source (décision du Factory Owner)'
+objective: Corriger la sémantique de R09 révélée par le ticket pilote T-GF-001
+requester: Factory Owner
+state: IMPLEMENTED
+criticality: C3
+criticality_justification: 'Politique de sécurité et autorisation : C3 au minimum (Playbook §9.1, §10.4).'
+scope:
+  included:
+  - policies/policy-engine.yaml
+  - core/noyau/politique.py
+  - core/tests/test_politique.py
+  - adr/accepted/ADR-0011-r09-environnement-et-fichiers.md
+  excluded:
+  - toute commande d'approbation
+  - configuration de l'agent
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules: []
+  functional_requirements: []
+  non_functional_requirements:
+  - aucune règle d'accès aux fichiers affaiblie
+  acceptance_criteria:
+  - écriture de source dans l'espace isolé et le périmètre permise en LOCAL non inscriptible
+  - db_write et execute en LOCAL non inscriptible toujours refusés
+  - fichier hors chemins, hors ticket ou sensible toujours refusé
+design:
+  architecture_ref: adr/accepted/ADR-0011-r09-environnement-et-fichiers.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0011
+security:
+  required: false
+  assessment_ref: null
+  risks: []
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-007
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: déplacements inverses listés dans ADR-0003 (dépôt non commité)
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: PENDING
+evidence:
+  required:
+  - tests
+  collected:
+  - 'test_politique : 2 tests R09 ajoutés'
+  - 'suites : 236 OK'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: 'revue humaine — relecteur distinct requis : WAITING_HUMAN'

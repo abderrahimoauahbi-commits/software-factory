@@ -1,0 +1,9 @@
+schema_version: '1.0'
+id: LANGUAGE_TOOLCHAIN
+name: LANGUAGE_TOOLCHAIN
+description: Compilateurs et interpréteurs des langages des projets
+status: DEFINED
+implementations:
+- rustc
+- node
+- python

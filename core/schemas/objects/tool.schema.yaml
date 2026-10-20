@@ -1,0 +1,40 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+# Clés « references », « mandatory », « limits », « version_fields » : extensions ADR-0004.
+schema_version: '1.0'
+object: tool
+required:
+- id
+- name
+- version
+- type
+- lifecycle
+- capabilities
+- compatibility
+- permissions
+- security
+- evaluation
+- approval
+- health
+- update
+enums:
+  lifecycle: lifecycle:tool
+fields:
+  security.secret_access:
+    default: false
+  security.production_access:
+    default: false
+references:
+  capabilities[]: capabilities
+mandatory:
+  security.secret_access: false
+  security.production_access: false
+active_requires_approval:
+  states:
+  - APPROVED
+  - AVAILABLE
+  - ACTIVE
+  - REEVALUATION
+  - UPDATED
+  field: approval.status
+  equals: APPROVED

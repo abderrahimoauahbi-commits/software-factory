@@ -1,0 +1,70 @@
+schema_version: '1.0'
+id: tailwindcss
+name: Tailwind CSS
+version: project          # ADR-0022 D5 : fixée par les fichiers de dépendances du projet (relevé du Bootstrap)
+type: framework
+lifecycle: DISCOVERED
+capabilities: []
+compatibility:
+  os:
+  - windows
+  - linux
+  - macos
+  languages: []
+  frameworks:
+  - tailwindcss
+  projects: []
+permissions:
+  read: []
+  write: []
+  execute: []
+  network: []
+  database: []
+security:
+  risk_level: LOW
+  secret_access: false
+  production_access: false
+evaluation:
+  maturity: null
+  stability: null
+  security: null
+  documentation: null
+  integration: null
+  portability: null
+  lock_in: null
+  cost: null
+  performance: null
+  recoverability: null
+  maintenance: null
+  license: null
+  confidentiality: null
+  permissions: null
+  interoperability: null
+  observability: null
+  update: null
+  status: PENDING
+  last: null
+  next: '2027-01-15'
+approval:
+  status: PENDING
+  owner: Factory Owner
+  approved_by: null
+health:
+  status: UNKNOWN
+  last_check: null
+update:
+  current_version: null
+  latest_evaluated_version: null
+  reevaluation_required: false
+owner: Factory Owner
+license: MIT
+documentation: null
+review_date: '2027-01-15'
+detection:
+  adapter: node_package
+  package: tailwindcss
+lifecycle_history:
+- date: '2026-10-15'
+  state: DISCOVERED
+  reason: constaté par le Bootstrap CHECK du 15/10/2026
+notes: 'Composant de pile d''un projet : déclaré par son manifest, jamais imposé par la Factory.'

@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: WEB_FETCH
+name: WEB_FETCH
+description: Lecture de pages web (contenu non fiable, P06)
+status: DEFINED
+implementations: []

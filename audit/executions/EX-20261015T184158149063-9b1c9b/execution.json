@@ -1,0 +1,309 @@
+{
+ "execution_id": "EX-20261015T184158149063-9b1c9b",
+ "id": "EX-20261015T184158149063-9b1c9b",
+ "project_id": "gestionfil",
+ "ticket_id": "T-GF-002",
+ "state": "COMPLETED",
+ "agent": {
+  "id": "qa",
+  "version": "registre"
+ },
+ "model": {
+  "id": "claude-opus-5-5",
+  "version": "claude-opus-5-5"
+ },
+ "budget": {
+  "attempt": 2,
+  "max_attempts": 3
+ },
+ "timestamps": {
+  "requested": "2026-10-15T18:41:58+00:00",
+  "authorized": "2026-10-15T18:41:58+00:00",
+  "started": "2026-10-15T18:42:00+00:00",
+  "completed": "2026-10-15T18:42:19+00:00"
+ },
+ "policy_decision": {
+  "decision": "ALLOW",
+  "regle": "R99",
+  "motifs": [
+   "« run_ticket » permis en C1 dans le périmètre"
+  ],
+  "criticite_effective": "C1",
+  "empreinte_contexte": null,
+  "approbation_requise": null,
+  "empreinte_demande": "9b51a3c086cb292ef7142ae7c4fcaab75a9c6a7f0eb0a43427b7176761c4814e"
+ },
+ "history": [
+  {
+   "to": "AUTHORIZED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000063"
+  },
+  {
+   "to": "RESERVED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000064"
+  },
+  {
+   "to": "PREPARED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000065"
+  },
+  {
+   "to": "STARTED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000066"
+  },
+  {
+   "to": "RUNNING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000067"
+  },
+  {
+   "to": "ARTIFACTS_PRODUCED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000068"
+  },
+  {
+   "to": "TESTING",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000069"
+  },
+  {
+   "to": "COMPLETED",
+   "result": "APPLIED",
+   "reasons": [
+    "transition appliquée"
+   ],
+   "event": "AE-000070"
+  }
+ ],
+ "isolation": {
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-002-EX-20261015T184158149063-9b1c9b",
+  "branch": "factory/T-GF-002/EX-20261015T184158149063-9b1c9b",
+  "base": "f06df9d049ae00dea4ef8708fb23814f4b32f6eb",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "extraction_differences": {}
+ },
+ "envelope": {
+  "factory": {
+   "version": "3.2",
+   "policies": "policies/"
+  },
+  "project": {
+   "id": "gestionfil"
+  },
+  "ticket": {
+   "id": "T-GF-002",
+   "criticality": "C1",
+   "objective": "Créer frontend/tests/export.test.ts, qui fige le comportement actuel de versCsv (frontend/src/lib/export.ts, aucun test aujourd'hui), sans modifier le code source",
+   "scope": {
+    "paths": [
+     "frontend/tests/export.test.ts"
+    ],
+    "included": [
+     "frontend/tests/export.test.ts"
+    ],
+    "excluded": [
+     "frontend/src/",
+     "backend/",
+     "db/",
+     "deploiement/"
+    ],
+    "roots": [
+     "PROJECT_ROOT"
+    ],
+    "files": [
+     "frontend/tests/export.test.ts"
+    ],
+    "modules": [],
+    "services": [],
+    "data": []
+   }
+  },
+  "execution": {
+   "id": "EX-20261015T184158149063-9b1c9b",
+   "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-002-EX-20261015T184158149063-9b1c9b",
+   "branch": "factory/T-GF-002/EX-20261015T184158149063-9b1c9b",
+   "base": "f06df9d049ae00dea4ef8708fb23814f4b32f6eb",
+   "extraction_differences": {},
+   "permissions": {
+    "write": {
+     "project_write": [
+      "backend/src/",
+      "backend/tests/",
+      "frontend/src/",
+      "frontend/tests/",
+      "frontend/e2e/",
+      "docs/"
+     ],
+     "ticket_scope": [
+      "frontend/tests/export.test.ts"
+     ],
+     "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+    },
+    "read": "paths.read du projet + périmètre du ticket"
+   }
+  },
+  "tools": {
+   "allowed": [
+    "axum",
+    "cargo",
+    "claude-code",
+    "clippy",
+    "git",
+    "msedge",
+    "node",
+    "npm",
+    "playwright",
+    "postgresql-client",
+    "react",
+    "rustc",
+    "rustfmt",
+    "rustup",
+    "sqlx",
+    "tailwindcss",
+    "tauri",
+    "typescript",
+    "vite",
+    "vscode"
+   ]
+  },
+  "mcp": {
+   "allowed": []
+  },
+  "security": {
+   "restrictions": [
+    "toute action passe par le Policy Engine",
+    "aucune action hors de l'espace isolé",
+    "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+   ]
+  },
+  "budget": {
+   "attempt": 2,
+   "max_attempts": 3
+  }
+ },
+ "changes": [
+  "frontend/tests/export.test.ts"
+ ],
+ "extraction_unchanged": [],
+ "post_gates": {
+  "frontend/tests/export.test.ts": "5068f234555e3c35d94d664d8c5a190dca1ae062046d788207ea6403ed5c389a"
+ },
+ "gate_outputs": [],
+ "provenance": {
+  "project": "gestionfil",
+  "ticket": "T-GF-002",
+  "execution": "EX-20261015T184158149063-9b1c9b",
+  "agent": "qa",
+  "model": "claude-opus-5-5",
+  "model_version": "claude-opus-5-5",
+  "factory_version": "3.2",
+  "schema_version": "1.0",
+  "prompt_version": "1.1",
+  "tools": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ],
+  "skills": [],
+  "mcp": [],
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/tests/export.test.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  },
+  "branch": "factory/T-GF-002/EX-20261015T184158149063-9b1c9b",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-002-EX-20261015T184158149063-9b1c9b",
+  "sandbox": "aucun (v1 : espace isolé seul)",
+  "artifacts": [
+   "EX-20261015T184158149063-9b1c9b-diff"
+  ],
+  "tests": [
+   "EX-20261015T184158149063-9b1c9b-frontend_unit_tests"
+  ],
+  "reviews": [],
+  "approvals": []
+ },
+ "evidence": [
+  {
+   "id": "EX-20261015T184158149063-9b1c9b-diff",
+   "type": "ARTIFACT",
+   "source": "git diff --stat f06df9d049ae00dea4ef8708fb23814f4b32f6eb",
+   "timestamp": "2026-10-15T18:42:16+00:00",
+   "command": "git diff --stat f06df9d049ae00dea4ef8708fb23814f4b32f6eb",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T184158149063-9b1c9b-diff.log",
+   "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "generated_by": "plateforme:EX-20261015T184158149063-9b1c9b",
+   "verified_by": null,
+   "immutable": true
+  },
+  {
+   "id": "EX-20261015T184158149063-9b1c9b-frontend_unit_tests",
+   "type": "TEST",
+   "source": "npm test",
+   "timestamp": "2026-10-15T18:42:19+00:00",
+   "command": "npm test",
+   "exit_code": 0,
+   "result": "SUCCESS",
+   "artifact_ref": "EX-20261015T184158149063-9b1c9b-frontend_unit_tests.log",
+   "hash": "4cc1c3988389e6e34df13cea2b3d06453b4050969431b05b3808bd33103e3d58",
+   "generated_by": "plateforme:EX-20261015T184158149063-9b1c9b",
+   "verified_by": null,
+   "immutable": true
+  }
+ ]
+}

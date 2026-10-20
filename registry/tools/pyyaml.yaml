@@ -1,0 +1,71 @@
+schema_version: '1.0'
+id: pyyaml
+name: PyYAML
+version: '6.0'          # ADR-0022 D5 : épinglée (major.minor) sur le relevé du Bootstrap du 19/10/2026
+type: library
+lifecycle: APPROVED
+capabilities:
+- CONFIG_PARSING
+compatibility:
+  os:
+  - windows
+  - linux
+  - macos
+  languages: []
+  frameworks: []
+  projects: []
+permissions:
+  read: []
+  write: []
+  execute: []
+  network: []
+  database: []
+security:
+  risk_level: LOW
+  secret_access: false
+  production_access: false
+evaluation:
+  maturity: null
+  stability: null
+  security: null
+  documentation: null
+  integration: null
+  portability: null
+  lock_in: null
+  cost: null
+  performance: null
+  recoverability: null
+  maintenance: null
+  license: null
+  confidentiality: null
+  permissions: null
+  interoperability: null
+  observability: null
+  update: null
+  status: PENDING
+  last: null
+  next: '2027-01-15'
+approval:
+  status: APPROVED
+  owner: Factory Owner
+  approved_by: Factory Owner — ADR-0001 (15/10/2026)
+health:
+  status: UNKNOWN
+  last_check: null
+update:
+  current_version: null
+  latest_evaluated_version: null
+  reevaluation_required: false
+owner: Factory Owner
+license: MIT
+documentation: https://pyyaml.org
+review_date: '2027-01-15'
+detection:
+  adapter: python_module
+  module: yaml
+lifecycle_history:
+- date: '2026-10-15'
+  state: APPROVED
+  reason: adoption humaine initiale, évaluation formelle due (Playbook §6.3)
+notes: 'Installé dans le site UTILISATEUR de Python : lancer le Bootstrap avec « python -P » (et non -I, qui désactive
+  ce site).'

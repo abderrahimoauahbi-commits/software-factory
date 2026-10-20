@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: TYPECHECK
+name: TYPECHECK
+description: Vérification de types
+status: DEFINED
+implementations:
+- typescript

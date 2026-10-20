@@ -1,0 +1,18 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: evidence
+required:
+- id
+- type
+- source
+- timestamp
+- result
+- generated_by
+- immutable
+enums:
+  type: EVIDENCE_TYPE
+  result: EVIDENCE_RESULT
+rules:
+- la déclaration d'un agent n'est pas une preuve
+- une preuve exige un artefact observable ou un résultat vérifiable

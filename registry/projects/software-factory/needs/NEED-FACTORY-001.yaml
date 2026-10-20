@@ -1,0 +1,22 @@
+schema_version: "1.0"
+id: NEED-FACTORY-001
+title: Construire le Factory Registry v1 et le Bootstrap v1
+description: >
+  Registre structuré (capacités, outils, adaptateurs, agents, skills, MCP, modèles, workflows, projets)
+  et Bootstrap en mode CHECK, sur la base des faits vérifiés du Bootstrap CHECK du 15/10/2026.
+requester: Factory Owner
+project: software-factory
+business_objective: Disposer d'un socle de contrôle reproductible avant toute exécution d'agent.
+technical_context: Executable Schemas v1.0 ; Playbook v3.2 ; ROOT_SCOPE validé ; ADR-0001 et ADR-0002.
+priority: HIGH
+known_constraints:
+  - lecture seule hors FACTORY_ROOT ; aucune écriture dans les projets
+  - aucune installation, aucun accès réseau, aucune base de données
+  - aucun commit sans accord humain
+  - rien de figé dans le code (projet, pile, fournisseur, IDE, MCP)
+unknowns:
+  - versions exactes de rustfmt et clippy (commande hors liste blanche)
+  - environnement et classification de la base locale du projet pilote (DB_ACCESS_REQUIRED)
+state: ACCEPTED
+history:
+  - { date: "2026-10-15", from: RECEIVED, to: ACCEPTED, by: Factory Owner, ref: APR-0001 }

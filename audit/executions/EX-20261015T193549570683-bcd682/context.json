@@ -1,0 +1,109 @@
+{
+ "factory": {
+  "version": "3.2",
+  "policies": "policies/"
+ },
+ "project": {
+  "id": "gestionfil"
+ },
+ "ticket": {
+  "id": "T-GF-009",
+  "criticality": "C1",
+  "objective": "Dans fmt.nombre, fmt.entier, fmt.mad et fmt.compact (frontend/src/lib/utils.ts), NaN et ±Infinity donnent « — » comme une valeur absente ; toute l'application affiche ses nombres par fmt",
+  "scope": {
+   "data": [],
+   "excluded": [
+    "les autres fichiers de frontend/src/",
+    "backend/",
+    "db/",
+    "deploiement/"
+   ],
+   "files": [
+    "frontend/src/lib/utils.ts",
+    "frontend/tests/utils.test.ts"
+   ],
+   "included": [
+    "frontend/src/lib/utils.ts",
+    "frontend/tests/utils.test.ts"
+   ],
+   "modules": [],
+   "paths": [
+    "frontend/src/lib/utils.ts",
+    "frontend/tests/utils.test.ts"
+   ],
+   "roots": [
+    "PROJECT_ROOT"
+   ],
+   "services": []
+  }
+ },
+ "execution": {
+  "id": "EX-20261015T193549570683-bcd682",
+  "worktree": "C:\\Users\\vboxuser\\Desktop\\factory-workspaces\\T-GF-009-EX-20261015T193549570683-bcd682",
+  "branch": "factory/T-GF-009/EX-20261015T193549570683-bcd682",
+  "base": "5f8d2d0f427bc22cdae72a9183f89e77d2cf04f3",
+  "extraction_differences": {},
+  "copied_dependencies": {
+   "frontend/node_modules": {
+    "files": 21043,
+    "seconds": 40.2
+   }
+  },
+  "permissions": {
+   "write": {
+    "project_write": [
+     "backend/src/",
+     "backend/tests/",
+     "frontend/src/",
+     "frontend/tests/",
+     "frontend/e2e/",
+     "docs/"
+    ],
+    "ticket_scope": [
+     "frontend/src/lib/utils.ts",
+     "frontend/tests/utils.test.ts"
+    ],
+    "rule": "un chemin écrit doit appartenir aux deux listes ; forbidden et fichiers sensibles priment"
+   },
+   "read": "paths.read du projet + périmètre du ticket"
+  }
+ },
+ "tools": {
+  "allowed": [
+   "axum",
+   "cargo",
+   "claude-code",
+   "clippy",
+   "git",
+   "msedge",
+   "node",
+   "npm",
+   "playwright",
+   "postgresql-client",
+   "react",
+   "rustc",
+   "rustfmt",
+   "rustup",
+   "sqlx",
+   "tailwindcss",
+   "tauri",
+   "typescript",
+   "vite",
+   "vscode"
+  ]
+ },
+ "mcp": {
+  "allowed": []
+ },
+ "security": {
+  "restrictions": [
+   "toute action passe par le Policy Engine",
+   "aucune action hors de l'espace isolé",
+   "arrêt sur ambiguïté, permission manquante ou risque (Executable Schemas §24)"
+  ]
+ },
+ "budget": {
+  "attempt": 1,
+  "max_attempts": 3
+ }
+}

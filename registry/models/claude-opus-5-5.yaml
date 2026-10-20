@@ -1,0 +1,46 @@
+schema_version: '1.0'
+id: claude-opus-5-5
+provider: anthropic
+name: Claude Opus 5.5
+version: claude-opus-5-5
+lifecycle: DISCOVERED
+capabilities: []
+context:
+  max_context: null
+  multimodal: null
+  reasoning: null
+performance:
+  latency: null
+  quality_score: null
+cost:
+  input: null
+  output: null
+privacy:
+  data_retention: null
+  processing_location: null
+  training_use: null
+security:
+  approved_for: []
+  prohibited_for: []
+roles:
+  allowed: []
+fallback:
+  model_id: null
+evaluation:
+  benchmark: null
+  security: null
+  prompt_injection: null
+  coding: null
+  reasoning: null
+  reliability: null
+  cost_efficiency: null
+approval:
+  status: PENDING
+  owner: Factory Owner
+  approved_by: null
+owner: Factory Owner
+review_date: '2027-01-15'
+notes: 'Valeurs non renseignées : à établir par benchmark (Playbook §5.4), jamais supposées. Repli d''un autre fournisseur
+  requis pour les rôles critiques : WAITING_HUMAN.'
+observation: Modèle de l'agent d'exécution de la session de construction du 15/10/2026, utilisé sans évaluation
+  (UNAPPROVED).

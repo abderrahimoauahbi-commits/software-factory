@@ -1,0 +1,3 @@
+$ psql -f revue_integrite.sql
+code=0
+

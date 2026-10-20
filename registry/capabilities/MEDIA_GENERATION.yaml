@@ -1,0 +1,6 @@
+schema_version: '1.0'
+id: MEDIA_GENERATION
+name: MEDIA_GENERATION
+description: Génération de médias
+status: DEFINED
+implementations: []

@@ -1,0 +1,32 @@
+# Approbation humaine (décision W1, ADR-0006). Canal primaire : commande lancée par l'humain dans sa console.
+schema_version: "1.0"
+id: human-approval
+version: "1.0"
+command: scripts/factory_approve.py
+records: audit/approvals/human/            # créés par la commande seulement ; jamais par l'agent
+requests: audit/approvals/requests/        # écrits par l'agent : il DEMANDE, il ne crée pas d'approbation
+# ADR-0017 I8 (étape G1) : demandes dédoublonnées par empreinte ; au-delà de ce nombre de demandes sans décision
+# humaine, toute nouvelle demande est refusée (core/noyau/demandes.py).
+max_open_requests: 20
+# Exécution humaine des actions réservées (ADR-0017 D38, I7 ; étape G2) : l'agent prépare un plan d'étapes exactes,
+# l'humain l'approuve (commande ci-dessus) puis l'exécute (`factory plan execute`, refusé dans une session d'agent).
+execution_roles: [factory_owner, project_owner]
+execution_max_age_hours: 24
+# Revue de code humaine (T-FACTORY-018, ADR-0012) : même commande, demande de type CODE_REVIEW liée à l'empreinte
+# du diff complet. APPROUVE = revue favorable ; REFUSE = modifications demandées.
+review_roles: [project_owner, reviewer_senior, chief_architect, factory_owner]
+decision_roles: [factory_owner, project_owner]   # décisions humaines d'un projet (factory decide request, ADR-0022 v2)
+agent_may: [demander, préparer le contexte, afficher ce qui doit être approuvé, lire le résultat]
+agent_may_not: [créer une approbation, se déclarer humain, s'auto-approuver, modifier une approbation existante]
+binding: "empreinte SHA-256 du contexte exact (projet, ticket, criticité, acteur, action, ressource, commande, outil, MCP, périmètre)"
+invalidation: "tout changement du contexte change l'empreinte ; toute modification de l'enregistrement casse son empreinte"
+# Gardes procédurales de la commande (pas une frontière de sécurité) :
+require_interactive_console: true
+agent_environment_markers: [CLAUDECODE, CLAUDE_CODE_ENTRYPOINT, CLAUDE_CODE_SESSION_ID]
+# Fermeture de W1 (décision humaine, configuration de l'agent — hors Factory) :
+required_agent_deny_rules:
+  - "Edit/Write sur audit/approvals/human/**"
+  - "exécution de scripts/factory_approve.py"
+status: CONFIGURED_FACTORY_SESSIONS        # J7 : refus + garde PreToolUse dans .claude/settings.json de la Factory
+residual: "une session ouverte AILLEURS (autre projet, réglages utilisateur) n'a pas ces refus : W1 reste ouverte pour elle"
+projection: [.claude/settings.json, scripts/hooks/garde_approbations.py]   # vérifiés par le Bootstrap (F-W1) et core/tests/test_garde.py

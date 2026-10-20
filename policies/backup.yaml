@@ -1,0 +1,39 @@
+# Sauvegarde et reprise de la Factory (décision D2, Playbook §14.5, Master §39). Politique, pas implémentation :
+# l'outil est scripts/factory_backup.py, la procédure docs/operations/restauration-factory.md.
+schema_version: "1.0"
+id: backup
+version: "1.0"
+destination: "F:/software-factory-backups"     # autre lecteur que la Factory ; choisi le 15/10/2026 (EXC-0002)
+archive_pattern: "factory-backup-*.zip"
+required_scopes:                               # exigés par le Factory Owner (D2) : une archive sans eux échoue
+  - factory.yaml
+  - registry
+  - policies
+  - workflows
+  - quality
+  - security
+  - audit
+  - knowledge
+  - adr
+  - risks
+  - compliance
+  - docs
+  - scripts
+  - registry/projects                          # manifests et cartes des projets
+also_included: "tout le reste de FACTORY_ROOT (core, bootstrap…), nécessaire pour reconstruire"
+excluded:                                      # régénérables ou propres au poste
+  - .git/                                      # aucun commit à ce jour ; un « git bundle » s'ajoutera quand il y en aura
+  - "**/__pycache__/"
+  - "*.pyc"
+  - bootstrap/reports/                         # rapports régénérés ; ceux retenus comme preuve sont dans compliance/evidence
+verification:
+  - "empreinte SHA-256 de l'archive dans un fichier compagnon"
+  - "manifeste interne : chemin, taille et SHA-256 de chaque fichier"
+  - "restauration d'essai dans un répertoire temporaire, revalidation du registre et de l'empreinte du Playbook"
+rpo_target: WAITING_HUMAN                      # proposition : après chaque jalon accepté et au moins une fois par jour
+rto_measured_by: "durée de la restauration d'essai (restore-test)"
+offsite_copy: WAITING_HUMAN                    # copie hors du poste (dépôt distant privé…) : décision humaine
+never:
+  - écraser une archive existante
+  - restaurer par-dessus une Factory existante
+  - inclure un secret (la Factory n'en contient aucun ; vérifié par les tests)

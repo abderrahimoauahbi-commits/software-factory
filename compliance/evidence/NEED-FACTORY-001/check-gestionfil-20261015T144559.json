@@ -1,0 +1,1742 @@
+{
+  "schema_version": "1.0",
+  "result": {
+    "status": "PARTIAL",
+    "phase": "BOOTSTRAP_CHECK",
+    "project_id": "gestionfil",
+    "ticket_id": null,
+    "execution_id": null,
+    "summary": "Factory READY ; analyse du projet READY ; exécution d'agents BLOCKED.",
+    "findings": [
+      {
+        "id": "A-claude-code-DENY",
+        "severity": "HIGH",
+        "description": "claude-code : règles de refus — 0 deny, 0 ask, 20 allow",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "A-claude-code-PROD",
+        "severity": "HIGH",
+        "description": "Protection de la production — hôtes de production déclarés : 2 ; aucune règle ni hook ne les protège",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "G-UNPUSHED",
+        "severity": "HIGH",
+        "description": "Commits non publiés — 108 commit(s) sans copie distante sur lots-devise-import-machines (Playbook §14.4)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "M-01",
+        "severity": "HIGH",
+        "description": "MCP higgsfield — UNAPPROVED — portée : projet, local (~/.claude.json) ; actif : oui ; fiche : higgsfield (DISCOVERED)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "M-02",
+        "severity": "HIGH",
+        "description": "MCP gestion-fil-sqlite — UNAPPROVED — portée : réglages utilisateur (clé non documentée) ; actif : inconnu ; fiche : mcp-server-sqlite (DISCOVERED)",
+        "evidence": "UNVERIFIABLE"
+      },
+      {
+        "id": "M-03",
+        "severity": "HIGH",
+        "description": "MCP postgres-local — UNAPPROVED — portée : réglages utilisateur (clé non documentée) ; actif : inconnu ; fiche : mcp-server-postgres (DISCOVERED)",
+        "evidence": "UNVERIFIABLE"
+      },
+      {
+        "id": "M-04",
+        "severity": "HIGH",
+        "description": "MCP postgres — UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : mcp-server-postgres (DISCOVERED)",
+        "evidence": "UNVERIFIABLE"
+      },
+      {
+        "id": "M-05",
+        "severity": "HIGH",
+        "description": "MCP fetch — UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : mcp-fetch (DISCOVERED)",
+        "evidence": "UNVERIFIABLE"
+      },
+      {
+        "id": "M-06",
+        "severity": "HIGH",
+        "description": "MCP sequentialthinking — UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : mcp-sequential-thinking (DISCOVERED)",
+        "evidence": "UNVERIFIABLE"
+      },
+      {
+        "id": "M-07",
+        "severity": "HIGH",
+        "description": "MCP semgrep — UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : semgrep-mcp (DISCOVERED)",
+        "evidence": "UNVERIFIABLE"
+      },
+      {
+        "id": "M-08",
+        "severity": "HIGH",
+        "description": "MCP context7 — UNAPPROVED — portée : greffon utilisateur context7@claude-plugins-official (tous projets) ; actif : oui ; fiche : context7 (DISCOVERED)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "M-09",
+        "severity": "HIGH",
+        "description": "MCP playwright-mcp — UNAPPROVED — portée : greffon utilisateur playwright@claude-plugins-official (tous projets) ; actif : oui ; fiche : playwright-mcp (DISCOVERED)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "M-10",
+        "severity": "HIGH",
+        "description": "MCP microsoft/playwright-mcp — UNAPPROVED — portée : IDE (mcp.json) ; actif : oui ; fiche : playwright-mcp (DISCOVERED)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "Q-dependency_audit",
+        "severity": "HIGH",
+        "description": "gate dependency_audit — aucun outil approuvé (DEPENDENCY_AUDIT)",
+        "evidence": "DECLARED"
+      },
+      {
+        "id": "Q-security",
+        "severity": "HIGH",
+        "description": "gate security — aucun outil approuvé (SECRET_SCAN, SECURITY_SCAN)",
+        "evidence": "DECLARED"
+      },
+      {
+        "id": "X-TRACKED",
+        "severity": "HIGH",
+        "description": "Fichiers sensibles suivis par Git — SENSITIVE_TRACKED — contenu non lu, noms seulement : db/pg/seed_100_referentiel_reel.sql, db/pg/seed_110_comptes_production.sql, db/pg/seed_120_entreprise.sql",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "A-claude-code-AGENTS",
+        "severity": "MEDIUM",
+        "description": "agents du projet non enregistrés — ui-mobile-erp",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "A-claude-code-BYPASS",
+        "severity": "MEDIUM",
+        "description": "claude-code : contournement des permissions — non interdit par la configuration",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "A-claude-code-RISK-1",
+        "severity": "MEDIUM",
+        "description": "claude-code : règle risquée — Read(//c/Users/vboxuser/Desktop/**) — lecture d'un dossier personnel entier",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "A-claude-code-RISK-2",
+        "severity": "MEDIUM",
+        "description": "claude-code : règle risquée — Bash(git checkout *) — commande Git pouvant détruire ou publier",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "A-claude-code-SKILLS",
+        "severity": "MEDIUM",
+        "description": "skills du projet non enregistrés — axum-sqlx, erp-audit-logs, erp-finance, higgsfield-brandkit, higgsfield-generate, higgsfield-marketplace-cards, higgsfield-product-photoshoot, higgsfield-soul-id, higgsfield-video-explainer, higgsfield-websites, higgsfield-youtube-thumbnail, react-state-architecture, tauri-security",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "C-DEPENDENCY_AUDIT",
+        "severity": "MEDIUM",
+        "description": "DEPENDENCY_AUDIT — hors outils du projet : cargo-audit (CANDIDATE), cargo-deny (CANDIDATE), npm-audit (CANDIDATE)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "C-SECRET_SCAN",
+        "severity": "MEDIUM",
+        "description": "SECRET_SCAN — hors outils du projet : gitleaks (CANDIDATE)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "C-SECURITY_SCAN",
+        "severity": "MEDIUM",
+        "description": "SECURITY_SCAN — hors outils du projet : semgrep (DISCOVERED)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "M-claude-docs-connector",
+        "severity": "MEDIUM",
+        "description": "MCP claude-docs-connector — activation invisible dans les fichiers locaux",
+        "evidence": "UNVERIFIABLE"
+      },
+      {
+        "id": "P-MANIFEST",
+        "severity": "MEDIUM",
+        "description": "Manifest du projet — manifest absent du projet : brouillon de la Factory utilisé",
+        "evidence": "DECLARED"
+      },
+      {
+        "id": "Q-CI",
+        "severity": "MEDIUM",
+        "description": "Intégration continue — aucune configuration de CI (la CI est la source de vérité, règle 11)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "S-DISK-C",
+        "severity": "MEDIUM",
+        "description": "Espace libre C:\\ — 14.1 Go libres (seuil 20 Go)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "X-IGNORED",
+        "severity": "MEDIUM",
+        "description": "Fichiers sensibles présents, exclus de Git — contenu non lu : backend/.env, backend/.env.example, backend/sauvegardes/, deploiement/gestionfil-20261013-2007.tar.gz, deploiement/gestionfil-20261015-1055.tar.gz, deploiement/paquet/, frontend/rapport-e2e/, frontend/rapport-simulation/",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "G-DIRTY",
+        "severity": "LOW",
+        "description": "Modifications non commitées — 1 fichier(s)",
+        "evidence": "VERIFIED"
+      },
+      {
+        "id": "G-HOOKS",
+        "severity": "LOW",
+        "description": "Hooks Git — aucun hook actif",
+        "evidence": "VERIFIED"
+      }
+    ],
+    "decisions": [],
+    "risks": [],
+    "artifacts": [],
+    "tests": [],
+    "unresolved": [
+      "P-MANIFEST : copier le manifest dans le projet (WAITING_HUMAN)",
+      "A-claude-code-DENY : définir les refus (production, secrets, destructif)",
+      "A-claude-code-RISK-1 : restreindre ou retirer (WAITING_HUMAN)",
+      "A-claude-code-RISK-2 : restreindre ou retirer (WAITING_HUMAN)",
+      "A-claude-code-PROD : garde de production (hook PreToolUse) : WAITING_HUMAN",
+      "A-claude-code-AGENTS : inscrire au registre ou retirer (UNAPPROVED)",
+      "A-claude-code-SKILLS : inscrire au registre ou retirer (UNAPPROVED)",
+      "M-01 : désactiver ou faire évaluer (Security Owner)",
+      "M-02 : désactiver ou faire évaluer (Security Owner)",
+      "M-03 : désactiver ou faire évaluer (Security Owner)",
+      "M-04 : désactiver ou faire évaluer (Security Owner)",
+      "M-05 : désactiver ou faire évaluer (Security Owner)",
+      "M-06 : désactiver ou faire évaluer (Security Owner)",
+      "M-07 : désactiver ou faire évaluer (Security Owner)",
+      "M-08 : désactiver ou faire évaluer (Security Owner)",
+      "M-09 : désactiver ou faire évaluer (Security Owner)",
+      "M-10 : désactiver ou faire évaluer (Security Owner)",
+      "M-claude-docs-connector : vérifier dans le compte",
+      "X-TRACKED : retirer de l'historique et invalider (WAITING_HUMAN)",
+      "X-IGNORED : interdire leur lecture aux agents (règles de refus)",
+      "Q-security : choisir et faire évaluer un outil",
+      "Q-dependency_audit : choisir et faire évaluer un outil",
+      "G-UNPUSHED : publier (action humaine)"
+    ],
+    "next_phase": "PROJECT_ANALYSIS",
+    "human_action_required": true
+  },
+  "bootstrap": {
+    "version": "1.0.0",
+    "mode": "CHECK",
+    "timestamp": "2026-10-15T14:45:59+00:00",
+    "factory_state": "READY",
+    "phase_readiness": {
+      "PROJECT_ANALYSIS": "READY",
+      "EXECUTION": "BLOCKED"
+    },
+    "manifest_source": "DRAFT",
+    "constats": [
+      {
+        "id": "F-ROOT",
+        "domaine": "factory",
+        "element": "FACTORY_ROOT",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "C:\\Users\\vboxuser\\Desktop\\software-factory",
+        "bloque": [
+          "PROJECT_ANALYSIS",
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "F-PLAYBOOK",
+        "domaine": "factory",
+        "element": "Playbook normatif",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "v3.2, empreinte conforme",
+        "bloque": [
+          "PROJECT_ANALYSIS",
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "F-REGISTRY",
+        "domaine": "factory",
+        "element": "Registre et schémas",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "107 fiches valides",
+        "bloque": [
+          "PROJECT_ANALYSIS",
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "P-ROOT",
+        "domaine": "root_scope",
+        "element": "PROJECT_ROOT",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "C:\\Users\\vboxuser\\Desktop\\gestionFil",
+        "bloque": [
+          "PROJECT_ANALYSIS",
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "P-MANIFEST",
+        "domaine": "root_scope",
+        "element": "Manifest du projet",
+        "statut": "WARNING",
+        "nature": "DECLARED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "manifest absent du projet : brouillon de la Factory utilisé",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "copier le manifest dans le projet (WAITING_HUMAN)"
+      },
+      {
+        "id": "S-DISK-C",
+        "domaine": "system",
+        "element": "Espace libre C:\\",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "14.1 Go libres (seuil 20 Go)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-AGENT_RUNTIME",
+        "domaine": "capability",
+        "element": "AGENT_RUNTIME",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "claude-code 2.1.300 (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-BROWSER_TEST",
+        "domaine": "capability",
+        "element": "BROWSER_TEST",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "playwright 1.56.1 (approuvé) ; msedge (NON approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-BUILD",
+        "domaine": "capability",
+        "element": "BUILD",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "cargo 1.93.1 (approuvé) ; npm 11.6.2 (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-CONFIG_PARSING",
+        "domaine": "factory",
+        "element": "CONFIG_PARSING",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "pyyaml 6.0.3 (approuvé)",
+        "bloque": [
+          "PROJECT_ANALYSIS",
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-DATABASE_INSPECTION",
+        "domaine": "capability",
+        "element": "DATABASE_INSPECTION",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "postgresql-client 18.4 (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-DEPENDENCY_AUDIT",
+        "domaine": "capability",
+        "element": "DEPENDENCY_AUDIT",
+        "statut": "DEGRADED",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "hors outils du projet : cargo-audit (CANDIDATE), cargo-deny (CANDIDATE), npm-audit (CANDIDATE)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-FACTORY_RUNTIME",
+        "domaine": "factory",
+        "element": "FACTORY_RUNTIME",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "python 3.14.2 (approuvé)",
+        "bloque": [
+          "PROJECT_ANALYSIS",
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-FORMAT",
+        "domaine": "capability",
+        "element": "FORMAT",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "rustfmt (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-IDE",
+        "domaine": "capability",
+        "element": "IDE",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "vscode 1.142.0 (approuvé)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-ISOLATED_WORKSPACE",
+        "domaine": "capability",
+        "element": "ISOLATED_WORKSPACE",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "git 2.55.0.windows.4 (approuvé) ; vérification : disponible ; 1 espace(s) de travail",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-LANGUAGE_TOOLCHAIN",
+        "domaine": "capability",
+        "element": "LANGUAGE_TOOLCHAIN",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "hors outils du projet : python (APPROVED) ; rustc 1.93.1 (approuvé) ; node 24.13.0 (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-LINT",
+        "domaine": "capability",
+        "element": "LINT",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "clippy (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-PACKAGE_MANAGEMENT",
+        "domaine": "capability",
+        "element": "PACKAGE_MANAGEMENT",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "cargo 1.93.1 (approuvé) ; npm 11.6.2 (approuvé) ; rustup 1.28.2 (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-SECRET_SCAN",
+        "domaine": "capability",
+        "element": "SECRET_SCAN",
+        "statut": "DEGRADED",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "hors outils du projet : gitleaks (CANDIDATE)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-SECURITY_SCAN",
+        "domaine": "capability",
+        "element": "SECURITY_SCAN",
+        "statut": "DEGRADED",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "hors outils du projet : semgrep (DISCOVERED)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-SOURCE_CONTROL",
+        "domaine": "factory",
+        "element": "SOURCE_CONTROL",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "git 2.55.0.windows.4 (approuvé) ; vérification : dépôt Git valide",
+        "bloque": [
+          "PROJECT_ANALYSIS",
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-TEST",
+        "domaine": "capability",
+        "element": "TEST",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "cargo 1.93.1 (approuvé) ; node 24.13.0 (approuvé) ; playwright 1.56.1 (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "C-TYPECHECK",
+        "domaine": "capability",
+        "element": "TYPECHECK",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "typescript 5.9.3 (approuvé)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-git",
+        "domaine": "capability",
+        "element": "outil exigé : git",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "2.55.0.windows.4 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-claude-code",
+        "domaine": "capability",
+        "element": "outil exigé : claude-code",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "2.1.300 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-rustc",
+        "domaine": "capability",
+        "element": "outil exigé : rustc",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "1.93.1 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-cargo",
+        "domaine": "capability",
+        "element": "outil exigé : cargo",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "1.93.1 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-node",
+        "domaine": "capability",
+        "element": "outil exigé : node",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "24.13.0 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-npm",
+        "domaine": "capability",
+        "element": "outil exigé : npm",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "11.6.2 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-postgresql-client",
+        "domaine": "capability",
+        "element": "outil exigé : postgresql-client",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "18.4 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "T-playwright",
+        "domaine": "capability",
+        "element": "outil exigé : playwright",
+        "statut": "READY",
+        "nature": "VERIFIED",
+        "gravite": "INFO",
+        "critique": true,
+        "detail": "1.56.1 — APPROVED",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "A-claude-code-DENY",
+        "domaine": "agent_permissions",
+        "element": "claude-code : règles de refus",
+        "statut": "FAILED",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "0 deny, 0 ask, 20 allow",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "définir les refus (production, secrets, destructif)"
+      },
+      {
+        "id": "A-claude-code-BYPASS",
+        "domaine": "agent_permissions",
+        "element": "claude-code : contournement des permissions",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "non interdit par la configuration",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "A-claude-code-RISK-1",
+        "domaine": "agent_permissions",
+        "element": "claude-code : règle risquée",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "Read(//c/Users/vboxuser/Desktop/**) — lecture d'un dossier personnel entier",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "restreindre ou retirer (WAITING_HUMAN)"
+      },
+      {
+        "id": "A-claude-code-RISK-2",
+        "domaine": "agent_permissions",
+        "element": "claude-code : règle risquée",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "Bash(git checkout *) — commande Git pouvant détruire ou publier",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "restreindre ou retirer (WAITING_HUMAN)"
+      },
+      {
+        "id": "A-claude-code-PROD",
+        "domaine": "production_protection",
+        "element": "Protection de la production",
+        "statut": "FAILED",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": true,
+        "detail": "hôtes de production déclarés : 2 ; aucune règle ni hook ne les protège",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "garde de production (hook PreToolUse) : WAITING_HUMAN"
+      },
+      {
+        "id": "A-claude-code-AGENTS",
+        "domaine": "agent_permissions",
+        "element": "agents du projet non enregistrés",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "ui-mobile-erp",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "inscrire au registre ou retirer (UNAPPROVED)"
+      },
+      {
+        "id": "A-claude-code-SKILLS",
+        "domaine": "agent_permissions",
+        "element": "skills du projet non enregistrés",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "axum-sqlx, erp-audit-logs, erp-finance, higgsfield-brandkit, higgsfield-generate, higgsfield-marketplace-cards, higgsfield-product-photoshoot, higgsfield-soul-id, higgsfield-video-explainer, higgsfield-websites, higgsfield-youtube-thumbnail, react-state-architecture, tauri-security",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "inscrire au registre ou retirer (UNAPPROVED)"
+      },
+      {
+        "id": "M-01",
+        "domaine": "mcp",
+        "element": "MCP higgsfield",
+        "statut": "FAILED",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : projet, local (~/.claude.json) ; actif : oui ; fiche : higgsfield (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-02",
+        "domaine": "mcp",
+        "element": "MCP gestion-fil-sqlite",
+        "statut": "UNKNOWN",
+        "nature": "UNVERIFIABLE",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : réglages utilisateur (clé non documentée) ; actif : inconnu ; fiche : mcp-server-sqlite (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-03",
+        "domaine": "mcp",
+        "element": "MCP postgres-local",
+        "statut": "UNKNOWN",
+        "nature": "UNVERIFIABLE",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : réglages utilisateur (clé non documentée) ; actif : inconnu ; fiche : mcp-server-postgres (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-04",
+        "domaine": "mcp",
+        "element": "MCP postgres",
+        "statut": "UNKNOWN",
+        "nature": "UNVERIFIABLE",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : mcp-server-postgres (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-05",
+        "domaine": "mcp",
+        "element": "MCP fetch",
+        "statut": "UNKNOWN",
+        "nature": "UNVERIFIABLE",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : mcp-fetch (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-06",
+        "domaine": "mcp",
+        "element": "MCP sequentialthinking",
+        "statut": "UNKNOWN",
+        "nature": "UNVERIFIABLE",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : mcp-sequential-thinking (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-07",
+        "domaine": "mcp",
+        "element": "MCP semgrep",
+        "statut": "UNKNOWN",
+        "nature": "UNVERIFIABLE",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : projet (.mcp.json) ; actif : inconnu ; fiche : semgrep-mcp (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-08",
+        "domaine": "mcp",
+        "element": "MCP context7",
+        "statut": "FAILED",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : greffon utilisateur context7@claude-plugins-official (tous projets) ; actif : oui ; fiche : context7 (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-09",
+        "domaine": "mcp",
+        "element": "MCP playwright-mcp",
+        "statut": "FAILED",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : greffon utilisateur playwright@claude-plugins-official (tous projets) ; actif : oui ; fiche : playwright-mcp (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-10",
+        "domaine": "mcp",
+        "element": "MCP microsoft/playwright-mcp",
+        "statut": "FAILED",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "UNAPPROVED — portée : IDE (mcp.json) ; actif : oui ; fiche : playwright-mcp (DISCOVERED)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "désactiver ou faire évaluer (Security Owner)"
+      },
+      {
+        "id": "M-claude-docs-connector",
+        "domaine": "mcp",
+        "element": "MCP claude-docs-connector",
+        "statut": "UNKNOWN",
+        "nature": "UNVERIFIABLE",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "activation invisible dans les fichiers locaux",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": "vérifier dans le compte"
+      },
+      {
+        "id": "X-TRACKED",
+        "domaine": "secrets",
+        "element": "Fichiers sensibles suivis par Git",
+        "statut": "FAILED",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "SENSITIVE_TRACKED — contenu non lu, noms seulement : db/pg/seed_100_referentiel_reel.sql, db/pg/seed_110_comptes_production.sql, db/pg/seed_120_entreprise.sql",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "retirer de l'historique et invalider (WAITING_HUMAN)"
+      },
+      {
+        "id": "X-IGNORED",
+        "domaine": "secrets",
+        "element": "Fichiers sensibles présents, exclus de Git",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "contenu non lu : backend/.env, backend/.env.example, backend/sauvegardes/, deploiement/gestionfil-20261013-2007.tar.gz, deploiement/gestionfil-20261015-1055.tar.gz, deploiement/paquet/, frontend/rapport-e2e/, frontend/rapport-simulation/",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": "interdire leur lecture aux agents (règles de refus)"
+      },
+      {
+        "id": "Q-format",
+        "domaine": "quality",
+        "element": "gate format",
+        "statut": "READY",
+        "nature": "DECLARED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "CONFIGURED : « cargo fmt --check » (dans backend) — déclarée, non exécutée",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "Q-lint",
+        "domaine": "quality",
+        "element": "gate lint",
+        "statut": "READY",
+        "nature": "DECLARED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "CONFIGURED : « npm run lint » (dans frontend) — déclarée, non exécutée",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "Q-typecheck",
+        "domaine": "quality",
+        "element": "gate typecheck",
+        "statut": "READY",
+        "nature": "DECLARED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "CONFIGURED : « npm run build » (dans frontend) — déclarée, non exécutée",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "Q-unit_tests",
+        "domaine": "quality",
+        "element": "gate unit_tests",
+        "statut": "READY",
+        "nature": "DECLARED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "CONFIGURED : « cargo test --bins » (dans backend) — déclarée, non exécutée",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "Q-integration_tests",
+        "domaine": "quality",
+        "element": "gate integration_tests",
+        "statut": "READY",
+        "nature": "DECLARED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "CONFIGURED : « python backend/tests/banc/banc.py » (dans .) — déclarée, non exécutée",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "Q-build",
+        "domaine": "quality",
+        "element": "gate build",
+        "statut": "READY",
+        "nature": "DECLARED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "CONFIGURED : « cargo build --bins » (dans backend) — déclarée, non exécutée",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "Q-security",
+        "domaine": "quality",
+        "element": "gate security",
+        "statut": "FAILED",
+        "nature": "DECLARED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "aucun outil approuvé (SECRET_SCAN, SECURITY_SCAN)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "choisir et faire évaluer un outil"
+      },
+      {
+        "id": "Q-dependency_audit",
+        "domaine": "quality",
+        "element": "gate dependency_audit",
+        "statut": "FAILED",
+        "nature": "DECLARED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "aucun outil approuvé (DEPENDENCY_AUDIT)",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": "choisir et faire évaluer un outil"
+      },
+      {
+        "id": "Q-e2e",
+        "domaine": "quality",
+        "element": "gate e2e",
+        "statut": "READY",
+        "nature": "DECLARED",
+        "gravite": "INFO",
+        "critique": false,
+        "detail": "CONFIGURED : « python e2e/lancer.py » (dans frontend) — déclarée, non exécutée",
+        "bloque": [
+          "EXECUTION"
+        ],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "Q-CI",
+        "domaine": "quality",
+        "element": "Intégration continue",
+        "statut": "DEGRADED",
+        "nature": "VERIFIED",
+        "gravite": "MEDIUM",
+        "critique": false,
+        "detail": "aucune configuration de CI (la CI est la source de vérité, règle 11)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "G-UNPUSHED",
+        "domaine": "source_control",
+        "element": "Commits non publiés",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "HIGH",
+        "critique": false,
+        "detail": "108 commit(s) sans copie distante sur lots-devise-import-machines (Playbook §14.4)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": "publier (action humaine)"
+      },
+      {
+        "id": "G-DIRTY",
+        "domaine": "source_control",
+        "element": "Modifications non commitées",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "LOW",
+        "critique": false,
+        "detail": "1 fichier(s)",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      },
+      {
+        "id": "G-HOOKS",
+        "domaine": "source_control",
+        "element": "Hooks Git",
+        "statut": "WARNING",
+        "nature": "VERIFIED",
+        "gravite": "LOW",
+        "critique": false,
+        "detail": "aucun hook actif",
+        "bloque": [],
+        "preuves": [],
+        "action_humaine": null
+      }
+    ],
+    "observations": {
+      "registre": {
+        "fiches": {
+          "capabilities": 34,
+          "tools": 27,
+          "mcp": 14,
+          "models": 4,
+          "agents": 15,
+          "skills": 0,
+          "workflows": 11,
+          "projects": 2
+        },
+        "erreurs": [],
+        "en_attente_humaine": [
+          "registry/projects/gestionfil/factory.draft.yaml : budgets.cost_limit",
+          "registry/projects/gestionfil/factory.draft.yaml : compliance.frameworks[0]",
+          "registry/projects/gestionfil/factory.draft.yaml : data.classification",
+          "registry/projects/gestionfil/factory.draft.yaml : data.owners[0]",
+          "registry/projects/gestionfil/factory.draft.yaml : governance.data_owner",
+          "registry/projects/gestionfil/factory.draft.yaml : governance.project_owner",
+          "registry/projects/gestionfil/factory.draft.yaml : governance.release_approver",
+          "registry/projects/gestionfil/factory.draft.yaml : governance.security_owner"
+        ]
+      },
+      "lectures_identite": [
+        "C:\\Users\\vboxuser\\Desktop\\software-factory\\factory.yaml",
+        "C:\\Users\\vboxuser\\Desktop\\gestionFil\\backend\\Cargo.toml",
+        "C:\\Users\\vboxuser\\Desktop\\gestionFil\\frontend\\package.json"
+      ],
+      "systeme": {
+        "os": "Windows-11-10.0.26300-SP0",
+        "machine": "AMD64",
+        "python": "3.14.2"
+      },
+      "verifications": {
+        "ISOLATED_WORKSPACE": {
+          "present": true,
+          "version": null,
+          "nature": "VERIFIED",
+          "detail": "disponible ; 1 espace(s) de travail",
+          "donnees": {
+            "espaces": 1
+          }
+        },
+        "SOURCE_CONTROL": {
+          "present": true,
+          "version": null,
+          "nature": "VERIFIED",
+          "detail": "dépôt Git valide",
+          "donnees": {
+            "branche": "lots-devise-import-machines",
+            "amont": "origin/lots-devise-import-machines",
+            "en_avance": 108,
+            "en_retard": 0,
+            "sans_commit": false,
+            "modifies": 1,
+            "distants": [
+              "https://github.com/abderrahimoauahbi-commits/GestionFil"
+            ],
+            "espaces_isoles": 1,
+            "hooks_path": null,
+            "hooks_actifs": []
+          }
+        }
+      },
+      "outils": {
+        "claude-code": {
+          "present": true,
+          "version": "2.1.300",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Users\\vboxuser\\.local\\bin\\claude.EXE"
+        },
+        "playwright": {
+          "present": true,
+          "version": "1.56.1",
+          "nature": "VERIFIED",
+          "detail": "déclaré ^1.56.1 ; installé",
+          "chemin": null
+        },
+        "msedge": {
+          "present": true,
+          "version": null,
+          "nature": "VERIFIED",
+          "detail": "présent (version non lue)",
+          "chemin": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
+        },
+        "cargo": {
+          "present": true,
+          "version": "1.93.1",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Users\\vboxuser\\.cargo\\bin\\cargo.EXE"
+        },
+        "npm": {
+          "present": true,
+          "version": "11.6.2",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Program Files\\nodejs\\npm.CMD"
+        },
+        "pyyaml": {
+          "present": true,
+          "version": "6.0.3",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Users\\vboxuser\\AppData\\Roaming\\Python\\Python314\\site-packages\\yaml\\__init__.py"
+        },
+        "postgresql-client": {
+          "present": true,
+          "version": "18.4",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Program Files\\PostgreSQL\\18\\bin\\psql.EXE"
+        },
+        "python": {
+          "present": true,
+          "version": "3.14.2",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Python314\\python.exe"
+        },
+        "rustfmt": {
+          "present": true,
+          "version": null,
+          "nature": "VERIFIED",
+          "detail": "présent (version non lue : commande hors liste blanche)",
+          "chemin": "C:\\Users\\vboxuser\\.cargo\\bin\\rustfmt.EXE"
+        },
+        "vscode": {
+          "present": true,
+          "version": "1.142.0",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Users\\vboxuser\\AppData\\Local\\Programs\\Microsoft VS Code\\bin\\code.CMD"
+        },
+        "git": {
+          "present": true,
+          "version": "2.55.0.windows.4",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Program Files\\Git\\mingw64\\bin\\git.EXE"
+        },
+        "rustc": {
+          "present": true,
+          "version": "1.93.1",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Users\\vboxuser\\.cargo\\bin\\rustc.EXE"
+        },
+        "node": {
+          "present": true,
+          "version": "24.13.0",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Program Files\\nodejs\\node.EXE"
+        },
+        "clippy": {
+          "present": true,
+          "version": null,
+          "nature": "VERIFIED",
+          "detail": "présent (version non lue : commande hors liste blanche)",
+          "chemin": "C:\\Users\\vboxuser\\.cargo\\bin\\cargo-clippy.EXE"
+        },
+        "rustup": {
+          "present": true,
+          "version": "1.28.2",
+          "nature": "VERIFIED",
+          "detail": "",
+          "chemin": "C:\\Users\\vboxuser\\.cargo\\bin\\rustup.EXE"
+        },
+        "typescript": {
+          "present": true,
+          "version": "5.9.3",
+          "nature": "VERIFIED",
+          "detail": "déclaré ^5.7.0 ; installé",
+          "chemin": null
+        }
+      },
+      "inventaires": {
+        "claude-code": {
+          "present": true,
+          "version": null,
+          "nature": "VERIFIED",
+          "detail": "configuration inventoriée (clés seulement)",
+          "donnees": {
+            "regles": {
+              "allow": 20,
+              "ask": 0,
+              "deny": 0
+            },
+            "regles_risquees": [
+              {
+                "regle": "Read(//c/Users/vboxuser/Desktop/**)",
+                "pourquoi": "lecture d'un dossier personnel entier"
+              },
+              {
+                "regle": "Bash(git checkout *)",
+                "pourquoi": "commande Git pouvant détruire ou publier"
+              }
+            ],
+            "contournement_interdit": false,
+            "hooks": [],
+            "greffons_actifs": [
+              "claude-md-management@claude-plugins-official",
+              "code-modernization@claude-plugins-official",
+              "context7@claude-plugins-official",
+              "example-skills@anthropic-agent-skills",
+              "frontend-design@claude-plugins-official",
+              "playwright@claude-plugins-official",
+              "rust-analyzer-lsp@claude-plugins-official",
+              "superpowers@claude-plugins-official",
+              "typescript-lsp@claude-plugins-official"
+            ],
+            "mcp_declares": [
+              {
+                "nom": "higgsfield",
+                "portee": "projet, local (~/.claude.json)",
+                "actif": true,
+                "descripteur": "https://mcp.higgsfield.ai/mcp"
+              },
+              {
+                "nom": "gestion-fil-sqlite",
+                "portee": "réglages utilisateur (clé non documentée)",
+                "actif": null,
+                "descripteur": "npx -y @modelcontextprotocol/server-sqlite --db c:/Users/vboxuser/Desktop/gestionFil/db/gestionfil.db"
+              },
+              {
+                "nom": "postgres-local",
+                "portee": "réglages utilisateur (clé non documentée)",
+                "actif": null,
+                "descripteur": "npx -y @modelcontextprotocol/server-postgres postgresql://votre_user:***@localhost:5432/votre_bdd"
+              },
+              {
+                "nom": "postgres",
+                "portee": "projet (.mcp.json)",
+                "actif": null,
+                "descripteur": "cmd /c npx -y @modelcontextprotocol/server-postgres ${DATABASE_URL:-postgres://user:***@localhost:5432/erp_db}"
+              },
+              {
+                "nom": "fetch",
+                "portee": "projet (.mcp.json)",
+                "actif": null,
+                "descripteur": "python -m mcp_server_fetch --ignore-robots-txt"
+              },
+              {
+                "nom": "sequentialthinking",
+                "portee": "projet (.mcp.json)",
+                "actif": null,
+                "descripteur": "cmd /c npx -y @modelcontextprotocol/server-sequential-thinking"
+              },
+              {
+                "nom": "semgrep",
+                "portee": "projet (.mcp.json)",
+                "actif": null,
+                "descripteur": "${USERPROFILE}\\AppData\\Roaming\\Python\\Python314\\Scripts\\semgrep.exe mcp -t stdio"
+              }
+            ],
+            "reglages_projet_locaux_lus": false,
+            "agents_projet": [
+              "ui-mobile-erp"
+            ],
+            "skills_projet": [
+              "axum-sqlx",
+              "erp-audit-logs",
+              "erp-finance",
+              "higgsfield-brandkit",
+              "higgsfield-generate",
+              "higgsfield-marketplace-cards",
+              "higgsfield-product-photoshoot",
+              "higgsfield-soul-id",
+              "higgsfield-video-explainer",
+              "higgsfield-websites",
+              "higgsfield-youtube-thumbnail",
+              "react-state-architecture",
+              "tauri-security"
+            ],
+            "refus": [
+              "sensible : C:\\Users\\vboxuser\\Desktop\\gestionFil\\.claude\\settings.local.json"
+            ]
+          }
+        },
+        "vscode": {
+          "present": true,
+          "version": null,
+          "nature": "VERIFIED",
+          "detail": "configuration inventoriée (clés seulement)",
+          "donnees": {
+            "cles_reglages": 15,
+            "profils": [
+              "Agents"
+            ],
+            "extensions": [
+              "anthropic.claude-code",
+              "christian-kohler.npm-intellisense",
+              "dotjoshjohnson.xml",
+              "dustypomerleau.rust-syntax",
+              "ecmel.vscode-html-css",
+              "esbenp.prettier-vscode",
+              "fill-labs.dependi",
+              "firefox-devtools.vscode-firefox-debug",
+              "formulahendry.auto-close-tag",
+              "formulahendry.auto-complete-tag",
+              "formulahendry.auto-rename-tag",
+              "hbenl.vscode-test-explorer",
+              "ms-playwright.playwright",
+              "ms-python.debugpy",
+              "ms-python.python",
+              "ms-python.vscode-pylance",
+              "ms-python.vscode-python-envs",
+              "ms-vscode.anycode-rust",
+              "ms-vscode.cmake-tools",
+              "ms-vscode.cpp-devtools",
+              "ms-vscode.cpptools",
+              "ms-vscode.cpptools-extension-pack",
+              "ms-vscode.cpptools-themes",
+              "ms-vscode.powershell",
+              "ms-vscode.test-adapter-converter",
+              "ms-vscode.vscode-typescript-next",
+              "mtxr.sqltools",
+              "naumovs.color-highlight",
+              "openai.codex-audio",
+              "pkief.material-icon-theme",
+              "rust-lang.rust-analyzer",
+              "rvest.vs-code-prettier-eslint",
+              "swellaby.rust-pack",
+              "tamasfe.even-better-toml",
+              "tauri-apps.tauri-vscode",
+              "tomoki1207.pdf",
+              "typescriptteam.native-preview",
+              "xabikos.javascriptsnippets"
+            ],
+            "nombre_extensions": 38,
+            "mcp_declares": [
+              {
+                "nom": "microsoft/playwright-mcp",
+                "portee": "IDE (mcp.json)",
+                "actif": true,
+                "descripteur": "npx @playwright/mcp@latest"
+              }
+            ],
+            "refus": []
+          }
+        }
+      },
+      "fichiers_sensibles": {
+        "suivis": [
+          "db/pg/seed_100_referentiel_reel.sql",
+          "db/pg/seed_110_comptes_production.sql",
+          "db/pg/seed_120_entreprise.sql"
+        ],
+        "ignores": [
+          "backend/.env",
+          "backend/.env.example",
+          "backend/sauvegardes/",
+          "deploiement/gestionfil-20261013-2007.tar.gz",
+          "deploiement/gestionfil-20261015-1055.tar.gz",
+          "deploiement/paquet/",
+          "frontend/rapport-e2e/",
+          "frontend/rapport-simulation/"
+        ]
+      }
+    },
+    "preuves_commandes": [
+      {
+        "type": "COMMAND",
+        "source": "claude --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "2.1.300 (Claude Code) (0.1 s)",
+        "timestamp": "2026-10-15T14:45:56+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "cargo --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "cargo 1.93.1 (083ac5135 2025-12-15) (0.1 s)",
+        "timestamp": "2026-10-15T14:45:57+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "npm --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "11.6.2 (0.5 s)",
+        "timestamp": "2026-10-15T14:45:57+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "psql --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "psql (PostgreSQL) 18.4 (0.0 s)",
+        "timestamp": "2026-10-15T14:45:57+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "code --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "1.142.0\n6d62b1d5dace93a33b3a6d3eca1317bd5e15bcb1\nx64 (0.2 s)",
+        "timestamp": "2026-10-15T14:45:57+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "git version 2.55.0.windows.4 (0.0 s)",
+        "timestamp": "2026-10-15T14:45:57+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil worktree list",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "C:/Users/vboxuser/Desktop/gestionFil 0255dcf [lots-devise-import-machines] (0.1 s)",
+        "timestamp": "2026-10-15T14:45:57+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "rustc --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "rustc 1.93.1 (01f6ddf75 2026-02-11) (0.2 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "node --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "v24.13.0 (0.1 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "rustup --version",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "rustup 1.28.2 (e4f3ad6f8 2025-04-28) (0.1 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil rev-parse --show-toplevel",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "C:/Users/vboxuser/Desktop/gestionFil (0.0 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil status --short --branch",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "## lots-devise-import-machines...origin/lots-devise-import-machines [ahead 108]\n M db/pg/migrations/2026-10-14a_reception_arrivage.sql (0.1 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil remote -v",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "origin\thttps://github.com/abderrahimoauahbi-commits/GestionFil (fetch)\norigin\thttps://github.com/abderrahimoauahbi-commits/GestionFil (push) (0.1 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil worktree list",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "C:/Users/vboxuser/Desktop/gestionFil 0255dcf [lots-devise-import-machines] (0.0 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil config --get core.hookspath",
+        "result": "FAILURE",
+        "exit_code": 1,
+        "extrait": " (0.0 s)",
+        "timestamp": "2026-10-15T14:45:58+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "code --list-extensions",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": "anthropic.claude-code\nchristian-kohler.npm-intellisense\ndotjoshjohnson.xml\ndustypomerleau.rust-syntax\necmel.vscode-html-css (0.5 s)",
+        "timestamp": "2026-10-15T14:45:59+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil ls-files",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": ".gitattributes\n.gitignore\nCLAUDE.md\nREADME.md\nbackend/Cargo.lock (0.1 s)",
+        "timestamp": "2026-10-15T14:45:59+00:00"
+      },
+      {
+        "type": "COMMAND",
+        "source": "git -C C:\\Users\\vboxuser\\Desktop\\gestionFil ls-files --others --ignored --exclude-standard --directory",
+        "result": "SUCCESS",
+        "exit_code": 0,
+        "extrait": ".agents/\n.claude/\n.mcp.json\nbackend/.env\nbackend/.env.example (0.1 s)",
+        "timestamp": "2026-10-15T14:45:59+00:00"
+      }
+    ],
+    "lectures": [
+      "C:\\Users\\vboxuser\\Desktop\\software-factory\\factory.yaml (identité)",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\backend\\Cargo.toml (identité)",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\frontend\\package.json (identité)",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil/ (liste)",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\frontend\\package.json",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\frontend\\node_modules\\@playwright\\test\\package.json",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\.git\\hooks/ (liste)",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil/ (liste)",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\frontend\\package.json",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\frontend\\node_modules\\typescript\\package.json",
+      "C:\\Users\\vboxuser\\.claude\\settings.json",
+      "C:\\Users\\vboxuser\\.claude.json",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\.mcp.json",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\.claude\\agents/ (liste)",
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\.claude\\skills/ (liste)",
+      "C:\\Users\\vboxuser\\AppData\\Roaming\\Code\\User\\settings.json",
+      "C:\\Users\\vboxuser\\AppData\\Roaming\\Code\\User\\mcp.json",
+      "C:\\Users\\vboxuser\\AppData\\Roaming\\Code\\User\\globalStorage\\storage.json"
+    ],
+    "refus": [
+      "C:\\Users\\vboxuser\\Desktop\\gestionFil\\.claude\\settings.local.json : fichier ou répertoire sensible (DENY)"
+    ],
+    "garanties": [
+      "aucune écriture hors bootstrap/reports",
+      "aucune commande hors liste blanche",
+      "aucun fichier sensible ouvert",
+      "aucun serveur MCP démarré",
+      "aucune connexion réseau ou base de données par le Bootstrap"
+    ]
+  }
+}

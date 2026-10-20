@@ -1,0 +1,3 @@
+$ psql -f 2026-10-15_remise_fournisseur.sql
+code=0
+

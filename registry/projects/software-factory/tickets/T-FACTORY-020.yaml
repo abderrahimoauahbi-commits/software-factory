@@ -1,0 +1,104 @@
+schema_version: '1.0'
+id: T-FACTORY-020
+project_id: software-factory
+workflow_id: feature
+title: Tickets validés par le registre, preuve des changements, dépendances copiées dans l'espace isolé
+objective: 'Corriger trois défauts du pilote : workflow inconnu accepté, preuve de diff vide pour un fichier nouveau,
+  espace isolé sans dépendances'
+requester: Factory Owner
+state: IMPLEMENTED
+criticality: C3
+criticality_justification: 'Validation du registre et contenu de l''espace isolé (isolation) : contrôles de sécurité
+  du cycle (Playbook §9.1, §10.4).'
+scope:
+  included:
+  - core/schemas/objects/ticket.schema.yaml
+  - core/noyau/registre.py
+  - core/noyau/execution.py
+  - core/noyau/politique.py
+  - core/noyau/contexte.py
+  - policies/execution.yaml
+  - registry/projects/gestionfil/project.yaml
+  - core/tests/test_registre.py
+  - core/tests/test_execution.py
+  - adr/accepted/ADR-0014-dependances-et-preuves.md
+  excluded:
+  - dépôt GestionFil (rien n'y est écrit)
+  - toute installation de paquet
+  - réseau
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules:
+  - un ticket référence un workflow, un projet et des tickets existants
+  - une dépendance est copiée, jamais liée, et doit être ignorée par l'outil de version
+  functional_requirements:
+  - 'registre : chargement des tickets'
+  - preuve <exécution>-changes
+  - 'carte du projet : workspace.copy_from_root'
+  non_functional_requirements:
+  - aucune installation, aucun réseau
+  - contenu d'un fichier nouveau jamais lu pour la preuve
+  acceptance_criteria:
+  - workflow, projet ou ticket dépendant inconnu → REFERENCE_UNKNOWN
+  - 'preuve : « modifié +a -b » et « nouveau N octets »'
+  - copie isolée du projet ; refus des chemins non relatifs, sensibles, absents, existants ou non ignorés
+design:
+  architecture_ref: adr/accepted/ADR-0014-dependances-et-preuves.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0014
+security:
+  required: true
+  assessment_ref: adr/accepted/ADR-0014-dependances-et-preuves.md
+  risks:
+  - copie d'un dossier sensible (refusée)
+  - dépendance devenant un changement (refusée)
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-019
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: retirer workspace de la carte du projet ; retirer les références du schéma des tickets
+approvals:
+  required:
+  - revue humaine du jalon
+  - revue de sécurité (C3)
+  status: PENDING
+evidence:
+  required:
+  - tests
+  collected:
+  - 'test_registre : tickets chargés, références inconnues refusées'
+  - 'test_execution : PreuveDesChangements, DependancesCopiees (copie isolée + 6 refus)'
+  - 'suites : core 279 OK, bootstrap 2 OK ; registre 160 objets VALID'
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: 'revue humaine — relecteur distinct requis : WAITING_HUMAN'

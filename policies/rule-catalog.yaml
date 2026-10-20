@@ -1,0 +1,268 @@
+# Catalogue des règles du Policy Engine (ADR-0017 D30, D11 ; étape G1). Source NORMATIVE des règles : le code du
+# moteur (core/noyau/politique.py) les applique, ce fichier les définit et les explique. Un test bloquant vérifie la
+# correspondance code ↔ catalogue dans les deux sens (core/tests/test_catalogue_regles.py).
+#
+# nature (pour une décision DENY) :
+#   DENY_ABSOLUTE   aucune exception humaine possible (falsification, contournement, accès inter-projets, secret,
+#                   erreur interne, demande malformée…)
+#   DENY_BY_POLICY  interdit dans ce contexte ; une exception n'est possible que si `exception.exceptable: true`
+# Une règle absente du catalogue est traitée comme DENY_ABSOLUTE (refus par défaut, fail-closed).
+schema_version: "1.0"
+id: rule-catalog
+version: "1.0"
+rule_catalog_version: 1
+
+rules:
+  R-ERR:
+    name: Erreur interne d'évaluation
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: une erreur du moteur n'est jamais interprétée comme une autorisation (fail-closed)
+    risk: une autorisation obtenue par un cas non prévu
+    exception: { exceptable: false }
+  R00:
+    name: Demande malformée ou action inconnue
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: une demande non structurée, un acteur inconnu ou une action absente des politiques ne sont pas évaluables
+    risk: contournement par une action non décrite
+    exception: { exceptable: false }
+  R01:
+    name: Verbe de pouvoir (approuver, accorder, changer une politique)
+    decisions: [ALLOW, DENY]
+    nature: DENY_ABSOLUTE
+    why: seul un humain habilité exerce un verbe de pouvoir ; un agent ne s'approuve jamais
+    risk: auto-approbation, fausse approbation humaine
+    human_boundary: PERMISSION_MODEL_CHANGE
+    exception: { exceptable: false }
+  R02:
+    name: Acteur humain ou système hors de son périmètre d'évaluation
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: en v1, seuls les verbes de pouvoir humains passent par le moteur ; un acteur système ne fait que lire
+    risk: confusion des rôles d'acteurs
+    exception: { exceptable: false }
+  R03:
+    name: Action réservée à une décision humaine
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: suppression, réseau, déploiement, push et merge sont réservés à une décision humaine (ADR-0006, ADR-0016)
+    risk: action irréversible ou sortante sans décision humaine
+    human_boundary: PRODUCTION_WRITE
+    exception: { exceptable: true, allowed_roles: [factory_owner, security_owner], max_duration_hours: 4, max_uses: 1 }
+  R04:
+    name: Agent inconnu, non habilité ou déclaré avec un accès interdit
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un agent agit seulement s'il est enregistré et habilité, ou sous bail en environnement jetable (ADR-0016)
+    risk: agent non évalué hors d'un environnement jetable
+    exception: { exceptable: false }   # voie légitime : évaluation ou habilitation provisoire (ADR-0010)
+  R05:
+    name: Projet non enregistré ou agent non autorisé par le projet
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: isolation des projets ; un projet n'accède jamais à un autre
+    risk: accès inter-projets
+    exception: { exceptable: false }
+  R06:
+    name: Action d'agent sans ticket, ou ticket d'un autre projet
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: le ticket est un contrat (P04) et appartient à un seul projet
+    risk: travail hors contrat, accès inter-projets
+    exception: { exceptable: false }
+  R07:
+    name: Criticité invalide, abaissée, ou ticket C0 non limité à la lecture
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: la criticité ne peut jamais être abaissée par un agent (règle absolue 9)
+    risk: contournement des contrôles par sous-classement
+    exception: { exceptable: false }
+  R08:
+    name: Criticité au-delà du maximum de l'agent
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un agent agit dans la criticité pour laquelle il est habilité
+    risk: agent hors de sa compétence évaluée
+    exception: { exceptable: false }   # voie légitime : évaluation
+  R09:
+    name: Environnement non déclaré, non autorisé, ou production pour un agent
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un agent n'agit que dans un environnement déclaré et autorisé ; jamais en production (Executable Schemas §34)
+    risk: action en production ou dans un environnement inconnu
+    human_boundary: PRODUCTION_WRITE
+    exception: { exceptable: false }
+  R11:
+    name: Action C4 non permise à un agent
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: en C4, l'agent prépare et l'humain décide (Playbook §9.1)
+    risk: opération critique sans décision humaine
+    exception: { exceptable: false }
+  R12:
+    name: Approbation humaine requise (C3, C4, actions contrôlées)
+    decisions: [APPROVAL_REQUIRED, ALLOW]
+    why: au-delà de C2, ou pour une action contrôlée, une approbation humaine liée au contexte exact est exigée
+    risk: action sensible sans décision humaine
+    human_boundary: PERMISSION_MODEL_CHANGE
+  R13:
+    name: Commande refusée (non reconnue, caractère de shell, option interdite)
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: seules les commandes classées (liste blanche, gates du manifest, préfixes contrôlés) sont permises
+    risk: exécution arbitraire, contournement des permissions (--dangerously-skip-permissions)
+    exception: { exceptable: false }   # voie légitime : classement de la commande par politique
+  R14:
+    name: Outil inconnu, non approuvé ou non autorisé
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un outil n'est utilisable qu'approuvé au registre et autorisé par le projet et le ticket
+    risk: outil non évalué
+    exception: { exceptable: false }   # voie légitime : cycle de vie du registre
+  R15:
+    name: MCP non approuvé ou non autorisé
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: MCP refusé par défaut ; autorisé par projet et par ticket ; jamais d'écriture en production
+    risk: abus d'outil, exfiltration
+    exception: { exceptable: false }
+  R16:
+    name: Ressource de base de données attendue
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: une action de base vise une ressource de base déclarée
+    risk: demande malformée
+    exception: { exceptable: false }
+  R20:
+    name: Écriture hors d'un espace isolé du projet
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: un ticket, un espace isolé, une branche ; l'espace doit appartenir au projet
+    risk: écriture dans le dépôt principal ou dans un autre projet
+    exception: { exceptable: false }
+  R21:
+    name: Chemin absent
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: une action sur fichier désigne un chemin
+    risk: demande malformée
+    exception: { exceptable: false }
+  R22:
+    name: Chemin hors de la racine (remontée, lien, jonction)
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: aucun accès hors de la racine du projet ou de l'espace isolé
+    risk: évasion de périmètre, accès inter-projets
+    exception: { exceptable: false }
+  R23:
+    name: Chemin interdit ou sensible
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: secrets et chemins sensibles ne sont jamais lus ni écrits
+    risk: exposition de secret, données réelles
+    exception: { exceptable: false }
+  R24:
+    name: Lecture hors des chemins autorisés
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: la lecture se limite aux chemins du manifest et du ticket
+    risk: analyse hors périmètre
+    exception: { exceptable: true, allowed_roles: [factory_owner, project_owner], max_duration_hours: 24, max_uses: 1 }   # demande d'analyse (policies/analysis-scope.yaml)
+  R25:
+    name: Écriture hors des chemins du projet ou du périmètre du ticket ; ticket sans périmètre
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un changement de périmètre est une nouvelle décision ou un nouveau ticket (Playbook §9.5)
+    risk: débordement de périmètre
+    exception: { exceptable: false }
+  R30:
+    name: Autonomie par capacités non active, ou acteur non agent
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: une capacité ne s'accorde qu'à un agent, par bail, si la politique d'autonomie est active
+    risk: capacité hors du régime prévu
+    exception: { exceptable: false }
+  R31:
+    name: Capacité inconnue ou visant un genre de ressource inadapté
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: une capacité est définie par la politique d'autonomie, pour un genre de ressource
+    risk: demande malformée
+    exception: { exceptable: false }
+  R32:
+    name: Ressource non enregistrée, d'un autre projet ou inactive
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: l'identité d'une ressource vient du registre, jamais d'un nom ; isolation des projets
+    risk: viser une base réelle sous un nom trompeur ; accès inter-projets
+    exception: { exceptable: false }
+  R33:
+    name: Profil d'environnement inconnu ou non déclaré par le projet
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un profil n'est utilisable que s'il est déclaré et autorisé par le manifest
+    risk: environnement non maîtrisé
+    exception: { exceptable: false }
+  R34:
+    name: Niveau d'autonomie du projet
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: le niveau d'autonomie (A0 à A3) borne ce qu'un agent peut faire
+    risk: autonomie au-delà de ce que le projet accepte
+    exception: { exceptable: false }
+  R35:
+    name: Matrice du profil d'environnement
+    decisions: [ALLOW, DENY]
+    nature: DENY_BY_POLICY
+    why: la matrice du profil dit quelles capacités sont permises dans un environnement jetable
+    risk: "capacité non prévue (réseau, installation : DENY tant que la frontière réseau n'est pas appliquée)"
+    exception: { exceptable: false }   # décision B8 : pas de pseudo-capacité réseau par exception
+  R36:
+    name: Capacité destructive hors ressource jetable créée par la Factory
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: la destruction n'est permise que sur une ressource jetable créée par la Factory (ADR-0016)
+    risk: destruction de données réelles
+    exception: { exceptable: false }
+  R37:
+    name: Identité de la ressource non vérifiée à l'appel
+    decisions: [DENY]
+    nature: DENY_ABSOLUTE
+    why: la ressource interrogée maintenant doit être celle que la Factory a créée
+    risk: substitution de ressource
+    exception: { exceptable: false }
+  R38:
+    name: Approbation humaine requise pour une capacité (données sensibles, niveau A1, capacité en approbation)
+    decisions: [APPROVAL_REQUIRED, ALLOW]
+    why: certaines capacités franchissent une frontière humaine (données au-delà d'INTERNAL, niveau A1)
+    risk: accès sensible sans décision humaine
+    human_boundary: SENSITIVE_DATA_ACCESS
+  R39:
+    name: Capacité non déclarée par la fiche de l'agent
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un agent n'exerce que les capacités que sa fiche déclare
+    risk: agent hors de son rôle
+    exception: { exceptable: false }
+  R40:
+    name: Domaine du ticket non autorisé au rôle pour ce projet
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: un rôle n'agit que dans les domaines que sa fiche lui ouvre pour le projet (ADR-0022 v2, F-6)
+    risk: agent hors de son domaine de compétence
+    exception: { exceptable: false }
+  R41:
+    name: Skill exigée non autorisée au rôle, inconnue ou non approuvée
+    decisions: [DENY]
+    nature: DENY_BY_POLICY
+    why: une skill n'est utilisée que par un rôle qui l'autorise, et seulement approuvée (ADR-0022 v2, F-6)
+    risk: savoir-faire non évalué
+    exception: { exceptable: false }
+  R99:
+    name: Permission dans le périmètre, ou refus par défaut d'une action connue
+    decisions: [ALLOW, DENY]
+    nature: DENY_BY_POLICY
+    why: une action connue est permise dans son périmètre ; sinon, aucune règle ne la permet (refus par défaut)
+    risk: —
+    exception: { exceptable: false }

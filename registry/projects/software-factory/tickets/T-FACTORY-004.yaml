@@ -1,0 +1,92 @@
+schema_version: '1.0'
+id: T-FACTORY-004
+project_id: software-factory
+workflow_id: feature
+title: J2 — moteur de validation autonome
+objective: 'Valider tout objet contre son schéma : VALID, INVALID, REJECTED (guide §14, Executable Schemas §30)'
+requester: Factory Owner
+state: ACCEPTED
+criticality: C2
+criticality_justification: Composant de contrôle dont dépendent politiques et états (Playbook §9.1).
+scope:
+  included:
+  - core/noyau/validation.py
+  - core/noyau/registre.py
+  - core/schemas/objects/
+  - core/tests/
+  excluded:
+  - tout le reste
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules: []
+  functional_requirements: []
+  non_functional_requirements:
+  - aucun type d'objet ni outil codé dans le moteur
+  acceptance_criteria:
+  - projet valide → VALID
+  - sans id → INVALID
+  - schema_version incompatible → REJECTED
+  - C5 → REJECTED
+  - registre entier VALID
+  - CHECK inchangé
+design:
+  architecture_ref: adr/accepted/ADR-0004-moteur-de-validation.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0004
+security:
+  required: false
+  assessment_ref: null
+  risks: []
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets:
+  - T-FACTORY-003
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - core/tests
+  - bootstrap/tests
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: déplacements inverses listés dans ADR-0003 (dépôt non commité)
+approvals:
+  required:
+  - revue humaine du jalon
+  status: APPROVED
+  refs:
+  - APR-0004
+evidence:
+  required:
+  - tests
+  - empreinte du CHECK
+  collected:
+  - 'core/tests : 45 tests OK (dont 18 de validation)'
+  - 'bootstrap/tests : 2 OK'
+  - 'registre : 106 verdicts VALID, 0 erreur'
+  - empreinte du CHECK identique à la référence de J1 (cmp)
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+next: READY_TO_MERGE après le premier commit (geste humain)

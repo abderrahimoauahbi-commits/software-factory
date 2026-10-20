@@ -1,0 +1,7 @@
+schema_version: '1.0'
+id: FORMAT
+name: FORMAT
+description: Formatage du code
+status: DEFINED
+implementations:
+- rustfmt

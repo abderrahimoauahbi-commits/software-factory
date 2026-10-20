@@ -1,0 +1,21 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: approval
+required:
+- id
+- type
+- criticality
+- requested_by
+- approver_role
+- status
+- reason
+- requested_at
+enums:
+  type: APPROVAL_TYPE
+  status: APPROVAL_STATUS
+  criticality: CRITICALITY
+rules:
+- l'absence de réponse ne vaut jamais approbation
+- approbation explicite et auditable
+- ne vaut que pour son périmètre déclaré

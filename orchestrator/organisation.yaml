@@ -1,0 +1,46 @@
+# Organisation dynamique (Master Evolution Prompt v4 §18–§20, §26–§27). Données lues par core/noyau/organisation.py.
+# Les rôles cités sont des rôles du registre des agents (registry/agents/) : aucun outil, aucun projet.
+schema_version: "1.0"
+id: organisation
+version: "1.0"
+
+# Hiérarchie (§19), du plus haut au plus bas.
+levels: [MISSION_MANAGER, DEPARTMENT_LEAD, TEAM_LEAD, SPECIALIST, WORKER]
+mission_manager_role: planner
+architecture_role: architect
+
+# Domaine → département. Un département n'est créé que si la mission touche son domaine (§18).
+departments:
+  architecture: { department: Architecture, lead: architect, specialists: [architect] }
+  backend:      { department: Backend,      lead: backend,   specialists: [backend, refactoring, algorithm] }
+  database:     { department: Database,     lead: database,  specialists: [database, migration] }
+  frontend:     { department: Frontend,     lead: frontend,  specialists: [frontend] }
+  security:     { department: Security,     lead: security,  specialists: [security] }
+  qa:           { department: QA,           lead: qa,        specialists: [qa] }
+  performance:  { department: Performance,  lead: performance, specialists: [performance] }
+  devops:       { department: DevOps,       lead: devops,    specialists: [devops] }
+  data:         { department: Data,         lead: data-bi,   specialists: [data-bi] }
+  documentation: { department: Documentation, lead: documentation, specialists: [documentation] }
+  business:     { department: Business,     lead: business-rules, specialists: [business-rules] }
+
+# Rôles adversariaux (§26) : un rôle du registre + une posture. Ils cherchent activement les défauts.
+critics:
+  SECURITY_REVIEWER:       { role: security,       stance: "trouver une faille exploitable" }
+  ARCHITECTURE_CRITIC:     { role: architect,      stance: "trouver une alternative plus simple ou un couplage caché" }
+  DEVILS_ADVOCATE:         { role: architect,      stance: "contester chaque hypothèse du plan" }
+  TEST_BREAKER:            { role: qa,             stance: "écrire le cas qui casse l'implémentation" }
+  PERFORMANCE_REVIEWER:    { role: performance,    stance: "trouver le chemin lent ou la requête en N+1" }
+  DATA_INTEGRITY_REVIEWER: { role: database,       stance: "trouver la donnée qui devient incohérente" }
+
+# Agents métier (§27) : le rôle « business-rules » porte un domaine métier ; ils peuvent contester un choix technique.
+business_domains: [ACCOUNTING, INVENTORY, PURCHASING, SALES, PRODUCTION, MAINTENANCE, HR, PAYROLL, IMPORT, CUSTOMS, CRM]
+business_role: business-rules
+
+# Critiques engagés par défaut selon les domaines de la mission.
+critics_by_domain:
+  database: [DATA_INTEGRITY_REVIEWER]
+  backend: [TEST_BREAKER]
+  security: [SECURITY_REVIEWER]
+  architecture: [ARCHITECTURE_CRITIC, DEVILS_ADVOCATE]
+  performance: [PERFORMANCE_REVIEWER]
+always_critics: [SECURITY_REVIEWER]

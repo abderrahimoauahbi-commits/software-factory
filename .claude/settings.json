@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(/audit/approvals/human/**)",
+      "Bash(python -P scripts/factory_approve.py *)",
+      "Bash(python scripts/factory_approve.py *)",
+      "PowerShell(python -P scripts/factory_approve.py *)",
+      "PowerShell(python scripts/factory_approve.py *)"
+    ],
+    "allow": [
+      "Write(/policies/autonomy.yaml)",
+      "Edit(/policies/**)",
+      "Write(/docs/playbook/**)",
+      "Edit(/core/noyau/politique.py)",
+      "Edit(/core/noyau/contexte.py)"
+    ],
+    "disableBypassPermissionsMode": "disable"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell|Edit|Write|NotebookEdit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -P \"${CLAUDE_PROJECT_DIR}/scripts/hooks/garde_approbations.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

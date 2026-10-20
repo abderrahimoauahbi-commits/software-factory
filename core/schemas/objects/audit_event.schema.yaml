@@ -1,0 +1,17 @@
+# AI Software Factory — Executable Schemas v1.0 (normatif, 15/10/2026).
+# Contrat générique : aucun projet, outil, langage ni fournisseur n'y est nommé.
+schema_version: '1.0'
+object: audit_event
+required:
+- id
+- timestamp
+- actor
+- action
+- result
+- factory_version
+- schema_version
+enums:
+  actor.type: ACTOR_TYPE
+rules:
+- chaque transition d'état produit un événement d'audit
+- journal en ajout seul, protégé contre toute modification non autorisée

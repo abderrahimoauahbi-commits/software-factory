@@ -1,0 +1,97 @@
+schema_version: '1.0'
+id: T-FACTORY-001
+project_id: software-factory
+workflow_id: feature
+title: Registry v1
+objective: Registres structurés conformes aux Executable Schemas v1.0
+requester: Factory Owner
+state: ACCEPTED
+criticality: C2
+criticality_justification: Socle de contrôle de la Factory, sans production ni données (Playbook §9.1).
+scope:
+  included:
+  - core/schemas/
+  - registry/
+  - policies/
+  - audit/
+  - adr/
+  excluded:
+  - tout dépôt de projet (lecture seule)
+  - bases de données
+  - réseau
+  - installation
+  - configuration des outils
+  roots:
+  - FACTORY_ROOT
+  files: []
+  modules: []
+  services: []
+  data: []
+specification:
+  business_rules: []
+  functional_requirements: []
+  non_functional_requirements:
+  - aucun nom de projet, de pile, de fournisseur, d'IDE ni de MCP dans le code du cœur (Executable Schemas §36)
+  acceptance_criteria:
+  - chaque fiche valide contre son schéma (champs requis, énumérations, cycle de vie)
+  - 'aucune version inventée : les versions sont laissées au Bootstrap'
+  - aucun MCP, agent ni modèle actif sans approbation
+  - aucun secret ni identifiant dans le registre
+design:
+  architecture_ref: adr/accepted/ADR-0002-cycle-schemas-et-corrections.md
+  technical_design_ref: null
+  adr_refs:
+  - ADR-0001
+  - ADR-0002
+security:
+  required: true
+  assessment_ref: null
+  risks:
+  - fuite de secret dans un rapport
+  - commande non autorisée
+data:
+  classification: INTERNAL
+  impact_assessment_ref: null
+dependencies:
+  tickets: []
+  external: []
+execution:
+  agent_id: null
+  model_id: claude-opus-5-5
+  skills: []
+  tools:
+  - python
+  - pyyaml
+  mcp: []
+quality:
+  required_gates:
+  - unit_tests
+  required_tests:
+  - bootstrap/tests/test_registre.py
+budget:
+  token_limit: null
+  cost_limit: null
+  time_limit_minutes: null
+  max_attempts: 3
+rollback:
+  required: true
+  strategy: 'dépôt Factory non commité : rien à défaire hors FACTORY_ROOT'
+approvals:
+  required:
+  - revue humaine du Factory Owner avant commit
+  status: APPROVED
+  refs:
+  - « valide et continue pour tous » du 15/10/2026 (canal ancien, W1)
+evidence:
+  required:
+  - sortie des tests unitaires
+  - rapport du Bootstrap CHECK
+  collected:
+  - 'tests : test_registre (7 cas) — OK'
+  - 'registre : 107 fiches valides'
+  - compliance/evidence/NEED-FACTORY-001/check-gestionfil-20261015T144559.json
+created_at: '2026-10-15'
+updated_at: '2026-10-15'
+notes: 'Exécuté par l''agent de construction sans habilitation d''agent (aucun agent n''est encore évalué) : écart
+  assumé de la phase 1, couvert par EXC-0001, compensé par la revue humaine obligatoire.'
+next: READY_TO_MERGE après le premier commit (geste humain)
